@@ -1,0 +1,114 @@
+ion-content {
+  --background: none;
+  background-image: url('../../../assets/img/fondo.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+/* Estilo de la tarjeta de login */
+ion-card {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  box-shadow: none;
+  border-radius: 5%;
+  margin: 10% auto;
+  width: 90%;
+}
+
+/* Contenedor y logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20%;
+}
+
+.login-container img {
+  width: 60%;
+}
+
+/* Estilos de los inputs */
+ion-card ion-input,
+ion-card input {
+  --background: transparent;
+  background-color: transparent;
+  color: darkgreen;
+}
+
+/* Estilos de los labels */
+ion-card ion-label,
+ion-card label {
+  --background: transparent;
+  background-color: transparent;
+  color: #D35400;
+}
+
+/* Estilo del item */
+ion-card ion-item {
+  --background: transparent;
+  color: #D35400;
+}
+
+/* Botón principal */
+ion-card ion-button.login-button {
+  --background: #D35400;
+  color: white;
+}
+
+/* Botón de registro */
+.register-button {
+  color: darkgreen;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+/* Enlace "¿Olvidaste tu contraseña?" */
+.forgot-password {
+  text-align: center;
+  margin-top: 10px;
+  display: block;
+
+  a {
+    color: darkred;
+    text-decoration: none;
+  }
+}
+
+/* Animación para logo de carga (si se usa otro estilo) */
+.logox {
+  height: auto;
+  animation: zoomIn 3s ease-in-out infinite alternate;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.5);
+  }
+}
+
+/* Animación para entrada suave del logo */
+.logo {
+  width: 100%;
+  animation: zoomInOut 5s ease-in-out;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes zoomInOut {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}

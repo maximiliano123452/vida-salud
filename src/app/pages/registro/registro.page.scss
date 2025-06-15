@@ -1,0 +1,94 @@
+ion-card {
+    background-color: rgba(255, 255, 255, 0.5); /* Fondo semitransparente */
+    backdrop-filter: blur(5px); /* Opcional: agrega un efecto de desenfoque detrás */
+    box-shadow: none;
+    border-radius: 5%;
+    margin: 10%  auto;
+    width: 90%; 
+  }
+
+  .logo-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding-top: 20%;
+  }
+
+  .login-container img {
+    width: 60%;  
+  }
+
+  ion-card ion-input {
+    --background: transparent; /* Fondo transparente */
+    color: darkgreen; /* Color de texto en naranja oscuro */
+  }
+  
+  ion-card input {
+    background-color: transparent; /* Fondo transparente para navegadores que no usan variables CSS */
+    color: darkgreen; /* Color de texto en naranja oscuro */
+  }
+
+
+  ion-card ion-label {
+    --background: transparent; /* Fondo transparente */
+    color: #D35400; /* Color de texto en naranja oscuro */
+  }
+  
+  ion-card label {
+    background-color: transparent; /* Fondo transparente para navegadores que no usan variables CSS */
+    color: #D35400; /* Color de texto en naranja oscuro */
+  }
+
+
+  ion-card ion-item {
+    --background: transparent; /* Fondo transparente */
+    color: #D35400; /* Color de texto en naranja oscuro */
+  }
+  
+  ion-card ion-button.login-button {
+    --background: #D35400; /* Fondo en naranja oscuro */
+    color: white; /* Texto en blanco para buen contraste */
+  }
+
+
+  ion-card ion-select {
+    --background: transparent; /* Fondo transparente */
+    color: darkgreen; /* Color de texto en naranja oscuro */
+  }
+  
+  ion-card select {
+    background-color: transparent; /* Fondo transparente para navegadores que no usan variables CSS */
+    color: darkgreen; /* Color de texto en naranja oscuro */
+  }
+
+  mat-form-field {
+    background-color: transparent; /* Fondo transparente para el campo del formulario */
+  }
+  
+  mat-form-field .mat-form-field-flex {
+    background-color: transparent; /* Fondo transparente para el contenedor del input */
+  }
+  
+  mat-form-field .mat-form-field-infix {
+    background-color: transparent; /* Fondo transparente en el área del input */
+  }
+  
+  input[matInput] {
+    background-color: transparent; /* Fondo transparente del input */
+    color: #D35400; /* Texto en naranja oscuro */
+  }
+  
+  mat-datepicker-toggle {
+    background-color: transparent; /* Fondo transparente para el selector de fecha */
+  }
+
+  ion-card ion-button {
+    --background: #D35400; /* Fondo en naranja oscuro */
+    color: white; /* Texto en blanco para buen contraste */ 
+    padding: 10px;
+  }
+
+  .center-title {
+    margin: 0 auto;
+    text-align: center;
+  }

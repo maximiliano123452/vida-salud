@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+   
+
+  <div class="title_tab">
+    <h2>Galería</h2>
+  </div>
+ 
+    <ion-grid class="gallery-grid">
+      <ion-row>
+        <ion-col size="4" size-md="4" *ngFor="let image of images; let i = index" [ngClass]="{ 'fade-in': true }">
+          <img [src]="image" class="gallery-image" alt="Image {{ i + 1 }}"    (click)="openImage(image)"/> 
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
+  
+</ion-content>

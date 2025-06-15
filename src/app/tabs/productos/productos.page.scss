@@ -1,0 +1,35 @@
+.transparent-list {
+    background: transparent;
+  }
+
+ ion-item {
+    --background: transparent; /* Fondo transparente */
+    color: #D35400; /* Color de texto en naranja oscuro */
+  }
+  
+ 
+  
+  ion-label h2 {
+    font-size: 1.2em;
+    color: #333;
+    margin: 0;
+  }
+  
+  ion-label p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 5px 0 0;
+  }
+
+  .content_img{
+    width: 80px; 
+  }
+  
+  .product-image {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-left: auto;
+  }
+
+  

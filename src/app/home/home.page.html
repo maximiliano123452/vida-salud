@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>  
+    <app-company-name [companyName]="'Frutix'"></app-company-name>  
+    <ion-buttons slot="end"> 
+        <ion-menu-button menu="mainMenu"></ion-menu-button>
+   </ion-buttons> 
+  </ion-toolbar> 
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding"> 
+  
+
+  <!-- Imagen de usuario y mensaje de bienvenida -->
+  <div class="user-info">
+    <img src="../../assets/img/user.png" alt="User Avatar" class="user-avatar" />
+    <h2><strong>{{ bienvenidos }}</strong><br/> {{ email }}</h2>
+    <span>Tienes 2500 puntos</span>
+  </div>
+
+
+  <div class="ofertas-info"> 
+    <h2>Ofertas</h2>
+  </div>
+
+ <!-- Cards de Ofertas -->
+ <ion-card>
+  <img src="../../assets/img/manzanas.jpg" alt="Manzana" />
+  <ion-card-header>
+    <ion-card-title>Manzana</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    Deliciosas manzanas rojas, frescas y perfectas para un snack saludable.
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <img src="../../assets/img/bananas.jpeg" alt="Banana" />
+  <ion-card-header>
+    <ion-card-title>Banana</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    Bananas maduras, ricas en potasio y perfectas para cualquier momento del día.
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <img src="../../assets/img/naranjas.jpg" alt="Naranja" />
+  <ion-card-header>
+    <ion-card-title>Naranja</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    Jugosas naranjas, ideales para obtener toda la vitamina C que necesitas.
+  </ion-card-content>
+</ion-card>
+</ion-content>
