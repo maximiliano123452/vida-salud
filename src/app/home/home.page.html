@@ -1,55 +1,57 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>  
-    <app-company-name [companyName]="'Frutix'"></app-company-name>  
-    <ion-buttons slot="end"> 
-        <ion-menu-button menu="mainMenu"></ion-menu-button>
-   </ion-buttons> 
-  </ion-toolbar> 
+  <ion-toolbar color="light">
+    <ion-title class="titulo-header">Vida Sana 🍃</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="mainMenu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding"> 
-  
+<ion-content [fullscreen]="true" class="ion-padding">
 
-  <!-- Imagen de usuario y mensaje de bienvenida -->
+  <!-- Info del usuario -->
   <div class="user-info">
     <img src="../../assets/img/user.png" alt="User Avatar" class="user-avatar" />
     <h2><strong>{{ bienvenidos }}</strong><br/> {{ email }}</h2>
-    <span>Tienes 2500 puntos</span>
+    <span>¡Hoy es un buen día para cuidarte! 🌞</span>
   </div>
 
-
-  <div class="ofertas-info"> 
-    <h2>Ofertas</h2>
+  <div class="seccion-info">
+    <h2>Áreas de bienestar</h2>
   </div>
 
- <!-- Cards de Ofertas -->
- <ion-card>
-  <img src="../../assets/img/manzanas.jpg" alt="Manzana" />
-  <ion-card-header>
-    <ion-card-title>Manzana</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    Deliciosas manzanas rojas, frescas y perfectas para un snack saludable.
-  </ion-card-content>
-</ion-card>
+  <!-- Card: Alimentación saludable -->
+  <ion-card>
+    <img src="../../assets/img/alimentacion.png" alt="Alimentación saludable" />
+    <ion-card-header>
+      <ion-card-title>Alimentación saludable</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Consejos y recetas para nutrir tu cuerpo con alimentos naturales, frescos y equilibrados.
+    </ion-card-content>
+  </ion-card>
 
-<ion-card>
-  <img src="../../assets/img/bananas.jpeg" alt="Banana" />
-  <ion-card-header>
-    <ion-card-title>Banana</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    Bananas maduras, ricas en potasio y perfectas para cualquier momento del día.
-  </ion-card-content>
-</ion-card>
+  <!-- Card: Ejercicio físico -->
+  <ion-card>
+    <img src="../../assets/img/ejercicio.png" alt="Ejercicio físico" />
+    <ion-card-header>
+      <ion-card-title>Ejercicio físico</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Rutinas simples y efectivas para mantenerte activo y mejorar tu salud día a día.
+    </ion-card-content>
+  </ion-card>
 
-<ion-card>
-  <img src="../../assets/img/naranjas.jpg" alt="Naranja" />
-  <ion-card-header>
-    <ion-card-title>Naranja</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    Jugosas naranjas, ideales para obtener toda la vitamina C que necesitas.
-  </ion-card-content>
-</ion-card>
+  <!-- Card: Bienestar emocional -->
+  <ion-card>
+    <img src="../../assets/img/bienestar.png" alt="Bienestar emocional" />
+    <ion-card-header>
+      <ion-card-title>Bienestar emocional</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Técnicas y recursos para cuidar tu mente, reducir el estrés y vivir con más paz interior.
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
+
