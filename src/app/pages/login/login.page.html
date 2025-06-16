@@ -1,7 +1,5 @@
 <ion-content [fullscreen]="true">
   <div class="login-container">
-
-    <!-- Imagen del logo actualizado -->
     <div class="logo-container">
       <img src="../../../assets/img/logo_vidasana.png" alt="Logo Vida Sana" class="logo">
     </div>
@@ -9,24 +7,23 @@
     <ion-card class="login-card">
       <ion-card-header>
         <ion-card-title class="titulo">Bienvenido a Vida Sana 🍃</ion-card-title>
-        <ion-card-subtitle class="subtitulo">Tu espacio de bienestar y salud</ion-card-subtitle>
+        <ion-card-subtitle class="subtitulo">Tu espacio de bienestar</ion-card-subtitle>
       </ion-card-header>
 
       <ion-card-content>
         <ion-item class="input-item">
-          <ion-label position="floating" color="success">Correo electrónico</ion-label>
+          <ion-label position="floating">Correo electrónico</ion-label>
           <ion-input [(ngModel)]="email" type="email"></ion-input>
         </ion-item>
 
         <ion-item class="input-item">
-          <ion-label position="floating" color="success">Contraseña</ion-label>
+          <ion-label position="floating">Contraseña</ion-label>
           <ion-input [(ngModel)]="password" type="password"></ion-input>
         </ion-item>
 
-        <!-- Botón Login -->
-        <ion-button expand="block" (click)="login()" class="login-button" color="success">Iniciar sesión</ion-button>
+        <ion-button expand="block" (click)="login()" color="success">Iniciar sesión</ion-button>
 
-        <ion-button expand="block" (click)="registro()" fill="clear" class="register-button" color="medium">
+        <ion-button expand="block" fill="clear" (click)="registro()" color="primary">
           Registrarse
         </ion-button>
 
@@ -37,4 +34,5 @@
     </ion-card>
   </div>
 </ion-content>
+
 
