@@ -2,27 +2,39 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-   {
+  {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
-   },
-   {
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'registro',
-    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
+    loadChildren: () => import('./pages/registro/registro.module').then(m => m.RegistroPageModule)
   },
   {
     path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
+  {
+    path: 'alimentacion',
+    loadChildren: () => import('./pages/alimentacion/alimentacion.module').then(m => m.AlimentacionPageModule)
+  },
+  {
+    path: 'ejercicio',
+    loadChildren: () => import('./pages/ejercicio/ejercicio.module').then(m => m.EjercicioPageModule)
+  },
+  {
+    path: 'bienestar',
+    loadChildren: () => import('./pages/bienestar/bienestar.module').then(m => m.BienestarPageModule)
+  }
 ];
 
 @NgModule({

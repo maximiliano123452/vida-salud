@@ -1,75 +1,52 @@
-ion-content {
-  --background: none;
-  background-image: url('../../../assets/img/fondo.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+.login-fondo {
+  --background: #e8f5e9; // Verde clarito de fondo
 }
 
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .logo-container {
-  padding-top: 20%;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .logo {
-  width: 60%;
-  animation: zoomInOut 5s ease-in-out;
-  opacity: 0;
-  animation-fill-mode: forwards;
+  width: 150px;
+  height: auto;
+  animation: zoomIn 3s ease-in-out infinite alternate;
 }
 
-ion-card {
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(6px);
-  border-radius: 15px;
-  margin-top: 5%;
+.login-card {
   width: 90%;
+  max-width: 400px;
+  border-radius: 12px;
+  background: #ffffffcc;
+  backdrop-filter: blur(4px);
 }
 
-ion-item {
-  --background: transparent;
-  color: #2e7d32;
+.titulo, .subtitulo {
+  text-align: center;
+  color: #145a32; // Verde oscuro
 }
 
-ion-label {
-  color: #2e7d32;
-}
-
-ion-input {
-  color: #2e7d32;
-}
-
-ion-button {
-  margin-top: 15px;
-  --border-radius: 10px;
+.input-item {
+  --highlight-color-focused: #2e86c1; // Azul cuando enfocado
 }
 
 .forgot-password {
   text-align: center;
   margin-top: 10px;
-
-  a {
-    color: #1565c0;
-    text-decoration: none;
-  }
+  font-size: 0.9em;
+  color: #2e86c1;
 }
 
-@keyframes zoomInOut {
-  0% {
-    transform: scale(1);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
+@keyframes zoomIn {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
 }
+
