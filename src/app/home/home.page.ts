@@ -12,6 +12,9 @@ export class HomePage {
   email: string = '';
   password: string = '';
   bienvenidos: string = 'Bienvenid@';
+  
+  //  Control del segment activo
+  segmentSelected: string = 'mis-datos';
 
   constructor(private route: ActivatedRoute, private menu: MenuController) {}
 
@@ -23,5 +26,10 @@ export class HomePage {
       this.password = params['password'];
     });
   }
-}
 
+  //  Función para cambiar de segment
+  onSegmentChanged(event: any) {
+    this.segmentSelected = event.detail.value;
+    console.log('Segment seleccionado:', this.segmentSelected);
+  }
+}

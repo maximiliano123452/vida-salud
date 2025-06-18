@@ -1,67 +1,83 @@
-ion-content {
-  --background: #e8f5e9; /* Fondo verde claro */
+//  Estilos para segments 
+
+.custom-segment {
+  margin: 20px 0;
+  --color: var(--ion-color-medium);
+  --color-checked: var(--ion-color-primary);
+  --border-radius: 8px;
 }
 
-.titulo-header {
-  color: #2e86de; /* Azul fuerte */
-  font-weight: bold;
-  font-size: 1.3em;
-}
-
-/* Info del usuario */
-.user-info {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #2e86de;
-}
-
-.user-info h2 {
-  font-size: 1em;
-}
-
-.user-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-
-.user-info span {
-  font-size: 0.9em;
-  font-weight: bold;
-  color: #117a65;
-}
-
-/* Título de sección */
-.seccion-info {
-  text-align: center;
-  color: #2e86de;
+.segment-content {
   margin-top: 20px;
-  margin-bottom: 20px;
-  font-weight: bold;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Estilo de tarjetas */
-ion-card {
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(5px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  margin: 20px auto;
-  width: 90%;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-ion-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px 12px 0 0;
-}
-
-ion-card-title {
-  color: #2e86de;
-  font-weight: bold;
+// Estilos para los componentes
+.seccion-header {
   text-align: center;
+  margin-bottom: 20px;
+  
+  h2 {
+    color: var(--ion-color-primary);
+    margin-bottom: 5px;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+  }
+}
+
+.form-card {
+  margin-bottom: 20px;
+}
+
+.experiencia-header,
+.certificacion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  
+  h4 {
+    margin: 0;
+    color: var(--ion-color-primary);
+  }
+}
+
+.trabajando-actual {
+  color: var(--ion-color-success);
+  font-weight: bold;
+}
+
+.vencimiento-info {
+  margin-top: 10px;
+}
+
+.estado-certificado {
+  margin-top: 8px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ion-color-medium);
+  
+  .empty-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
 }
 

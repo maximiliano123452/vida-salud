@@ -1,0 +1,114 @@
+<div class="experiencia-container">
+  
+  <div class="seccion-header">
+    <h2>💼 Experiencia Laboral</h2>
+    <p>Registra tu historial profesional</p>
+  </div>
+
+  <!-- Formulario para agregar experiencia -->
+  <ion-card class="form-card">
+    <ion-card-header>
+      <ion-card-title>Agregar Experiencia</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      
+      <!-- Empresa -->
+      <ion-item>
+        <ion-label position="stacked">Empresa *</ion-label>
+        <ion-input 
+          [(ngModel)]="experiencia.empresa" 
+          placeholder="Nombre de la empresa">
+        </ion-input>
+      </ion-item>
+
+      <!-- Cargo -->
+      <ion-item>
+        <ion-label position="stacked">Cargo *</ion-label>
+        <ion-input 
+          [(ngModel)]="experiencia.cargo" 
+          placeholder="Tu cargo o posición">
+        </ion-input>
+      </ion-item>
+
+      <!-- Año inicio -->
+      <ion-item>
+        <ion-label position="stacked">Año de inicio *</ion-label>
+        <ion-input 
+          type="number" 
+          [(ngModel)]="experiencia.anoInicio" 
+          min="1980" 
+          max="2030">
+        </ion-input>
+      </ion-item>
+
+      <!-- ¿Trabaja actualmente? -->
+      <ion-item>
+        <ion-checkbox 
+          [(ngModel)]="experiencia.trabajaActualmente">
+        </ion-checkbox>
+        <ion-label class="ion-margin-start">
+          Actualmente trabajo aquí
+        </ion-label>
+      </ion-item>
+
+      <!-- Año término (solo si no trabaja actualmente) -->
+      <ion-item *ngIf="!experiencia.trabajaActualmente">
+        <ion-label position="stacked">Año de término *</ion-label>
+        <ion-input 
+          type="number" 
+          [(ngModel)]="experiencia.anoTermino" 
+          min="1980" 
+          max="2030">
+        </ion-input>
+      </ion-item>
+
+      <!-- Botón para agregar -->
+      <ion-button 
+        expand="block" 
+        (click)="agregarExperiencia()"
+        color="primary"
+        class="ion-margin-top">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Agregar Experiencia
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista de experiencias -->
+  <div *ngIf="experiencias.length > 0" class="experiencias-lista">
+    <h3>📋 Mis Experiencias</h3>
+    
+    <ion-card *ngFor="let exp of experiencias; let i = index" class="experiencia-item">
+      <ion-card-content>
+        
+        <div class="experiencia-header">
+          <h4>{{ exp.cargo }}</h4>
+          <ion-button 
+            fill="clear" 
+            color="danger" 
+            size="small"
+            (click)="eliminarExperiencia(i)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+
+        <p><strong>Empresa:</strong> {{ exp.empresa }}</p>
+        <p><strong>Período:</strong> 
+          {{ exp.anoInicio }} - 
+          <span *ngIf="exp.trabajaActualmente" class="trabajando-actual">Actual</span>
+          <span *ngIf="!exp.trabajaActualmente">{{ exp.anoTermino }}</span>
+        </p>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Mensaje cuando no hay experiencias -->
+  <div *ngIf="experiencias.length === 0" class="empty-state">
+    <ion-icon name="briefcase-outline" class="empty-icon"></ion-icon>
+    <p>Aún no has agregado experiencias laborales</p>
+  </div>
+
+</div>

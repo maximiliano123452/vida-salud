@@ -1,0 +1,50 @@
+<ion-content class="ion-padding">
+  <div class="container-404">
+    
+    <!-- Icono grande de error -->
+    <div class="icon-container">
+      <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon>
+    </div>
+
+    <!-- Número 404 -->
+    <div class="error-number">
+      <h1>404</h1>
+    </div>
+
+    <!-- Mensaje principal -->
+    <div class="error-message">
+      <h2>Página no encontrada</h2>
+      <p>Lo sentimos, la página que buscas no existe o ha sido movida.</p>
+    </div>
+
+    <!-- Botones de navegación -->
+    <div class="buttons-container">
+      
+      <ion-button 
+        expand="block" 
+        color="primary" 
+        (click)="volverAlHome()"
+        class="action-button">
+        <ion-icon name="home-outline" slot="start"></ion-icon>
+        Volver al Home
+      </ion-button>
+
+      <ion-button 
+        expand="block" 
+        color="secondary" 
+        fill="outline"
+        (click)="volverAlLogin()"
+        class="action-button">
+        <ion-icon name="log-in-outline" slot="start"></ion-icon>
+        Ir al Login
+      </ion-button>
+
+    </div>
+
+    <!-- Información adicional -->
+    <div class="additional-info">
+      <p>Si crees que esto es un error, contacta al administrador.</p>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,111 @@
+.container-404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  padding: 20px;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  
+  .error-icon {
+    font-size: 120px;
+    color: var(--ion-color-danger);
+    opacity: 0.8;
+  }
+}
+
+.error-number {
+  margin-bottom: 20px;
+  
+  h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  }
+}
+
+.error-message {
+  margin-bottom: 40px;
+  max-width: 400px;
+  
+  h2 {
+    font-size: 1.5rem;
+    color: var(--ion-color-dark);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.buttons-container {
+  width: 100%;
+  max-width: 300px;
+  
+  .action-button {
+    margin-bottom: 15px;
+    --border-radius: 12px;
+    font-weight: 600;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.additional-info {
+  margin-top: 40px;
+  
+  p {
+    font-size: 0.9rem;
+    color: var(--ion-color-medium);
+    font-style: italic;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .container-404 {
+    min-height: 70vh;
+    padding: 15px;
+  }
+  
+  .icon-container .error-icon {
+    font-size: 100px;
+  }
+  
+  .error-number h1 {
+    font-size: 3rem;
+  }
+  
+  .error-message h2 {
+    font-size: 1.3rem;
+  }
+}
+
+// Animación sutil
+.container-404 {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

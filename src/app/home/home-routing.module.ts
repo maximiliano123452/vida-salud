@@ -7,6 +7,8 @@ const routes: Routes = [
     path: '',
     component: HomePage,
   }
+  //  Los componentes se cargan dentro del HomePage usando segments
+  // No se necesitan rutas separadas porque estan embebidos
 ];
 
 @NgModule({

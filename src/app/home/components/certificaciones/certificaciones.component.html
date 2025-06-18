@@ -1,0 +1,141 @@
+<div class="certificaciones-container">
+  
+  <div class="seccion-header">
+    <h2>🎓 Certificaciones</h2>
+    <p>Administra tus certificados y credenciales</p>
+  </div>
+
+  <!-- Formulario para agregar certificación -->
+  <ion-card class="form-card">
+    <ion-card-header>
+      <ion-card-title>Agregar Certificación</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      
+      <!-- Nombre del certificado -->
+      <ion-item>
+        <ion-label position="stacked">Nombre del Certificado *</ion-label>
+        <ion-input 
+          [(ngModel)]="certificacion.nombreCertificado" 
+          placeholder="Ej: Certificación PMP, Curso de Angular, etc.">
+        </ion-input>
+      </ion-item>
+
+      <!-- Fecha de obtención -->
+      <ion-item>
+        <ion-label position="stacked">Fecha de Obtención *</ion-label>
+        <ion-datetime 
+          [(ngModel)]="certificacion.fechaObtencion"
+          display-format="DD/MM/YYYY"
+          picker-format="DD MM YYYY"
+          placeholder="Selecciona la fecha">
+        </ion-datetime>
+      </ion-item>
+
+      <!-- ¿Tiene vencimiento? -->
+      <ion-item>
+        <ion-checkbox 
+          [(ngModel)]="certificacion.tieneVencimiento">
+        </ion-checkbox>
+        <ion-label class="ion-margin-start">
+          Este certificado tiene fecha de vencimiento
+        </ion-label>
+      </ion-item>
+
+      <!-- Fecha de vencimiento (solo si tiene vencimiento) -->
+      <ion-item *ngIf="certificacion.tieneVencimiento">
+        <ion-label position="stacked">Fecha de Vencimiento *</ion-label>
+        <ion-datetime 
+          [(ngModel)]="certificacion.fechaVencimiento"
+          display-format="DD/MM/YYYY"
+          picker-format="DD MM YYYY"
+          placeholder="Selecciona la fecha de vencimiento">
+        </ion-datetime>
+      </ion-item>
+
+      <!-- Botón para agregar -->
+      <ion-button 
+        expand="block" 
+        (click)="agregarCertificacion()"
+        color="primary"
+        class="ion-margin-top">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Agregar Certificación
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista de certificaciones -->
+  <div *ngIf="certificaciones.length > 0" class="certificaciones-lista">
+    <h3>📜 Mis Certificaciones</h3>
+    
+    <ion-card *ngFor="let cert of certificaciones; let i = index" class="certificacion-item">
+      <ion-card-content>
+        
+        <div class="certificacion-header">
+          <h4>{{ cert.nombreCertificado }}</h4>
+          <ion-button 
+            fill="clear" 
+            color="danger" 
+            size="small"
+            (click)="eliminarCertificacion(i)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+
+        <p><strong>Fecha de Obtención:</strong> 
+          {{ cert.fechaObtencion | date:'dd/MM/yyyy' }}
+        </p>
+
+        <!-- Información de vencimiento -->
+        <div *ngIf="cert.tieneVencimiento" class="vencimiento-info">
+          <p><strong>Fecha de Vencimiento:</strong> 
+            {{ cert.fechaVencimiento | date:'dd/MM/yyyy' }}
+          </p>
+          
+          <!-- Estado del certificado -->
+          <div class="estado-certificado">
+            <ion-chip 
+              *ngIf="estaVencido(cert)" 
+              color="danger">
+              <ion-icon name="close-circle-outline"></ion-icon>
+              <ion-label>Vencido</ion-label>
+            </ion-chip>
+            
+            <ion-chip 
+              *ngIf="estaProximoAVencer(cert)" 
+              color="warning">
+              <ion-icon name="warning-outline"></ion-icon>
+              <ion-label>Próximo a vencer</ion-label>
+            </ion-chip>
+            
+            <ion-chip 
+              *ngIf="!estaVencido(cert) && !estaProximoAVencer(cert)" 
+              color="success">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <ion-label>Vigente</ion-label>
+            </ion-chip>
+          </div>
+        </div>
+
+        <!-- Certificado sin vencimiento -->
+        <div *ngIf="!cert.tieneVencimiento">
+          <ion-chip color="primary">
+            <ion-icon name="infinite-outline"></ion-icon>
+            <ion-label>Sin vencimiento</ion-label>
+          </ion-chip>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Mensaje cuando no hay certificaciones -->
+  <div *ngIf="certificaciones.length === 0" class="empty-state">
+    <ion-icon name="school-outline" class="empty-icon"></ion-icon>
+    <p>Aún no has agregado certificaciones</p>
+  </div>
+
+</div>

@@ -34,6 +34,15 @@ const routes: Routes = [
   {
     path: 'bienestar',
     loadChildren: () => import('./pages/bienestar/bienestar.module').then(m => m.BienestarPageModule)
+  },
+  {
+    path: 'page-not-found',
+    loadChildren: () => import('./pages/page-not-found/page-not-found.module').then(m => m.PageNotFoundPageModule)
+  },
+  //  Ruta wildcard debe ir AL FINAL para capturar URLs inexistentes
+  {
+    path: '**',
+    redirectTo: 'page-not-found'
   }
 ];
 
