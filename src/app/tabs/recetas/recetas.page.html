@@ -1,26 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="center-title">Recetas</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="mainMenu"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-     
-  <div class="title_tab">
-    <h2>Recetas</h2>
+<ion-content [fullscreen]="true" class="recetas-fondo">
+  <div class="recetas-container">
+    <ion-card *ngFor="let receta of recetas" class="receta-card">
+      <img [src]="receta.imagen" alt="{{ receta.nombre }}" class="receta-img" />
+
+      <ion-card-header>
+        <ion-card-title class="titulo">{{ receta.nombre }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p class="descripcion">{{ receta.descripcion }}</p>
+      </ion-card-content>
+    </ion-card>
   </div>
-
-  <ion-list>
-    <ion-item *ngFor="let receta of recetas">
-      <ion-card>
-        <img [src]="receta.imagen" alt="{{ receta.nombre }}" />
-        <ion-card-header>
-          <ion-card-title>{{ receta.nombre }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p>{{ receta.descripcion }}</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-item>
-  </ion-list>
-
 </ion-content>
+

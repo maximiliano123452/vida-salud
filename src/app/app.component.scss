@@ -1,19 +1,29 @@
 ion-list {
-    --background: transparent; /* Fondo transparente para el listado */
-    background-color: transparent;
-  }
-  
+  --background: transparent;
+  background-color: transparent;
+}
+
 ion-item {
---background: transparent; /* Fondo transparente para cada ítem */
-background-color: transparent; 
+  --background: transparent;
+  background-color: transparent;
 }
 
-ion-item ion-icon { 
-    color: #D35400;
+ion-item ion-icon {
+  color: #2ecc71; /* Verde claro */
 }
 
-ion-header,
-ion-toolbar{
-    background-color: #D35400;
-    color: white;
+ion-label {
+  color: #2ecc71; /* Verde claro */
 }
+
+
+ion-menu ion-toolbar {
+  --background: #ffffffcc; /* Fondo blanco semitransparente */
+  backdrop-filter: blur(4px);
+}
+
+ion-menu ion-title {
+  color: #145a32 !important; /* Verde oscuro para contrastar */
+  font-weight: bold;
+}
+

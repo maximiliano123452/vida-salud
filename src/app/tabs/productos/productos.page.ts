@@ -6,54 +6,52 @@ import { MenuController } from '@ionic/angular';
   templateUrl: './productos.page.html',
   styleUrls: ['./productos.page.scss'],
   standalone: false
-  
 })
 export class ProductosPage implements OnInit {
 
-    productos = [
+  productos = [
     {
-      nombre: 'Manzana',
-      precio: 2.5,
-      imagen: '/assets/img/productos/manzanas.jpg'
+      nombre: 'Nueces',
+      precio: 9.5,
+      imagen: '/assets/img/productos/nueces.jpg'
     },
     {
-      nombre: 'Banana',
-      precio: 1.2,
-      imagen: '/assets/img/productos/bananas.jpeg'
+      nombre: 'Almendras',
+      precio: 11.2,
+      imagen: '/assets/img/productos/almendras.jpg'
     },
     {
-      nombre: 'Naranja',
-      precio: 3.0,
-      imagen: '/assets/img/productos/naranjas.jpg'
+      nombre: 'Avellanas',
+      precio: 12.3,
+      imagen: '/assets/img/productos/avellanas.jpg'
     },
     {
-      nombre: 'Piña',
-      precio: 4.5,
-      imagen: '/assets/img/productos/piña.jpg'
+      nombre: 'Arándanos',
+      precio: 14.7,
+      imagen: '/assets/img/productos/arandanos.jpg'
     },
     {
-      nombre: 'Fresas',
-      precio: 5.0,
-      imagen: '/assets/img/productos/fresas.jpg'
+      nombre: 'Maqui',
+      precio: 16.9,
+      imagen: '/assets/img/productos/maqui.jpg'
     },
     {
-      nombre: 'Kiwi',
-      precio: 5.0,
-      imagen: '/assets/img/productos/kiwi.jpg'
+      nombre: 'Avena',
+      precio: 2.8,
+      imagen: '/assets/img/productos/avena.jpg'
     },
     {
-      nombre: 'Maracuya',
-      precio: 5.0,
-      imagen: '/assets/img/productos/maracuya.jpg'
+      nombre: 'Quinoa',
+      precio: 4.6,
+      imagen: '/assets/img/productos/quinoa.jpg'
     }
-    // Agrega más frutas si es necesario
   ];
 
   constructor(private menu: MenuController) { }
 
-
   ngOnInit() {
-        this.menu.close('mainMenu');
+    this.menu.close('mainMenu');
   }
 
 }
+

@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
 
 import { ProductosPageRoutingModule } from './productos-routing.module';
-
 import { ProductosPage } from './productos.page';
-
-import { ConvetirMonedaPipe } from '../../pipes/convetir-moneda.pipe';
+import { ConvertirMonedaPipe } from '../../pipes/convertir-moneda.pipe';
 
 @NgModule({
   imports: [
@@ -17,6 +14,6 @@ import { ConvetirMonedaPipe } from '../../pipes/convetir-moneda.pipe';
     IonicModule,
     ProductosPageRoutingModule
   ],
-  declarations: [ProductosPage,ConvetirMonedaPipe]
+  declarations: [ProductosPage, ConvertirMonedaPipe]
 })
 export class ProductosPageModule {}

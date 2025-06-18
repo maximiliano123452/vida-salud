@@ -1,94 +1,38 @@
-ion-card {
-    background-color: rgba(255, 255, 255, 0.5); /* Fondo semitransparente */
-    backdrop-filter: blur(5px); /* Opcional: agrega un efecto de desenfoque detrás */
-    box-shadow: none;
-    border-radius: 5%;
-    margin: 10%  auto;
-    width: 90%; 
-  }
+.registro-fondo {
+  --background: #e8f5e9; // Verde clarito
+}
 
-  .logo-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    padding-top: 20%;
-  }
+.registro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 
-  .login-container img {
-    width: 60%;  
-  }
+.registro-card {
+  width: 90%;
+  max-width: 400px;
+  border-radius: 12px;
+  background: #ffffffcc; // Fondo blanco translúcido
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
-  ion-card ion-input {
-    --background: transparent; /* Fondo transparente */
-    color: darkgreen; /* Color de texto en naranja oscuro */
-  }
-  
-  ion-card input {
-    background-color: transparent; /* Fondo transparente para navegadores que no usan variables CSS */
-    color: darkgreen; /* Color de texto en naranja oscuro */
-  }
+.titulo, .subtitulo {
+  text-align: center;
+  color: #145a32; // Verde oscuro
+}
 
+.input-item {
+  --highlight-color-focused: #2e86c1; // Azul al enfocar
+}
 
-  ion-card ion-label {
-    --background: transparent; /* Fondo transparente */
-    color: #D35400; /* Color de texto en naranja oscuro */
-  }
-  
-  ion-card label {
-    background-color: transparent; /* Fondo transparente para navegadores que no usan variables CSS */
-    color: #D35400; /* Color de texto en naranja oscuro */
-  }
+mat-form-field {
+  width: 100%;
+}
 
-
-  ion-card ion-item {
-    --background: transparent; /* Fondo transparente */
-    color: #D35400; /* Color de texto en naranja oscuro */
-  }
-  
-  ion-card ion-button.login-button {
-    --background: #D35400; /* Fondo en naranja oscuro */
-    color: white; /* Texto en blanco para buen contraste */
-  }
-
-
-  ion-card ion-select {
-    --background: transparent; /* Fondo transparente */
-    color: darkgreen; /* Color de texto en naranja oscuro */
-  }
-  
-  ion-card select {
-    background-color: transparent; /* Fondo transparente para navegadores que no usan variables CSS */
-    color: darkgreen; /* Color de texto en naranja oscuro */
-  }
-
-  mat-form-field {
-    background-color: transparent; /* Fondo transparente para el campo del formulario */
-  }
-  
-  mat-form-field .mat-form-field-flex {
-    background-color: transparent; /* Fondo transparente para el contenedor del input */
-  }
-  
-  mat-form-field .mat-form-field-infix {
-    background-color: transparent; /* Fondo transparente en el área del input */
-  }
-  
-  input[matInput] {
-    background-color: transparent; /* Fondo transparente del input */
-    color: #D35400; /* Texto en naranja oscuro */
-  }
-  
-  mat-datepicker-toggle {
-    background-color: transparent; /* Fondo transparente para el selector de fecha */
-  }
-
-  ion-card ion-button {
-    --background: #D35400; /* Fondo en naranja oscuro */
-    color: white; /* Texto en blanco para buen contraste */ 
-    padding: 10px;
-  }
-
-  .center-title {
-    margin: 0 auto;
-    text-align: center;
-  }
+.center-title {
+  text-align: center;
+  color: #145a32;
+}
