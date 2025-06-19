@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
-import { DBTaskService } from './services/dbtask.service';
+import { StorageService } from './services/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ export class AppComponent {
     private menu: MenuController,
     private router: Router,
     private platform: Platform,
-    private dbtaskService: DBTaskService
+    private storageService: StorageService
   ) {
     this.initializeApp();
   }
@@ -26,8 +26,10 @@ export class AppComponent {
       await this.platform.ready();
       console.log('📱 Plataforma lista');
       
-      await this.dbtaskService.inicializarSistema();
-      console.log('✅ Sistema de base de datos inicializado correctamente');
+      //  Inicializar Storage
+      await this.storageService.init();
+      console.log('✅ Storage inicializado correctamente');
+      
     } catch (error) {
       console.error('❌ Error al inicializar la aplicación:', error);
     }
@@ -37,8 +39,8 @@ export class AppComponent {
     try {
       console.log('🔐 Cerrando sesión...');
       
-      // Cerrar todas las sesiones activas en la base de datos
-      await this.dbtaskService.cerrarTodasLasSesiones();
+      //  Limpiar sesión del Storage
+      await this.storageService.clearSession();
       
       // Cerrar el menú
       await this.menu.close('mainMenu');

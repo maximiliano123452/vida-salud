@@ -11,24 +11,24 @@ import { ModalController } from '@ionic/angular';
 export class GaleriaPage   {
 
   images: string[] = [
-    '/assets/img/imagen1.jpg',
-    '/assets/img/imagen2.jpg',
-    '/assets/img/imagen3.jpg',
-    '/assets/img/imagen4.jpg',
-    '/assets/img/imagen5.jpg',
-    '/assets/img/imagen6.jpg',
-    '/assets/img/imagen7.jpg',
-    '/assets/img/imagen8.jpg',
-    '/assets/img/imagen9.jpg',
-    '/assets/img/imagen10.jpg',
-    '/assets/img/imagen11.jpg',
-    '/assets/img/imagen12.jpg',
-    '/assets/img/imagen12.jpg',
-    '/assets/img/imagen14.jpg',
-    '/assets/img/imagen15.jpg',
-    '/assets/img/imagen16.jpg',
-    '/assets/img/imagen17.jpg',
-    // Agrega más imágenes aquí
+    '/assets/img/Pilates.jpg',
+    '/assets/img/Yoga.jpg',
+    '/assets/img/Zumba.jpg',
+    '/assets/img/Aerobox.jpg',
+    '/assets/img/Crossfitt.jpg',
+    '/assets/img/AndarEnBicicleta.jpg',
+    '/assets/img/Natacion.jpg',
+    '/assets/img/Senderismo.jpg',
+    '/assets/img/HierbasMedicinales.jpg',
+    '/assets/img/HuertoCasero.jpg',
+    '/assets/img/PodarBonsai.jpg',
+    '/assets/img/Jardineria.jpg',
+    '/assets/img/Comunicacion.jpg',
+    '/assets/img/NiñosConMascotas.jpg',
+    '/assets/img/FamiliaJugando.jpg',
+    '/assets/img/Pintando.jpg',
+    '/assets/img/Caminando.jpg',
+    '/assets/img/JugosNaturales.jpg',
   ];
 
 

@@ -12,37 +12,37 @@ export class ProductosPage implements OnInit {
   productos = [
     {
       nombre: 'Nueces',
-      precio: 9.5,
+      precio: 3.5,
       imagen: '/assets/img/productos/nueces.jpg'
     },
     {
       nombre: 'Almendras',
-      precio: 11.2,
+      precio: 3.5,
       imagen: '/assets/img/productos/almendras.jpg'
     },
     {
       nombre: 'Avellanas',
-      precio: 12.3,
+      precio: 4.0,
       imagen: '/assets/img/productos/avellanas.jpg'
     },
     {
       nombre: 'Arándanos',
-      precio: 14.7,
+      precio: 5.5,
       imagen: '/assets/img/productos/arandanos.jpg'
     },
     {
       nombre: 'Maqui',
-      precio: 16.9,
+      precio: 8.0,
       imagen: '/assets/img/productos/maqui.jpg'
     },
     {
       nombre: 'Avena',
-      precio: 2.8,
+      precio: 3.5,
       imagen: '/assets/img/productos/avena.jpg'
     },
     {
       nombre: 'Quinoa',
-      precio: 4.6,
+      precio: 2.5,
       imagen: '/assets/img/productos/quinoa.jpg'
     }
   ];

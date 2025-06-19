@@ -6,8 +6,8 @@
     <ion-title class="center-title">Registro</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button menu="mainMenu"></ion-menu-button>
-    </ion-buttons> 
-  </ion-toolbar>
+    </ion-buttons>
+   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="registro-fondo">
@@ -19,7 +19,7 @@
       </ion-card-header>
 
       <ion-card-content>
-
+        
         <ion-item class="input-item">
           <ion-label position="floating">Nombre</ion-label>
           <ion-input type="text" [(ngModel)]="nombre"></ion-input>
@@ -30,14 +30,15 @@
           <ion-input type="text" [(ngModel)]="apellido"></ion-input>
         </ion-item>
 
+        
         <ion-item class="input-item">
-          <ion-label position="floating">Usuario</ion-label>
-          <ion-input type="text" [(ngModel)]="usuario"></ion-input>
+          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-input type="email" [(ngModel)]="usuario" placeholder="ejemplo@gmail.com"></ion-input>
         </ion-item>
 
         <ion-item class="input-item">
           <ion-label position="floating">Contraseña</ion-label>
-          <ion-input type="password" [(ngModel)]="password"></ion-input>
+          <ion-input type="password" [(ngModel)]="password" placeholder="Entre 3 y 8 caracteres"></ion-input>
         </ion-item>
 
         <ion-item class="input-item">
@@ -66,4 +67,3 @@
     </ion-card>
   </div>
 </ion-content>
-
