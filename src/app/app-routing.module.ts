@@ -4,7 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/no-auth.guard';
 
 const routes: Routes = [
-  // ✅ Páginas públicas (sin guards o con NoAuthGuard)
+  //  Páginas públicas
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
@@ -12,18 +12,17 @@ const routes: Routes = [
   },
   {
     path: 'registro',
-    loadChildren: () => import('./pages/registro/registro.module').then(m => m.RegistroPageModule),
-    canActivate: [NoAuthGuard]
+    loadChildren: () => import('./pages/registro/registro.module').then(m => m.RegistroPageModule)
   },
   
-  // ✅ CORRECCIÓN: Ruta raíz va a LOGIN (como siempre ha sido)
+  //  Ruta raíz
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
   },
   
-  // ✅ Páginas protegidas (requieren login)
+  //  Páginas protegidas
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
@@ -50,13 +49,20 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   
-  // ✅ Página 404 (accesible para todos)
+  //   Página de datos de salud con API
+  {
+    path: 'datos-salud',
+    loadChildren: () => import('./pages/datos-salud/datos-salud.module').then(m => m.DatosSaludPageModule),
+    canActivate: [AuthGuard]
+  },
+  
+  //  Página 404
   {
     path: 'page-not-found',
     loadChildren: () => import('./pages/page-not-found/page-not-found.module').then(m => m.PageNotFoundPageModule)
   },
   
-  // ✅ Ruta wildcard
+  //  Ruta wildcard
   {
     path: '**',
     redirectTo: 'page-not-found'

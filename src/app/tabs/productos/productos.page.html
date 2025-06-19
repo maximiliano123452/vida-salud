@@ -12,16 +12,39 @@
 
 <ion-content [fullscreen]="true" class="productos-fondo">
   <div class="productos-container">
+    
     <ion-card *ngFor="let producto of productos" class="producto-card">
+      
       <img [src]="producto.imagen" alt="{{ producto.nombre }}" class="product-image" />
-
+      
       <ion-card-header>
         <ion-card-title class="titulo">{{ producto.nombre }}</ion-card-title>
         <ion-card-subtitle class="subtitulo">
           Precio por kilo: {{ producto.precio | convertirMoneda:920 }}
         </ion-card-subtitle>
       </ion-card-header>
+
+      <!--  Contenido agregado -->
+      <ion-card-content>
+        
+        <!-- Descripción del producto -->
+        <p class="descripcion">{{ producto.descripcion }}</p>
+        
+        <!-- Beneficios -->
+        <div class="beneficios">
+          <span class="beneficios-label">Beneficios:</span>
+          <ion-chip 
+            *ngFor="let beneficio of producto.beneficios" 
+            color="success" 
+            class="beneficio-chip">
+            <ion-label>{{ beneficio }}</ion-label>
+          </ion-chip>
+        </div>
+
+      </ion-card-content>
+
     </ion-card>
+    
   </div>
 </ion-content>
 

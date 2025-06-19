@@ -1,0 +1,296 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Datos de Salud 🩺</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="mainMenu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <!--  Segment con detección de cambio -->
+  <ion-segment [(ngModel)]="seccionActiva" color="primary" (ionChange)="onSegmentChange($event)">
+    <ion-segment-button value="datos">
+      <ion-label>Mis Datos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="presion">
+      <ion-label>Presión</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="historial">
+      <ion-label>Historial</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!--  SECCIÓN: Datos de salud generales -->
+  <div *ngIf="seccionActiva === 'datos'" class="seccion">
+    
+    <h2>📊 Registrar Datos de Salud</h2>
+    
+    <!-- Formulario para nuevo dato -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nuevo Registro</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        
+        <ion-item>
+          <ion-label position="stacked">Tipo de dato</ion-label>
+          <ion-select [(ngModel)]="nuevoDato.tipo">
+            <ion-select-option value="peso">Peso (kg)</ion-select-option>
+            <ion-select-option value="imc">IMC</ion-select-option>
+            <ion-select-option value="medicion">Medición corporal</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Valor</ion-label>
+          <ion-input 
+            type="number" 
+            [(ngModel)]="nuevoDato.valor" 
+            placeholder="Ej: 75.5">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Fecha</ion-label>
+          <ion-input type="date" [(ngModel)]="nuevoDato.fecha"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Notas (opcional)</ion-label>
+          <ion-textarea 
+            [(ngModel)]="nuevoDato.notas" 
+            placeholder="Agregar observaciones...">
+          </ion-textarea>
+        </ion-item>
+
+        <ion-button 
+          expand="block" 
+          (click)="crearDato()" 
+          color="primary"
+          class="ion-margin-top">
+          <ion-icon name="add-outline" slot="start"></ion-icon>
+          Guardar Dato (POST)
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <!--  SECCIÓN: Presión arterial -->
+  <div *ngIf="seccionActiva === 'presion'" class="seccion">
+    
+    <h2>🩺 Registrar Presión Arterial</h2>
+    
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nueva Medición</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        
+        <ion-item>
+          <ion-label position="stacked">Presión Sistólica</ion-label>
+          <ion-input 
+            type="number" 
+            [(ngModel)]="nuevaPresion.sistolica" 
+            placeholder="120">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Presión Diastólica</ion-label>
+          <ion-input 
+            type="number" 
+            [(ngModel)]="nuevaPresion.diastolica" 
+            placeholder="80">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Fecha</ion-label>
+          <ion-input type="date" [(ngModel)]="nuevaPresion.fecha"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Notas (opcional)</ion-label>
+          <ion-textarea 
+            [(ngModel)]="nuevaPresion.notas" 
+            placeholder="Condiciones de la medición...">
+          </ion-textarea>
+        </ion-item>
+
+        <ion-button 
+          expand="block" 
+          (click)="registrarPresion()" 
+          color="success"
+          class="ion-margin-top">
+          <ion-icon name="medical-outline" slot="start"></ion-icon>
+          Registrar Presión (POST)
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <!--  SECCIÓN: Historial de datos -->
+  <div *ngIf="seccionActiva === 'historial'" class="seccion">
+    
+    <!--  HEADER CON INFO DE DEBUG -->
+    <div class="historial-header">
+      <h2>📋 Historial de Datos</h2>
+      
+      <!--  CHIPS DE ESTADO -->
+      <div class="info-chips ion-margin-bottom">
+        <ion-chip color="primary">
+          <ion-icon name="list-outline"></ion-icon>
+          <ion-label>{{datosSalud.length}} registros</ion-label>
+        </ion-chip>
+        
+        <ion-chip color="{{loading ? 'warning' : 'success'}}">
+          <ion-icon name="{{loading ? 'hourglass-outline' : 'checkmark-circle-outline'}}"></ion-icon>
+          <ion-label>{{loading ? 'Cargando...' : 'Listo'}}</ion-label>
+        </ion-chip>
+      </div>
+      
+      <ion-button fill="outline" (click)="cargarDatos()" [disabled]="loading">
+        <ion-icon name="refresh-outline" slot="start"></ion-icon>
+        Actualizar (GET)
+      </ion-button>
+    </div>
+
+    <!--  LOADING MEJORADO -->
+    <div *ngIf="loading" class="loading-container ion-text-center ion-padding">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+      <p class="ion-margin-top">Cargando datos de la API...</p>
+      <p><small>JSONPlaceholder devuelve ~100 registros</small></p>
+    </div>
+
+    <!--  LISTA DE DATOS -->
+    <div *ngIf="!loading">
+      
+      <!--  MENSAJE DE ÉXITO AL CARGAR -->
+      <ion-card *ngIf="datosSalud.length > 0" color="light" class="ion-margin-bottom">
+        <ion-card-content>
+          <ion-icon name="checkmark-circle" color="success"></ion-icon>
+          <strong> API conectada exitosamente!</strong>
+          <p>Se cargaron {{datosSalud.length}} registros desde JSONPlaceholder</p>
+        </ion-card-content>
+      </ion-card>
+      
+      <ion-card *ngFor="let dato of datosSalud; let i = index" class="dato-card">
+        
+        <!-- Modo normal -->
+        <div *ngIf="editandoId !== dato.id">
+          <ion-card-header>
+            <ion-card-title>{{ dato.title }}</ion-card-title>
+            <ion-card-subtitle>
+              <ion-chip size="small" color="tertiary">
+                <ion-label>ID: {{ dato.id }}</ion-label>
+              </ion-chip>
+              <ion-chip size="small" color="secondary">
+                <ion-label>Usuario: {{ dato.userId }}</ion-label>
+              </ion-chip>
+            </ion-card-subtitle>
+          </ion-card-header>
+          
+          <ion-card-content>
+            <p>{{ dato.body }}</p>
+            
+            <div class="botones-accion ion-margin-top">
+              <ion-button 
+                fill="outline" 
+                size="small" 
+                color="warning"
+                (click)="iniciarEdicion(dato)">
+                <ion-icon name="create-outline" slot="start"></ion-icon>
+                Editar (PUT)
+              </ion-button>
+              
+              <ion-button 
+                fill="outline" 
+                size="small" 
+                color="danger"
+                (click)="eliminarDato(dato.id)">
+                <ion-icon name="trash-outline" slot="start"></ion-icon>
+                Eliminar (DELETE)
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </div>
+
+        <!-- Modo edición -->
+        <div *ngIf="editandoId === dato.id">
+          <ion-card-header>
+            <ion-card-title>✏️ Editando: {{ dato.title }}</ion-card-title>
+          </ion-card-header>
+          
+          <ion-card-content>
+            
+            <ion-item>
+              <ion-label position="stacked">Nuevo valor</ion-label>
+              <ion-input 
+                type="number" 
+                [(ngModel)]="datoEditando.valor" 
+                placeholder="Nuevo valor">
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Fecha</ion-label>
+              <ion-input type="date" [(ngModel)]="datoEditando.fecha"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Notas</ion-label>
+              <ion-textarea [(ngModel)]="datoEditando.notas"></ion-textarea>
+            </ion-item>
+
+            <div class="botones-edicion ion-margin-top">
+              <ion-button 
+                fill="solid" 
+                size="small" 
+                color="success"
+                (click)="actualizarDato()">
+                <ion-icon name="checkmark-outline" slot="start"></ion-icon>
+                Guardar Cambios
+              </ion-button>
+              
+              <ion-button 
+                fill="outline" 
+                size="small" 
+                color="medium"
+                (click)="cancelarEdicion()">
+                <ion-icon name="close-outline" slot="start"></ion-icon>
+                Cancelar
+              </ion-button>
+            </div>
+
+          </ion-card-content>
+        </div>
+
+      </ion-card>
+
+      <!--  ESTADO VACÍO MEJORADO -->
+      <div *ngIf="datosSalud.length === 0" class="empty-state ion-text-center ion-padding">
+        <ion-icon name="cloud-download-outline" size="large" color="medium"></ion-icon>
+        <h3>No hay datos cargados</h3>
+        <p>Presiona "Actualizar (GET)" para cargar datos de la API</p>
+        <ion-button fill="outline" (click)="cargarDatos()">
+          <ion-icon name="refresh-outline" slot="start"></ion-icon>
+          Cargar Datos de API
+        </ion-button>
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>
