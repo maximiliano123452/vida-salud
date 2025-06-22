@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="light">
     <ion-title class="titulo-header">Vida Sana 🍃</ion-title>
     <ion-buttons slot="end">
@@ -7,7 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+
+<ion-content fullscreen>
   
   <!-- Info del usuario (siempre visible) -->
   <div class="user-info">
@@ -16,9 +17,9 @@
     <span>¡Hoy es un buen día para cuidarte! 🌞</span>
   </div>
 
-  <!--  Segment para navegación entre componentes -->
+  <!-- Segment para navegación entre componentes -->
   <ion-segment 
-    [(ngModel)]="segmentSelected" 
+    [(ngModel)]="segmentSelected"
     (ionChange)="onSegmentChanged($event)"
     color="primary"
     class="custom-segment">
@@ -40,7 +41,7 @@
     
   </ion-segment>
 
-  <!--  Contenido dinámico según el segment seleccionado -->
+  <!-- Contenido dinámico según el segment seleccionado -->
   <div class="segment-content">
     
     <!-- Componente Mis Datos -->
@@ -57,7 +58,7 @@
     <div *ngIf="segmentSelected === 'certificaciones'">
       <app-certificaciones [email]="email"></app-certificaciones>
     </div>
-
+    
   </div>
 
 </ion-content>

@@ -27,7 +27,51 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 /* -------------------------------------------------------------------------- */
-/*                            🎨 Estilos personalizados                        */
+/*                     CORRECCIONES PARA ANDROID EMULADOR                    */
+/* -------------------------------------------------------------------------- */
+
+// Corregir safe areas y layouts para Android
+ion-app {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+
+// Headers corregidos para Android
+ion-header {
+  --background: transparent;
+  --ion-toolbar-background: transparent;
+  --ion-toolbar-border-color: transparent;
+  padding-top:20px;
+  
+  ion-toolbar {
+    --padding-top: env(safe-area-inset-top, 0px);
+    --min-height: 56px;
+    --ion-toolbar-border-color: transparent;
+    --background: transparent;
+  }
+}
+
+// Content sin fullscreen para evitar overlaps
+ion-content {
+  --padding-top: env(safe-area-inset-top);
+  --padding-bottom: env(safe-area-inset-bottom);
+  --offset-top: 0;
+  --keyboard-offset: 0;
+}
+
+// Menú button corregido
+ion-menu-button {
+  --padding-top: 0 !important;
+  --padding-bottom: 0 !important;
+  --color: #145a32 !important;
+  margin: 0 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             Estilos personalizados                        */
 /* -------------------------------------------------------------------------- */
 
 /* Fondo blanco para toda la aplicación */
@@ -37,19 +81,13 @@ ion-app, ion-content, ion-router-outlet, .ion-page {
   background: #ffffff !important;
 }
 
-/* Cabecera transparente sin bordes ni sombra */
-ion-header {
-  --background: transparent;
-  --ion-toolbar-background: transparent;
-  --ion-toolbar-border-color: transparent;
-}
-
-ion-toolbar {
-  --ion-toolbar-border-color: transparent;
-  --background: transparent;
-}
-
+/* Cabecera sin sombras para diseño limpio */
 .header-md {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.header-ios {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
@@ -74,5 +112,110 @@ ion-icon {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--ion-color-light);
 }
 
+/* -------------------------------------------------------------------------- */
+/*                         MEJORAS PARA EMULADOR ANDROID                     */
+/* -------------------------------------------------------------------------- */
+
+// Asegurar que los elementos clickeables tengan área suficiente
+ion-button, ion-item, ion-segment-button, ion-menu-button {
+  min-height: 44px; // Estándar de accesibilidad
+  min-width: 44px;
+}
+
+// Mejorar contraste para pantallas del emulador
+ion-label, ion-text, p, span {
+  --color: #333333;
+  color: #333333;
+}
+
+// Asegurar que los inputs sean visibles y clickeables
+ion-input, ion-select, ion-datetime, ion-checkbox, ion-radio {
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  min-height: 48px;
+}
+
+// Mejorar la visibilidad de los botones
+ion-button {
+  --border-radius: 8px;
+  font-weight: 500;
+  text-transform: none;
+  
+  &.button-solid {
+    --background: var(--ion-color-primary);
+    --color: white;
+  }
+}
+
+// Segments más visibles en el emulador
+ion-segment {
+  --background: var(--ion-color-light);
+  border-radius: 8px;
+  
+  ion-segment-button {
+    --color: var(--ion-color-medium);
+    --color-checked: var(--ion-color-primary);
+    --border-radius: 6px;
+    min-height: 48px;
+    
+    &.segment-button-checked {
+      --background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+  }
+}
+
+// Cards con mejor sombra para profundidad
+ion-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin: 16px;
+  
+  ion-card-header {
+    padding-bottom: 0;
+  }
+  
+  ion-card-content {
+    padding-top: 8px;
+  }
+}
+
+// Lista items con mejor separación
+ion-list {
+  ion-item {
+    --border-color: var(--ion-color-light);
+    --padding-start: 16px;
+    --padding-end: 16px;
+    
+    &:last-child {
+      --border-width: 0;
+    }
+  }
+}
+
+// Loading y skelets más visibles
+ion-skeleton-text {
+  --background: var(--ion-color-light);
+  border-radius: 4px;
+}
+
+ion-spinner {
+  --color: var(--ion-color-primary);
+}
+
+// Modals y popups centrados
+ion-modal, ion-popover, ion-alert {
+  --backdrop-opacity: 0.4;
+}
+
+// Toast notifications mejorados
+ion-toast {
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}

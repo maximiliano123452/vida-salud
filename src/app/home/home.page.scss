@@ -1,15 +1,75 @@
-//  Estilos para segments 
+//  CORRECCIONES PARA ANDROID
+ion-toolbar {
+  --padding-top: 30;
+  --min-height: 56px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
 
+ion-menu-button {
+  --padding-top: 30;
+  --padding-bottom: 0;
+  margin: 0;
+}
+
+ion-title {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+// Info del usuario
+.user-info {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--ion-color-light);
+  margin-bottom: 20px;
+
+  .user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    color: var(--ion-color-primary);
+    margin: 10px 0 5px 0;
+    font-size: 1.2rem;
+  }
+
+  span {
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+  }
+}
+
+// Estilos para segments
 .custom-segment {
   margin: 20px 0;
   --color: var(--ion-color-medium);
   --color-checked: var(--ion-color-primary);
   --border-radius: 8px;
+  
+  ion-segment-button {
+    --padding-top: 18px;
+    --padding-bottom: 8px;
+    min-height: 48px;
+    
+    ion-icon {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    
+    ion-label {
+      font-size: 0.85rem;
+    }
+  }
 }
 
 .segment-content {
   margin-top: 20px;
   animation: fadeIn 0.3s ease-in-out;
+  min-height: 300px; // Asegurar altura mínima
 }
 
 @keyframes fadeIn {
@@ -27,46 +87,83 @@
 .seccion-header {
   text-align: center;
   margin-bottom: 20px;
+  padding: 16px;
   
   h2 {
     color: var(--ion-color-primary);
     margin-bottom: 5px;
+    font-size: 1.5rem;
   }
   
   p {
     color: var(--ion-color-medium);
     font-size: 0.9rem;
+    margin: 0;
   }
 }
 
 .form-card {
   margin-bottom: 20px;
+  
+  ion-card {
+    margin: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
 }
 
-.experiencia-header,
+.experiencia-header, 
 .certificacion-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  padding: 0 16px;
   
   h4 {
     margin: 0;
     color: var(--ion-color-primary);
+    font-size: 1.1rem;
   }
 }
 
 .trabajando-actual {
   color: var(--ion-color-success);
   font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .vencimiento-info {
   margin-top: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  
+  &.proximo-vencer {
+    background-color: var(--ion-color-warning-tint);
+    color: var(--ion-color-warning-shade);
+  }
+  
+  &.vencido {
+    background-color: var(--ion-color-danger-tint);
+    color: var(--ion-color-danger-shade);
+  }
 }
 
 .estado-certificado {
   margin-top: 8px;
+  font-size: 0.85rem;
+  
+  .vigente {
+    color: var(--ion-color-success);
+  }
+  
+  .proximo-vencer {
+    color: var(--ion-color-warning);
+  }
+  
+  .vencido {
+    color: var(--ion-color-danger);
+  }
 }
 
 .empty-state {
@@ -78,6 +175,41 @@
     font-size: 64px;
     margin-bottom: 16px;
     opacity: 0.5;
+    color: var(--ion-color-light);
+  }
+  
+  p {
+    font-size: 1rem;
+    margin: 0;
   }
 }
 
+// Botones y controles
+ion-button {
+  --border-radius: 8px;
+  margin: 8px 0;
+}
+
+ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 48px;
+}
+
+ion-input, ion-select, ion-datetime {
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+}
+
+// Responsive para tablets
+@media (min-width: 768px) {
+  .segment-content {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  .user-info {
+    max-width: 400px;
+    margin: 0 auto 20px auto;
+  }
+}

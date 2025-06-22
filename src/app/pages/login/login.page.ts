@@ -22,14 +22,11 @@ export class LoginPage implements OnInit {
     console.log('🚀 Inicializando login con SQLite...');
     
     try {
-      // Inicializar SQLite
       await this.dbTaskService.inicializarSistema();
       console.log('✅ SQLite inicializado correctamente');
       
-      // Crear usuarios de prueba
       await this.crearUsuariosDePrueba();
       
-      // Verificar si hay sesión activa
       await this.verificarSesionActiva();
       
     } catch (error) {
@@ -38,12 +35,12 @@ export class LoginPage implements OnInit {
   }
 
   async crearUsuariosDePrueba() {
-    console.log('🔧 Creando usuarios de prueba en SQLite...');
+    console.log('🔧 Creando usuarios de prueba...');
     
     const usuariosPrueba = [
       { user: 'admin@vidasana.com', pass: 'admin' },
       { user: 'marco@gmail.com', pass: '7890' },
-      { user: 'usuario@gmail.com', pass: '123' },
+      { user: 'marco@gmail.com', pass: '1234' },
       { user: 'test@test.com', pass: 'test' },
       { user: 'demo@demo.com', pass: 'demo' }
     ];
@@ -52,12 +49,12 @@ export class LoginPage implements OnInit {
       try {
         const registrado = await this.dbTaskService.registrarSesion(usuario.user, usuario.pass);
         if (registrado) {
-          console.log(`✅ Usuario SQLite ${usuario.user} creado`);
+          console.log(`✅ Usuario ${usuario.user} creado`);
         } else {
-          console.log(`ℹ️ Usuario SQLite ${usuario.user} ya existe`);
+          console.log(`ℹ️ Usuario ${usuario.user} ya existe`);
         }
       } catch (error) {
-        console.log(`ℹ️ Usuario SQLite ${usuario.user} ya existe o error:`, error);
+        console.log(`ℹ️ Usuario ${usuario.user} ya existe o error`);
       }
     }
   }
@@ -67,7 +64,7 @@ export class LoginPage implements OnInit {
       const sesionActiva = await this.dbTaskService.consultarSesionActiva();
       
       if (sesionActiva) {
-        console.log('✅ Sesión SQLite activa encontrada:', sesionActiva.user_name);
+        console.log('✅ Sesión activa encontrada:', sesionActiva.user_name);
         
         const alert = await this.alertController.create({
           header: '🔄 Sesión Activa',
@@ -77,7 +74,7 @@ export class LoginPage implements OnInit {
               text: 'Cerrar Sesión',
               handler: async () => {
                 await this.dbTaskService.cerrarTodasLasSesiones();
-                console.log('🚪 Sesión SQLite cerrada');
+                console.log('🚪 Sesión cerrada');
               }
             },
             {
@@ -91,13 +88,13 @@ export class LoginPage implements OnInit {
         await alert.present();
       }
     } catch (error) {
-      console.error('❌ Error al verificar sesión SQLite:', error);
+      console.error('Error al verificar sesión:', error);
     }
   }
 
   async mostrarAlerta(mensaje: string) {
     const alert = await this.alertController.create({
-      header: '❌ Error',
+      header: 'Error',
       message: mensaje,
       buttons: ['OK']
     });
@@ -114,13 +111,13 @@ export class LoginPage implements OnInit {
   }
 
   async mostrarUsuariosDePrueba() {
-    let mensaje = '🔑 Usuarios SQLite disponibles:\n\n';
+    let mensaje = '🔑 Usuarios disponibles:\n\n';
     mensaje += '📧 admin@vidasana.com - 🔑 admin\n';
     mensaje += '📧 marco@gmail.com - 🔑 7890\n';
-    mensaje += '📧 usuario@gmail.com - 🔑 123\n';
+    mensaje += '📧 marco@gmail.com - 🔑 1234\n';
     mensaje += '📧 test@test.com - 🔑 test\n';
     mensaje += '📧 demo@demo.com - 🔑 demo\n\n';
-    mensaje += 'O registra una cuenta nueva (se guardará en SQLite).';
+    mensaje += 'O registra una cuenta nueva.';
 
     const alert = await this.alertController.create({
       header: '👥 Usuarios SQLite',
@@ -136,7 +133,6 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    // Validaciones
     if (!this.email || this.email.trim() === '') {
       this.mostrarAlerta('El correo no puede estar vacío.');
       return;
@@ -160,17 +156,14 @@ export class LoginPage implements OnInit {
     try {
       console.log('🔍 Intentando login con SQLite:', this.email);
       
-      // Validar usuario en SQLite
       const isValidUser = await this.dbTaskService.validarUsuario(this.email, this.password);
       
       if (isValidUser) {
-        // Cerrar otras sesiones y activar la nueva
         await this.dbTaskService.cerrarTodasLasSesiones();
         await this.dbTaskService.actualizarEstadoSesion(this.email, 1);
         
         await this.mostrarExito(`¡Bienvenido ${this.email}! (SQLite Login)`);
         
-        // Navegar al home
         this.navCtrl.navigateForward(['/home'], {
           queryParams: {
             email: this.email,
@@ -178,13 +171,11 @@ export class LoginPage implements OnInit {
           }
         });
         
-        console.log('✅ Login SQLite exitoso para:', this.email);
+        console.log(' Login SQLite exitoso para:', this.email);
       } else {
-        console.log('❌ Usuario no encontrado en SQLite:', this.email);
-        
         const alert = await this.alertController.create({
           header: '❌ Credenciales incorrectas',
-          message: 'Usuario no encontrado en SQLite. ¿Deseas ver los usuarios disponibles o registrarte?',
+          message: 'Usuario no encontrado en SQLite.',
           buttons: [
             {
               text: 'Ver usuarios',
@@ -192,25 +183,19 @@ export class LoginPage implements OnInit {
                 this.mostrarUsuariosDePrueba();
               }
             },
-            {
-              text: 'Registrarse',
-              handler: () => {
-                this.registro();
-              }
-            },
-            'Cancelar'
+            'OK'
           ]
         });
         await alert.present();
       }
     } catch (error) {
       console.error('❌ Error en login SQLite:', error);
-      this.mostrarAlerta('Error al iniciar sesión con SQLite. Verifica la conexión.');
+      this.mostrarAlerta('Error al iniciar sesión con SQLite.');
     }
   }
 
   registro() {
-    console.log('🔄 Navegando a registro (usará SQLite)');
     this.navCtrl.navigateForward(['/registro']);
   }
+
 }
