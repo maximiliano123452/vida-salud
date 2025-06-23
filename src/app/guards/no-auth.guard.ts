@@ -19,7 +19,8 @@ export class NoAuthGuard implements CanActivate {
       const hasSession = await this.storageService.hasActiveSession();
       
       if (hasSession) {
-        console.log('ℹ️ NoAuthGuard: Hay sesión activa, redirigiendo al home');
+        const session = await this.storageService.getSession();
+        console.log('ℹ️ NoAuthGuard: Hay sesión activa para:', session?.email, '- redirigiendo al home');
         this.router.navigate(['/home']);
         return false;
       } else {

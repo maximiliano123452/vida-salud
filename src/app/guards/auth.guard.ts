@@ -19,7 +19,8 @@ export class AuthGuard implements CanActivate {
       const hasSession = await this.storageService.hasActiveSession();
       
       if (hasSession) {
-        console.log('✅ AuthGuard: Sesión activa encontrada');
+        const session = await this.storageService.getSession();
+        console.log('✅ AuthGuard: Sesión activa encontrada para:', session?.email);
         return true;
       } else {
         console.log('❌ AuthGuard: No hay sesión, redirigiendo al login');

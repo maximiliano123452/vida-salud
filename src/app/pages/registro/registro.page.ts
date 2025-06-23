@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, NavController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
-import { FormtearFechaPipe } from '../../pipes/formtear-fecha.pipe';
+import { AlertController, MenuController, NavController } from '@ionic/angular';
 import { StorageService } from '../../services/storage.service';
+import { FormtearFechaPipe } from '../../pipes/formtear-fecha.pipe';
 
 @Component({
   selector: 'app-registro',
@@ -11,26 +10,26 @@ import { StorageService } from '../../services/storage.service';
   standalone: false
 })
 export class RegistroPage implements OnInit {
-
-  nombre: any = '';
-  apellido: any = '';
-  selectedOption: any = ''; // nivel de estudios
+  
+  nombre: string = '';
+  apellido: string = '';
+  selectedOption: string = '';
   selectedDate: any = '';
-  usuario: any = ''; // email
-  password: any = '';
-
+  email: string = '';  // CAMBIADO: era 'usuario', ahora es 'email'
+  password: string = '';
+  
   constructor(
     private alertController: AlertController,
     private menu: MenuController,
-    private formtearFechaPipe: FormtearFechaPipe,
+    private navCtrl: NavController,
     private storageService: StorageService,
-    private navCtrl: NavController
-  ) { }
-
+    private formtearFechaPipe: FormtearFechaPipe
+  ) {}
+  
   ngOnInit() {
     this.menu.close("mainMenu");
   }
-
+  
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
       header: 'Mensaje',
@@ -39,96 +38,86 @@ export class RegistroPage implements OnInit {
     });
     await alert.present();
   }
-
-  async presentSuccess(message: string) {
-    const alert = await this.alertController.create({
-      header: '✅ Registro Exitoso',
-      message: message,
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
-
+  
   validarEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
-
+  
   async guardar() {
     const fechaFormateada = this.formtearFechaPipe.transform(this.selectedDate);
-
-    // Validaciones básicas
-    if (this.nombre.trim() === '' || this.apellido.trim() === '') {
-      this.presentAlert('❌ Error: nombre y apellido no pueden estar vacíos');
+    
+    // Validación de campos obligatorios
+    if (!this.nombre || !this.apellido || !this.email || !this.password) {
+      this.presentAlert('❌ Todos los campos son obligatorios');
       return;
     }
-
-    if (!this.usuario || this.usuario.trim() === '') {
-      this.presentAlert('❌ Error: el email es obligatorio');
+    
+    // Validación de email
+    if (!this.validarEmail(this.email)) {
+      this.presentAlert('❌ Correo electrónico no válido');
       return;
     }
-
-    if (!this.validarEmail(this.usuario)) {
-      this.presentAlert('❌ Error: el email no tiene un formato válido');
-      return;
-    }
-
-    if (!this.password || this.password.trim() === '') {
-      this.presentAlert('❌ Error: la contraseña es obligatoria');
-      return;
-    }
-
+    
+    // Validación de contraseña
     if (this.password.length < 3 || this.password.length > 8) {
-      this.presentAlert('❌ Error: la contraseña debe tener entre 3 y 8 caracteres');
+      this.presentAlert('❌ La contraseña debe tener entre 3 y 8 caracteres');
       return;
     }
-
+    
+    // Verificar si el usuario ya existe
+    const existe = await this.storageService.existeUsuario(this.email);
+    if (existe) {
+      this.presentAlert('❌ Este correo ya está registrado');
+      return;
+    }
+    
+    // Crear objeto usuario
+    const usuarioData = {
+      nombre: this.nombre,
+      apellido: this.apellido,
+      email: this.email,  // CAMBIADO: ahora usa 'email' consistentemente
+      password: this.password,
+      fechaNacimiento: fechaFormateada,
+      nivel: this.selectedOption
+    };
+    
     try {
-      //  Verificar si el usuario ya existe
-      const users = await this.storageService.getUsers();
-      const userExists = users.find(user => user.email === this.usuario);
-
-      if (userExists) {
-        this.presentAlert('❌ Error: Ya existe un usuario registrado con este email');
-        return;
-      }
-
-      //  Guardar nuevo usuario
-      await this.storageService.saveUser(this.usuario, this.password);
-
-      //  Iniciar sesión automáticamente
-      const userData = {
-        email: this.usuario,
-        loginTime: new Date().toISOString()
-      };
+      // Guardar usuario y establecer sesión
+      await this.storageService.guardarUsuario(usuarioData);
+      await this.storageService.setSession(usuarioData);
       
-      await this.storageService.setSessionData(userData);
-
-      //  Mostrar mensaje de éxito
-      await this.presentSuccess(
-        `¡Usuario registrado exitosamente!\n\n` +
-        `👤 Nombre: ${this.nombre} ${this.apellido}\n` +
-        `📧 Email: ${this.usuario}\n` +
-        `📅 Fecha nacimiento: ${fechaFormateada}\n` +
-        `🎓 Nivel estudios: ${this.selectedOption}\n\n` +
-        `Serás redirigido al home automáticamente.`
-      );
-
-      //  Navegar al home después del registro
-      setTimeout(() => {
-        this.navCtrl.navigateForward(['/home'], {
-          queryParams: {
-            email: this.usuario,
-            password: this.password
-          }
-        });
-      }, 2000);
-
-      console.log('✅ Registro exitoso para:', this.usuario);
-
+      const success = await this.alertController.create({
+        header: '✅ Registro exitoso',
+        message: 'Serás redirigido al Home.',
+        buttons: ['OK']
+      });
+      await success.present();
+      
+      // Limpiar formulario
+      this.limpiarFormulario();
+      
+      // Navegar al home
+      this.navCtrl.navigateForward('/home');
+      
     } catch (error) {
-      console.error('❌ Error en registro:', error);
+      console.error('Error al guardar usuario:', error);
       this.presentAlert('❌ Error al registrar usuario. Intenta nuevamente.');
     }
+  }
+  
+  // Método para limpiar el formulario
+  limpiarFormulario() {
+    this.nombre = '';
+    this.apellido = '';
+    this.selectedOption = '';
+    this.selectedDate = '';
+    this.email = '';
+    this.password = '';
+  }
+  
+  // Método para volver al login
+  volverLogin() {
+    this.navCtrl.navigateBack('/login');
   }
 }
