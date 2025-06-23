@@ -7,7 +7,6 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content fullscreen>
   
   <!-- Info del usuario (siempre visible) -->
@@ -17,50 +16,99 @@
     <span>¡Hoy es un buen día para cuidarte! 🌞</span>
   </div>
 
-  <!-- Segment para navegación entre componentes -->
+  <!-- CONTENIDO ORIGINAL DEL HOME (movido desde mis-datos.component.html) -->
+  <div class="seccion-info">
+    <h2>Áreas de bienestar</h2>
+  </div>
+
+  <!-- Card: Alimentación saludable -->
+  <ion-card button routerLink="/alimentacion">
+    <img src="../../assets/img/alimentacion.png" alt="Alimentación saludable" />
+    <ion-card-header>
+      <ion-card-title>Alimentación saludable</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Consejos y recetas para nutrir tu cuerpo con alimentos naturales, frescos y equilibrados.
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Card: Ejercicio físico -->
+  <ion-card button routerLink="/ejercicio">
+    <img src="../../assets/img/ejercicio.png" alt="Ejercicio físico" />
+    <ion-card-header>
+      <ion-card-title>Ejercicio físico</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Rutinas simples y efectivas para mantenerte activo y mejorar tu salud día a día.
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Card: Bienestar emocional -->
+  <ion-card button routerLink="/bienestar">
+    <img src="../../assets/img/bienestar.png" alt="Bienestar emocional" />
+    <ion-card-header>
+      <ion-card-title>Bienestar emocional</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Técnicas y recursos para cuidar tu mente, reducir el estrés y vivir con más paz interior.
+    </ion-card-content>
+  </ion-card>
+
+  <!-- NUEVO: Consejo del día -->
+  <ion-card class="tip-card">
+    <ion-card-header>
+      <ion-card-title>💡 Consejo del día</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><em>"Recuerda mantenerte hidratado. Bebe al menos 8 vasos de agua al día para mantener tu cuerpo funcionando de manera óptima."</em></p>
+      <ion-chip color="success">
+        <ion-icon name="water-outline"></ion-icon>
+        <ion-label>Hidratación</ion-label>
+      </ion-chip>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- COMENTADO: Segments y components para que no aparezcan -->
+  <!--
   <ion-segment 
-    [(ngModel)]="segmentSelected"
+     [(ngModel)]="segmentSelected"
     (ionChange)="onSegmentChanged($event)"
     color="primary"
     class="custom-segment">
-    
+        
     <ion-segment-button value="mis-datos">
       <ion-icon name="person-outline"></ion-icon>
       <ion-label>Mis Datos</ion-label>
     </ion-segment-button>
-    
+        
     <ion-segment-button value="experiencia">
       <ion-icon name="briefcase-outline"></ion-icon>
       <ion-label>Experiencia</ion-label>
     </ion-segment-button>
-    
+        
     <ion-segment-button value="certificaciones">
       <ion-icon name="school-outline"></ion-icon>
       <ion-label>Certificaciones</ion-label>
     </ion-segment-button>
-    
+      
   </ion-segment>
 
-  <!-- Contenido dinámico según el segment seleccionado -->
   <div class="segment-content">
-    
-    <!-- Componente Mis Datos -->
+        
     <div *ngIf="segmentSelected === 'mis-datos'">
       <app-mis-datos [email]="email"></app-mis-datos>
     </div>
-
-    <!-- Componente Experiencia Laboral -->
+    
     <div *ngIf="segmentSelected === 'experiencia'">
       <app-experiencia-laboral [email]="email"></app-experiencia-laboral>
     </div>
-
-    <!-- Componente Certificaciones -->
+    
     <div *ngIf="segmentSelected === 'certificaciones'">
       <app-certificaciones [email]="email"></app-certificaciones>
     </div>
-    
+      
   </div>
+  -->
 
 </ion-content>
-
 
