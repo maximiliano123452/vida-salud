@@ -1,8 +1,9 @@
 {
-  "name": "vida-sana-maxi",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "name": "vida-sana",
+  "version": "1.0.0",
+  "author": "Maximiliano Negrete",
   "homepage": "https://ionicframework.com/",
+  "description": "Aplicación móvil para el bienestar integral - Vida Sana",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -66,6 +67,5 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.6.3"
-  },
-  "description": "Vida Sana project"
+  }
 }

@@ -1,13 +1,20 @@
-.company-content{
-    display: flex; 
-    align-items: center;
+.company-content {
+  display: flex; 
+  align-items: center;
+  justify-content: flex-start; // Alinear al inicio
+  padding: 8px 16px; // Espaciado interno
+  height: 100%; // Usar toda la altura disponible
 }
 
-.company-content  img {
-    width: 25%;
-    position: absolute;
-    margin-left: 3%;
-  }
-.company-icon{
-    margin-right: 8px;
-} 
+.company-content img {
+  width: 120px; 
+  height: 40px; // Altura fija
+  object-fit: contain; 
+  position: relative; 
+  margin-left: 0; 
+  margin-right: 8px; 
+}
+
+.company-icon {
+  margin-right: 8px;
+}
