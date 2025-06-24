@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService, DatoSalud, PresionArterial } from '../../services/api.service';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { CameraService } from '../../services/camera.service'; // NUEVO IMPORT
+import { AlertController, LoadingController, ToastController, ActionSheetController } from '@ionic/angular'; // AGREGADO ActionSheetController
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -18,11 +19,15 @@ export class DatosSaludPage implements OnInit, OnDestroy {
   //  Control de segments
   seccionActiva = 'datos';
   
+  // almacenar fotos
+  fotoTomada: string | null = null;
+  mostrarPreviewFoto = false;
+  
   //  Formulario para nuevos datos
   nuevoDato: DatoSalud = {
     userId: 1,
     tipo: 'peso',
-    valor: 75.5, // ⭐ Valor por defecto
+    valor: 75.5,
     fecha: new Date().toISOString().split('T')[0],
     notas: 'Dato de prueba'
   };
@@ -45,91 +50,214 @@ export class DatosSaludPage implements OnInit, OnDestroy {
 
   constructor(
     private apiService: ApiService,
+    private cameraService: CameraService, // servicio nuevo para la camara 
     private alertController: AlertController,
     private loadingController: LoadingController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private actionSheetController: ActionSheetController // CONTROLLER (nuevo)
   ) { }
 
   ngOnInit() {
     console.log('✅ DatosSaludPage inicializada');
-    
-    //  NO cargar datos automáticamente al iniciar
-    // Solo cargar cuando el usuario vaya a "Historial"
-    
-    //  REMOVIDO: La suscripción al loading del servicio
-    // Esto causaba conflictos con el loading local
+    // Verificar disponibilidad de cámara
+    this.verificarCamara();
   }
 
   ngOnDestroy() {
-    //  Cleanup de subscripciones
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  //  metodo para Detectar cambio de segmento
+  // Verificar disponibilidad de cámara
+  verificarCamara() {
+    const disponible = this.cameraService.isCameraAvailable();
+    const deviceInfo = this.cameraService.getDeviceInfo();
+    
+    console.log('📸 Estado de la cámara:', {
+      disponible,
+      platform: deviceInfo.platform,
+      isMobile: deviceInfo.isMobile
+    });
+  }
+
+  // MÉTODO: Mostrar opciones de cámara
+  async mostrarOpcionesCamara() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Agregar Foto 📸',
+      subHeader: 'Adjunta una imagen a tu registro de salud',
+      buttons: [
+        {
+          text: 'Tomar Foto 📷',
+          icon: 'camera',
+          handler: () => {
+            this.tomarFoto();
+          }
+        },
+        {
+          text: 'Seleccionar de Galería 🖼️',
+          icon: 'images',
+          handler: () => {
+            this.seleccionarDeGaleria();
+          }
+        },
+        {
+          text: 'Cancelar',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            console.log('❌ Cancelado por usuario');
+          }
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
+
+  // MÉTODO: Tomar foto
+  async tomarFoto() {
+    const loading = await this.loadingController.create({
+      message: 'Abriendo cámara...',
+      duration: 5000
+    });
+    await loading.present();
+
+    try {
+      console.log('📸 Iniciando captura de foto...');
+      const foto = await this.cameraService.tomarFoto();
+      
+      loading.dismiss();
+      
+      if (foto) {
+        this.fotoTomada = foto;
+        this.mostrarPreviewFoto = true;
+        this.mostrarToast('✅ Foto capturada exitosamente', 'success');
+        console.log('📸 Foto guardada en memoria');
+      } else {
+        this.mostrarToast('❌ No se pudo tomar la foto', 'warning');
+        console.log('❌ Foto no capturada');
+      }
+      
+    } catch (error) {
+      console.error('❌ Error al tomar foto:', error);
+      loading.dismiss();
+      this.mostrarToast('Error al acceder a la cámara', 'danger');
+    }
+  }
+
+  // MÉTODO: Seleccionar de galería
+  async seleccionarDeGaleria() {
+    const loading = await this.loadingController.create({
+      message: 'Abriendo galería...',
+      duration: 5000
+    });
+    await loading.present();
+
+    try {
+      console.log('🖼️ Iniciando selección de galería...');
+      const foto = await this.cameraService.seleccionarFoto();
+      
+      loading.dismiss();
+      
+      if (foto) {
+        this.fotoTomada = foto;
+        this.mostrarPreviewFoto = true;
+        this.mostrarToast('✅ Foto seleccionada exitosamente', 'success');
+        console.log('🖼️ Foto seleccionada de galería');
+      } else {
+        this.mostrarToast('❌ No se seleccionó ninguna foto', 'warning');
+        console.log('❌ No se seleccionó foto');
+      }
+      
+    } catch (error) {
+      console.error('❌ Error al seleccionar foto:', error);
+      loading.dismiss();
+      this.mostrarToast('Error al acceder a la galería', 'danger');
+    }
+  }
+
+  // MÉTODO: Eliminar foto
+  eliminarFoto() {
+    this.fotoTomada = null;
+    this.mostrarPreviewFoto = false;
+    this.mostrarToast('📸 Foto eliminada', 'medium');
+    console.log('🗑️ Foto eliminada');
+  }
+
+  // MÉTODO: Toggle preview de foto
+  togglePreviewFoto() {
+    this.mostrarPreviewFoto = !this.mostrarPreviewFoto;
+  }
+
+  //  Método para detectar cambio de segmento
   onSegmentChange(event: any) {
     this.seccionActiva = event.detail.value;
     console.log('📍 Cambiando a sección:', this.seccionActiva);
     
-    //  CARGAR DATOS AUTOMÁTICAMENTE AL IR A HISTORIAL
     if (this.seccionActiva === 'historial' && this.datosSalud.length === 0) {
       console.log('🔄 Cargando datos automáticamente...');
       this.cargarDatos();
     }
   }
 
-  //  MÉTODO CORREGIDO: Cargar datos de la API
+  //  Cargar datos de la API (CON MANEJO OFFLINE)
   async cargarDatos() {
     console.log('🔄 Iniciando carga de datos...');
     
-    //  ESTABLECER LOADING ANTES DEL LOADING CONTROLLER
     this.loading = true;
 
     const loading = await this.loadingController.create({
       message: 'Cargando datos de salud...',
-      duration: 10000 // Máximo 10 segundos
+      duration: 10000
     });
     await loading.present();
 
     try {
-      //  CREAR SUBSCRIPTION PARA MANEJAR CLEANUP
       const subscription = this.apiService.getDatosSalud(1).subscribe({
         next: (datos) => {
           console.log('✅ Datos recibidos de API:', datos);
-          console.log('📊 Cantidad total:', datos.length);
-          
-          //  MOSTRAR TODOS LOS DATOS 
           this.datosSalud = datos; 
-          
-          //  DETENER LOADING EN AMBOS LUGARES
           this.loading = false;
           loading.dismiss();
-          
-          console.log('✅ Datos asignados a la lista:', this.datosSalud.length);
           this.mostrarToast(`${datos.length} registros cargados correctamente`, 'success');
         },
         error: (error) => {
           console.error('❌ Error al cargar datos:', error);
-          
-          //  DETENER LOADING EN CASO DE ERROR
           this.loading = false;
           loading.dismiss();
           
-          this.mostrarToast('Error al cargar datos', 'danger');
+          // MANEJO OFFLINE - cargar datos locales
+          this.cargarDatosOffline();
         }
       });
 
-      //  AGREGAR SUBSCRIPTION PARA CLEANUP
       this.subscriptions.push(subscription);
 
     } catch (error) {
       console.error('❌ Error en try-catch:', error);
-      
-      //  DETENER LOADING EN CATCH
       this.loading = false;
       loading.dismiss();
       
-      this.mostrarToast('Error al conectar con el servidor', 'danger');
+      // MANEJO OFFLINE
+      this.cargarDatosOffline();
     }
+  }
+
+  // MÉTODO: Cargar datos offline (desde el servicio)
+  cargarDatosOffline() {
+    console.log('📱 Cargando datos offline...');
+    
+    // Usar datos locales del servicio API
+    const datosLocales = this.apiService.getDatosSaludLocal();
+    
+    // Convertir a formato de la API para mostrar
+    this.datosSalud = datosLocales.map(dato => ({
+      id: dato.id,
+      title: `${dato.tipo}: ${dato.valor}`,
+      body: `Fecha: ${dato.fecha}. Notas: ${dato.notas}`,
+      userId: dato.userId
+    }));
+    
+    this.mostrarToast('📱 Mostrando datos guardados localmente', 'warning');
+    console.log('✅ Datos offline cargados:', this.datosSalud.length);
   }
 
   //  POST: Crear nuevo dato de salud
@@ -143,21 +271,33 @@ export class DatosSaludPage implements OnInit, OnDestroy {
     });
     await loading.present();
 
+    // Incluir información de foto en las notas
+    let notasConFoto = this.nuevoDato.notas || '';
+    if (this.fotoTomada) {
+      notasConFoto += ' [📸 Incluye foto adjunta]';
+    }
+
+    const datoConFoto = {
+      ...this.nuevoDato,
+      notas: notasConFoto
+    };
+
     try {
-      const subscription = this.apiService.crearDatoSalud(this.nuevoDato).subscribe({
+      const subscription = this.apiService.crearDatoSalud(datoConFoto).subscribe({
         next: (resultado) => {
           console.log('✅ Dato creado:', resultado);
           
-          // Agregar el nuevo dato a la lista local AL TOPE
           const nuevoItem = {
             id: resultado.id,
             title: `${this.nuevoDato.tipo}: ${this.nuevoDato.valor}`,
-            body: `Fecha: ${this.nuevoDato.fecha}. Notas: ${this.nuevoDato.notas}`,
-            userId: this.nuevoDato.userId
+            body: `Fecha: ${this.nuevoDato.fecha}. Notas: ${notasConFoto}`,
+            userId: this.nuevoDato.userId,
+            foto: this.fotoTomada // Guardar foto localmente
           };
           this.datosSalud.unshift(nuevoItem);
           
           this.limpiarFormulario();
+          this.eliminarFoto(); // Limpiar foto
           loading.dismiss();
           this.mostrarToast('✅ Dato guardado exitosamente', 'success');
         },
@@ -176,7 +316,7 @@ export class DatosSaludPage implements OnInit, OnDestroy {
     }
   }
 
-  //  PUT: Actualizar dato existente
+  //  MÉTODOS EXISTENTES 
   async actualizarDato() {
     if (!this.datoEditando || !this.editandoId) return;
 
@@ -198,7 +338,6 @@ export class DatosSaludPage implements OnInit, OnDestroy {
         next: (resultado) => {
           console.log('✅ Dato actualizado:', resultado);
           
-          // Actualizar en la lista local
           const index = this.datosSalud.findIndex(d => d.id === this.editandoId);
           if (index !== -1) {
             this.datosSalud[index] = {
@@ -227,7 +366,6 @@ export class DatosSaludPage implements OnInit, OnDestroy {
     }
   }
 
-  //  DELETE: Eliminar dato
   async eliminarDato(id: number) {
     const alert = await this.alertController.create({
       header: 'Confirmar eliminación',
@@ -259,10 +397,7 @@ export class DatosSaludPage implements OnInit, OnDestroy {
       const subscription = this.apiService.eliminarDatoSalud(id).subscribe({
         next: () => {
           console.log('✅ Dato eliminado:', id);
-          
-          // Remover de la lista local INMEDIATAMENTE
           this.datosSalud = this.datosSalud.filter(d => d.id !== id);
-          
           loading.dismiss();
           this.mostrarToast('✅ Dato eliminado exitosamente', 'success');
         },
@@ -281,7 +416,6 @@ export class DatosSaludPage implements OnInit, OnDestroy {
     }
   }
 
-  //  POST: Registrar presión arterial
   async registrarPresion() {
     if (!this.validarPresion()) {
       return;
@@ -324,7 +458,7 @@ export class DatosSaludPage implements OnInit, OnDestroy {
     }
   }
 
-  //  Funciones auxiliares
+  // Funciones auxiliares
   iniciarEdicion(dato: any) {
     this.editandoId = dato.id;
     this.datoEditando = {
@@ -389,13 +523,13 @@ export class DatosSaludPage implements OnInit, OnDestroy {
     toast.present();
   }
 
-  //  MÉTODO DE DEBUG: Para verificar estado
   mostrarEstado() {
     console.log('📊 Estado actual:');
     console.log('- Datos cargados:', this.datosSalud.length);
     console.log('- Loading:', this.loading);
     console.log('- Sección activa:', this.seccionActiva);
+    console.log('- Foto tomada:', !!this.fotoTomada);
+    console.log('- Preview foto:', this.mostrarPreviewFoto);
     console.log('- Primeros 3 datos:', this.datosSalud.slice(0, 3));
   }
-
 }

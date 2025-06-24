@@ -69,13 +69,71 @@
           </ion-textarea>
         </ion-item>
 
+        <!-- SECCIÓN: CÁMARA -->
+        <div class="camera-section ion-margin-top">
+          <ion-item>
+            <ion-label>
+              <h3>📸 Adjuntar Foto (Opcional)</h3>
+              <p>Agrega una imagen a tu registro de salud</p>
+            </ion-label>
+          </ion-item>
+
+          <!-- Botones de cámara -->
+          <div class="camera-buttons">
+            <ion-button 
+              fill="outline" 
+              size="default"
+              color="primary"
+              (click)="mostrarOpcionesCamara()"
+              class="ion-margin-end">
+              <ion-icon name="camera" slot="start"></ion-icon>
+              {{ fotoTomada ? 'Cambiar Foto' : 'Agregar Foto' }}
+            </ion-button>
+
+            <ion-button 
+              *ngIf="fotoTomada"
+              fill="outline" 
+              size="default"
+              color="danger"
+              (click)="eliminarFoto()">
+              <ion-icon name="trash" slot="start"></ion-icon>
+              Eliminar
+            </ion-button>
+          </div>
+
+          <!-- Preview de foto tomada -->
+          <div *ngIf="fotoTomada" class="photo-preview ion-margin-top">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle>
+                  <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                  Foto adjunta
+                </ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content>
+                <div class="photo-container" (click)="togglePreviewFoto()">
+                  <img 
+                    [src]="fotoTomada" 
+                    alt="Foto adjunta"
+                    [class.photo-small]="!mostrarPreviewFoto"
+                    [class.photo-large]="mostrarPreviewFoto" />
+                  <p class="photo-hint">
+                    <ion-icon name="eye" color="medium"></ion-icon>
+                    Toca para {{ mostrarPreviewFoto ? 'minimizar' : 'ampliar' }}
+                  </p>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </div>
+
         <ion-button 
           expand="block" 
           (click)="crearDato()" 
           color="primary"
           class="ion-margin-top">
           <ion-icon name="add-outline" slot="start"></ion-icon>
-          Guardar Dato (POST)
+          {{ fotoTomada ? 'Guardar Dato con Foto (POST)' : 'Guardar Dato (POST)' }}
         </ion-button>
 
       </ion-card-content>
@@ -126,6 +184,56 @@
           </ion-textarea>
         </ion-item>
 
+        <!-- CÁMARA EN PRESIÓN ARTERIAL -->
+        <div class="camera-section ion-margin-top">
+          <ion-item>
+            <ion-label>
+              <h3>📸 Foto del Tensiómetro (Opcional)</h3>
+              <p>Adjunta imagen de la medición</p>
+            </ion-label>
+          </ion-item>
+
+          <div class="camera-buttons">
+            <ion-button 
+              fill="outline" 
+              size="default"
+              color="success"
+              (click)="mostrarOpcionesCamara()">
+              <ion-icon name="camera" slot="start"></ion-icon>
+              {{ fotoTomada ? 'Cambiar Foto' : 'Agregar Foto' }}
+            </ion-button>
+
+            <ion-button 
+              *ngIf="fotoTomada"
+              fill="outline" 
+              size="default"
+              color="danger"
+              (click)="eliminarFoto()">
+              <ion-icon name="trash" slot="start"></ion-icon>
+              Eliminar
+            </ion-button>
+          </div>
+
+          <!-- Preview también aquí -->
+          <div *ngIf="fotoTomada" class="photo-preview ion-margin-top">
+            <ion-card>
+              <ion-card-content>
+                <div class="photo-container" (click)="togglePreviewFoto()">
+                  <img 
+                    [src]="fotoTomada" 
+                    alt="Foto de medición"
+                    [class.photo-small]="!mostrarPreviewFoto"
+                    [class.photo-large]="mostrarPreviewFoto" />
+                  <p class="photo-hint">
+                    <ion-icon name="eye" color="medium"></ion-icon>
+                    Toca para {{ mostrarPreviewFoto ? 'minimizar' : 'ampliar' }}
+                  </p>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </div>
+
         <ion-button 
           expand="block" 
           (click)="registrarPresion()" 
@@ -157,6 +265,12 @@
         <ion-chip color="{{loading ? 'warning' : 'success'}}">
           <ion-icon name="{{loading ? 'hourglass-outline' : 'checkmark-circle-outline'}}"></ion-icon>
           <ion-label>{{loading ? 'Cargando...' : 'Listo'}}</ion-label>
+        </ion-chip>
+
+        <!-- Estado de cámara -->
+        <ion-chip color="tertiary">
+          <ion-icon name="camera"></ion-icon>
+          <ion-label>Cámara: {{ fotoTomada ? 'Con foto' : 'Sin foto' }}</ion-label>
         </ion-chip>
       </div>
       
@@ -190,7 +304,16 @@
         <!-- Modo normal -->
         <div *ngIf="editandoId !== dato.id">
           <ion-card-header>
-            <ion-card-title>{{ dato.title }}</ion-card-title>
+            <ion-card-title>
+              {{ dato.title }}
+              <!--Indicador de foto -->
+              <ion-icon 
+                *ngIf="dato.foto" 
+                name="camera" 
+                color="primary" 
+                class="foto-indicator">
+              </ion-icon>
+            </ion-card-title>
             <ion-card-subtitle>
               <ion-chip size="small" color="tertiary">
                 <ion-label>ID: {{ dato.id }}</ion-label>
@@ -203,6 +326,12 @@
           
           <ion-card-content>
             <p>{{ dato.body }}</p>
+
+            <!-- Mostrar foto si existe -->
+            <div *ngIf="dato.foto" class="registro-foto ion-margin-top">
+              <img [src]="dato.foto" alt="Foto del registro" class="foto-registro" />
+              <p class="foto-caption">📸 Foto adjunta al registro</p>
+            </div>
             
             <div class="botones-accion ion-margin-top">
               <ion-button 
@@ -294,3 +423,71 @@
   </div>
 
 </ion-content>
+
+<!-- ESTILOS CSS PARA LAS FOTOS -->
+<style>
+.camera-section {
+  border-top: 1px solid var(--ion-color-light);
+  padding-top: 16px;
+}
+
+.camera-buttons {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.photo-preview {
+  padding: 0 16px;
+}
+
+.photo-container {
+  text-align: center;
+  cursor: pointer;
+}
+
+.photo-small {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--ion-color-primary);
+}
+
+.photo-large {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 2px solid var(--ion-color-primary);
+}
+
+.photo-hint {
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  margin-top: 8px;
+}
+
+.foto-indicator {
+  margin-left: 8px;
+}
+
+.registro-foto {
+  text-align: center;
+}
+
+.foto-registro {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--ion-color-light);
+}
+
+.foto-caption {
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  margin-top: 4px;
+}
+</style>
