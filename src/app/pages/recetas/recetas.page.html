@@ -1,0 +1,207 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Recetas Saludables 🍽️</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- Segment para navegación -->
+  <ion-segment 
+    [(ngModel)]="seccionActiva"
+    (ionChange)="onSegmentChange($event)"
+    color="success">
+    
+    <ion-segment-button value="categorias">
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label>Categorías</ion-label>
+    </ion-segment-button>
+    
+    <ion-segment-button value="buscar">
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-label>Buscar</ion-label>
+    </ion-segment-button>
+    
+    <ion-segment-button value="recetas" *ngIf="recetas.length > 0">
+      <ion-icon name="restaurant-outline"></ion-icon>
+      <ion-label>Recetas ({{ recetas.length }})</ion-label>
+    </ion-segment-button>
+    
+  </ion-segment>
+
+  <!-- SECCIÓN: Categorías -->
+  <div *ngIf="seccionActiva === 'categorias'">
+    
+    <!-- Receta del día -->
+    <ion-card *ngIf="recetaDelDia" class="recipe-of-day">
+      <img [src]="recetaDelDia.strMealThumb" [alt]="recetaDelDia.strMeal" />
+      <ion-card-header>
+        <ion-card-subtitle>🌟 Receta del día</ion-card-subtitle>
+        <ion-card-title>{{ recetaDelDia.strMeal }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ recetaDelDia.strCategory }} • {{ recetaDelDia.strArea }}</p>
+        <ion-button 
+          fill="outline" 
+          size="small" 
+          (click)="verDetalleReceta({
+            id: recetaDelDia.idMeal,
+            nombre: recetaDelDia.strMeal,
+            categoria: recetaDelDia.strCategory,
+            imagen: recetaDelDia.strMealThumb,
+            area: recetaDelDia.strArea,
+            instrucciones: recetaDelDia.strInstructions,
+            ingredientes: []
+          })">
+          Ver receta
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Botón de recetas saludables -->
+    <ion-card class="quick-access-card">
+      <ion-card-header>
+        <ion-card-title>🥗 Acceso Rápido</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button 
+          expand="block" 
+          color="success" 
+          (click)="cargarRecetasSaludables()">
+          <ion-icon name="leaf-outline" slot="start"></ion-icon>
+          Ver Recetas Saludables
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Lista de categorías -->
+    <div class="categories-section">
+      <h3 style="padding: 0 16px; color: var(--ion-color-primary);">Explorar por Categoría</h3>
+      
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" *ngFor="let categoria of categorias">
+            <ion-card 
+              button 
+              class="category-card"
+              (click)="cargarRecetasPorCategoria(categoria.strCategory)">
+              <img [src]="categoria.strCategoryThumb" [alt]="categoria.strCategory" />
+              <ion-card-header>
+                <ion-card-title class="category-title">{{ categoria.strCategory }}</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+  </div>
+
+  <!-- SECCIÓN: Buscar -->
+  <div *ngIf="seccionActiva === 'buscar'">
+    <div class="search-section">
+      
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>🔍 Buscar Recetas</ion-card-title>
+          <ion-card-subtitle>Busca por nombre o ingrediente</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-searchbar
+            [(ngModel)]="terminoBusqueda"
+            placeholder="Ej: pollo, pasta, ensalada..."
+            (ionInput)="buscarRecetas()"
+            (ionClear)="limpiarBusqueda()">
+          </ion-searchbar>
+          
+          <ion-button 
+            expand="block" 
+            (click)="buscarRecetas()"
+            [disabled]="!terminoBusqueda || terminoBusqueda.length < 2">
+            <ion-icon name="search" slot="start"></ion-icon>
+            Buscar Recetas
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Resultados de búsqueda -->
+      <div *ngIf="recetas.length > 0" class="search-results">
+        <h4 style="padding: 0 16px; color: var(--ion-color-success);">
+          Resultados ({{ recetas.length }})
+        </h4>
+        
+        <ion-card *ngFor="let receta of recetas" button (click)="verDetalleReceta(receta)">
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img [src]="receta.imagen" [alt]="receta.nombre" />
+            </ion-thumbnail>
+            <ion-label>
+              <h3>{{ receta.nombre }}</h3>
+              <p>{{ receta.categoria }} • {{ receta.area }}</p>
+              <p class="recipe-preview">{{ receta.instrucciones }}</p>
+            </ion-label>
+            <ion-icon name="chevron-forward" slot="end"></ion-icon>
+          </ion-item>
+        </ion-card>
+      </div>
+
+      <!-- Sin resultados -->
+      <ion-card *ngIf="terminoBusqueda && terminoBusqueda.length >= 2 && recetas.length === 0">
+        <ion-card-content class="no-results">
+          <ion-icon name="search" size="large"></ion-icon>
+          <h3>No se encontraron recetas</h3>
+          <p>Intenta con otro término de búsqueda</p>
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+  </div>
+
+  <!-- SECCIÓN: Lista de Recetas -->
+  <div *ngIf="seccionActiva === 'recetas'">
+    
+    <!-- Header de la sección -->
+    <div class="recipes-header">
+      <ion-item>
+        <ion-icon name="arrow-back" slot="start" (click)="volverACategorias()"></ion-icon>
+        <ion-label>
+          <h2>{{ categoriaSeleccionada }}</h2>
+          <p>{{ recetas.length }} recetas disponibles</p>
+        </ion-label>
+      </ion-item>
+    </div>
+
+    <!-- Lista de recetas -->
+    <div class="recipes-grid">
+      <ion-card *ngFor="let receta of recetas" button (click)="verDetalleReceta(receta)">
+        <img [src]="receta.imagen" [alt]="receta.nombre" />
+        <ion-card-header>
+          <ion-card-title class="recipe-title">{{ receta.nombre }}</ion-card-title>
+          <ion-card-subtitle>{{ receta.area }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="recipe-ingredients">
+            <p><strong>Ingredientes principales:</strong></p>
+            <ion-chip 
+              *ngFor="let ingrediente of receta.ingredientes.slice(0, 3)" 
+              color="success" 
+              outline>
+              {{ ingrediente }}
+            </ion-chip>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+  </div>
+
+  <!-- Loading indicator -->
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner name="crescent" color="success"></ion-spinner>
+    <p>Cargando deliciosas recetas...</p>
+  </div>
+
+</ion-content>

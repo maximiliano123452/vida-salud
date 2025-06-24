@@ -9,14 +9,14 @@
 
 <ion-content fullscreen>
   
-  <!-- Info del usuario (siempre visible) -->
+  <!-- Info del usuario -->
   <div class="user-info">
     <img src="../../assets/img/user.png" alt="User Avatar" class="user-avatar" />
     <h2><strong>{{ bienvenidos }}</strong><br/> {{ email }}</h2>
     <span>¡Hoy es un buen día para cuidarte! 🌞</span>
   </div>
 
-  <!-- CONTENIDO ORIGINAL DEL HOME (movido desde mis-datos.component.html) -->
+  <!-- (contenido traido de mis-datos.component.html) -->
   <div class="seccion-info">
     <h2>Áreas de bienestar</h2>
   </div>
@@ -32,7 +32,7 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- Card: Ejercicio físico -->
+  <!-- Ejercicio físico -->
   <ion-card button routerLink="/ejercicio">
     <img src="../../assets/img/ejercicio.png" alt="Ejercicio físico" />
     <ion-card-header>
@@ -43,7 +43,7 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- Card: Bienestar emocional -->
+  <!-- Bienestar emocional -->
   <ion-card button routerLink="/bienestar">
     <img src="../../assets/img/bienestar.png" alt="Bienestar emocional" />
     <ion-card-header>
@@ -54,7 +54,18 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- NUEVO: Consejo del día -->
+  <!-- Recetas Saludables -->
+  <ion-card button routerLink="/recetas">
+    <img src="../../assets/img/alimentacion.png" alt="Recetas saludables" />
+    <ion-card-header>
+      <ion-card-title>Recetas saludables 🍽️</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Descubre deliciosas recetas saludables, busca por ingredientes y encuentra inspiración culinaria.
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Consejo del día -->
   <ion-card class="tip-card">
     <ion-card-header>
       <ion-card-title>💡 Consejo del día</ion-card-title>
@@ -68,7 +79,7 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- COMENTADO: Segments y components para que no aparezcan -->
+  <!-- Segments y components para que no aparezcan -->
   <!--
   <ion-segment 
      [(ngModel)]="segmentSelected"

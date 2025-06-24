@@ -56,6 +56,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   
+  // NUEVA: Página de recetas con API TheMealDB
+  {
+    path: 'recetas',
+    loadChildren: () => import('./pages/recetas/recetas.module').then(m => m.RecetasPageModule),
+    canActivate: [AuthGuard]
+  },
+  
   //  Página 404
   {
     path: 'page-not-found',
