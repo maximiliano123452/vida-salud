@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./company-name.component.scss'],
 })
 export class CompanyNameComponent {
-  @Input() companyName: string = 'Vida Sana'; // Cambiado de 'Mi Empresa'
+  @Input() companyName: string = 'Vida Sana'; 
 }
 
