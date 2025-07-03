@@ -15,7 +15,7 @@ export class RegistroPage implements OnInit {
   apellido: string = '';
   selectedOption: string = '';
   selectedDate: any = '';
-  email: string = '';  // CAMBIADO: era 'usuario', ahora es 'email'
+  email: string = '';  
   password: string = '';
   
   constructor(
@@ -76,7 +76,7 @@ export class RegistroPage implements OnInit {
     const usuarioData = {
       nombre: this.nombre,
       apellido: this.apellido,
-      email: this.email,  // CAMBIADO: ahora usa 'email' consistentemente
+      email: this.email,  
       password: this.password,
       fechaNacimiento: fechaFormateada,
       nivel: this.selectedOption

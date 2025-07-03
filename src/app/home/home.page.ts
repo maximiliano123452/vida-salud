@@ -27,7 +27,8 @@ export class HomePage {
     });
   }
 
-  // Función para cambiar de segment (comentada pero disponible)
+  // Funcion para cambiar de segment  (comentada pero disponible)
+  
   // onSegmentChanged(event: any) {
   //   this.segmentSelected = event.detail.value;
   //   console.log('Segment seleccionado:', this.segmentSelected);
