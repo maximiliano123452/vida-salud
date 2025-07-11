@@ -25,7 +25,7 @@ describe('GaleriaPage', () => {
     fixture.detectChanges();
   });
 
-  // Prueba básica  (que el componente se cree)
+  // Prueba básica (que el componente se cree)
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -56,5 +56,16 @@ describe('GaleriaPage', () => {
     const compiled = fixture.nativeElement;
     const imageElements = compiled.querySelectorAll('.gallery-image');
     expect(imageElements.length).toBe(18);
+  });
+
+  // NUEVA PRUEBA: apertura de modal (evento y método)
+  it('should open modal when openImage is called', async () => {
+    const mockModal = { present: jasmine.createSpy('present') } as any;
+    mockModalController.create.and.returnValue(Promise.resolve(mockModal));
+
+    await component.openImage('/assets/img/Yoga.jpg');
+
+    expect(mockModalController.create).toHaveBeenCalled();
+    expect(mockModal.present).toHaveBeenCalled();
   });
 });
