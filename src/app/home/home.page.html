@@ -8,15 +8,15 @@
 </ion-header>
 
 <ion-content fullscreen>
-  
+
   <!-- Info del usuario (siempre visible) -->
   <div class="user-info">
-    <img src="../../assets/img/user.png" alt="User Avatar" class="user-avatar" />
-    <h2><strong>{{ bienvenidos }}</strong><br/> {{ email }}</h2>
+    <img [src]="fotoPerfil || '../../assets/img/user.png'" alt="User Avatar" class="user-avatar" />
+    <h2><strong>Bienvenid&#64;</strong><br/> {{ nombre }} {{ apellido }}</h2>
     <span>¡Hoy es un buen día para cuidarte! 🌞</span>
   </div>
 
-  <!-- CONTENIDO actual del home (traido de mis-datos.component.html) -->
+  <!-- CONTENIDO actual del home -->
   <div class="seccion-info">
     <h2>Áreas de bienestar</h2>
   </div>
@@ -79,7 +79,7 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- Segments y components para que no aparezcan -->
+  <!-- Segments y components (comentados pero conservados) -->
   <!--
   <ion-segment 
      [(ngModel)]="segmentSelected"
@@ -105,7 +105,6 @@
   </ion-segment>
 
   <div class="segment-content">
-        
     <div *ngIf="segmentSelected === 'mis-datos'">
       <app-mis-datos [email]="email"></app-mis-datos>
     </div>
@@ -117,7 +116,6 @@
     <div *ngIf="segmentSelected === 'certificaciones'">
       <app-certificaciones [email]="email"></app-certificaciones>
     </div>
-      
   </div>
   -->
 
