@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, MenuController, NavController } from '@ionic/angular';
 import { StorageService } from '../../services/storage.service';
 import { FormtearFechaPipe } from '../../pipes/formtear-fecha.pipe';
+import { CameraService } from '../../services/camera.service'; // 📸 Importa tu servicio de cámara
 
 @Component({
   selector: 'app-registro',
@@ -17,13 +18,18 @@ export class RegistroPage implements OnInit {
   selectedDate: any = '';
   email: string = '';  
   password: string = '';
+
+  // 📸 FOTO DE PERFIL
+  fotoPerfil: string | null = null;
+  mostrarPreviewFotoPerfil = false;
   
   constructor(
     private alertController: AlertController,
     private menu: MenuController,
     private navCtrl: NavController,
     private storageService: StorageService,
-    private formtearFechaPipe: FormtearFechaPipe
+    private formtearFechaPipe: FormtearFechaPipe,
+    private cameraService: CameraService // ✅ Inyecta el servicio aquí
   ) {}
   
   ngOnInit() {
@@ -79,7 +85,8 @@ export class RegistroPage implements OnInit {
       email: this.email,  
       password: this.password,
       fechaNacimiento: fechaFormateada,
-      nivel: this.selectedOption
+      nivel: this.selectedOption,
+      fotoPerfil: this.fotoPerfil // 📸 Agrega la foto de perfil si existe
     };
     
     try {
@@ -114,10 +121,34 @@ export class RegistroPage implements OnInit {
     this.selectedDate = '';
     this.email = '';
     this.password = '';
+    this.fotoPerfil = null; // limpia foto de perfil
   }
   
   // Método para volver al login
   volverLogin() {
     this.navCtrl.navigateBack('/login');
   }
+
+  // 📸 MÉTODOS DE FOTO DE PERFIL
+
+  async mostrarOpcionesCamara() {
+    const foto = await this.cameraService.tomarFoto();
+    if (foto) {
+      this.fotoPerfil = foto;
+      this.mostrarPreviewFotoPerfil = true;
+      console.log('📸 Foto de perfil guardada');
+    } else {
+      console.log('❌ No se tomó foto de perfil');
+    }
+  }
+
+  eliminarFotoPerfil() {
+    this.fotoPerfil = null;
+    this.mostrarPreviewFotoPerfil = false;
+  }
+
+  togglePreviewFotoPerfil() {
+    this.mostrarPreviewFotoPerfil = !this.mostrarPreviewFotoPerfil;
+  }
+
 }

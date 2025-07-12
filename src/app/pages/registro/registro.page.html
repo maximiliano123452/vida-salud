@@ -7,7 +7,7 @@
     <ion-buttons slot="end">
       <ion-menu-button menu="mainMenu"></ion-menu-button>
     </ion-buttons>
-   </ion-toolbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="registro-fondo">
@@ -30,7 +30,6 @@
           <ion-input type="text" [(ngModel)]="apellido" name="apellido"></ion-input>
         </ion-item>
 
-        
         <ion-item class="input-item">
           <ion-label position="floating">Correo Electrónico</ion-label>
           <ion-input type="email" [(ngModel)]="email" name="email" placeholder="ejemplo@gmail.com"></ion-input>
@@ -60,6 +59,64 @@
           </mat-form-field>
         </ion-item>
 
+        <!-- 📸 SECCIÓN: Foto de Perfil -->
+        <div class="camera-section ion-margin-top">
+          <ion-item>
+            <ion-label>
+              <h3>📸 Foto de Perfil (Opcional)</h3>
+              <p>Agrega una foto para tu cuenta</p>
+            </ion-label>
+          </ion-item>
+
+          <div class="camera-buttons">
+            <ion-button 
+              fill="outline" 
+              size="default"
+              color="primary"
+              (click)="mostrarOpcionesCamara()"
+              class="ion-margin-end">
+              <ion-icon name="camera" slot="start"></ion-icon>
+              {{ fotoPerfil ? 'Cambiar Foto' : 'Agregar Foto' }}
+            </ion-button>
+
+            <ion-button 
+              *ngIf="fotoPerfil"
+              fill="outline" 
+              size="default"
+              color="danger"
+              (click)="eliminarFotoPerfil()">
+              <ion-icon name="trash" slot="start"></ion-icon>
+              Eliminar
+            </ion-button>
+          </div>
+
+          <!-- Preview de foto tomada -->
+          <div *ngIf="fotoPerfil" class="photo-preview ion-margin-top">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle>
+                  <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                  Foto adjunta
+                </ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content>
+                <div class="photo-container" (click)="togglePreviewFotoPerfil()">
+                  <img 
+                    [src]="fotoPerfil" 
+                    alt="Foto de perfil"
+                    [class.photo-small]="!mostrarPreviewFotoPerfil"
+                    [class.photo-large]="mostrarPreviewFotoPerfil" />
+                  <p class="photo-hint">
+                    <ion-icon name="eye" color="medium"></ion-icon>
+                    Toca para {{ mostrarPreviewFotoPerfil ? 'minimizar' : 'ampliar' }}
+                  </p>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </div>
+
+        <!-- Botones de acción -->
         <ion-button expand="block" (click)="guardar()" color="success">Guardar Datos</ion-button>
         <ion-button expand="block" fill="clear" routerLink="/login" color="primary">¿Ya tienes cuenta? Inicia sesión</ion-button>
 

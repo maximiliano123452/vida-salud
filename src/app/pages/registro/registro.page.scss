@@ -1,48 +1,72 @@
-/* Fondo general para registro */
-ion-content {
-  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
+/* Fondo verde claro general */
+ion-content.registro-fondo {
+  --background: #e8f5e9 !important; /* Verde clarito coherente con la app */
+  background-color: #e8f5e9 !important;
 }
 
-/* Contenedor principal */
 .registro-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding: 16px;
+  justify-content: flex-start; /* Cambiado de center a flex-start */
+  padding: 20px 0; /* Espacio arriba y abajo */
+  min-height: 100%; /* Cambiado de height: 100% */
 }
 
-/* Card del formulario */
 .registro-card {
   width: 90%;
   max-width: 400px;
   border-radius: 12px;
-  background: #ffffffcc; /* Fondo blanco translúcido */
+  background: #ffffffcc; // Fondo blanco translúcido
   backdrop-filter: blur(4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 16px;
 }
 
-/* Títulos */
 .titulo, .subtitulo {
   text-align: center;
-  color: #145a32; /* Verde oscuro */
-  margin: 8px 0;
+  color: #145a32; // Verde oscuro
 }
 
-/* Inputs */
 .input-item {
-  --highlight-color-focused: #2e86c1; /* Azul al enfocar */
+  --highlight-color-focused: #2e86c1; // Azul al enfocar
 }
 
-/* Angular Material form fields */
 mat-form-field {
   width: 100%;
 }
 
-/* Título centrado adicional */
 .center-title {
   text-align: center;
   color: #145a32;
 }
+
+/* Estilos para foto de perfil */
+.photo-preview {
+  padding: 0 16px;
+  overflow: auto;
+  text-align: center;
+}
+
+.photo-small {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--ion-color-primary);
+}
+
+.photo-large {
+  width: 80%; /* Antes 100% */
+  max-width: 250px; /* Reducido de 300px */
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 2px solid var(--ion-color-primary);
+}
+
+.photo-hint {
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  margin-top: 8px;
+}
+
