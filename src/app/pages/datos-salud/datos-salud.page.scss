@@ -1,0 +1,134 @@
+/* Fondo general para Datos de Salud */
+ion-content {
+  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
+}
+
+/* Segmento */
+ion-segment {
+  margin: 16px 0;
+}
+
+/* Secciones generales */
+.seccion {
+  padding: 16px;
+}
+
+/* Títulos */
+h2 {
+  text-align: center;
+  color: #145a32; /* Verde oscuro */
+  margin-bottom: 16px;
+}
+
+/* Cards */
+ion-card {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: #ffffffcc; /* Blanco translúcido */
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Inputs y selects */
+ion-item {
+  --background: transparent;
+}
+
+/* Botones de acción */
+.botones-accion,
+.botones-edicion {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Chips de info */
+.info-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+/* Loading */
+.loading-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.loading-container p {
+  margin-top: 12px;
+  color: #145a32;
+}
+
+/* Estado vacío */
+.empty-state {
+  text-align: center;
+  color: #145a32;
+}
+
+/* Cámara y fotos */
+.camera-section {
+  border-top: 1px solid var(--ion-color-light);
+  padding-top: 16px;
+}
+
+.camera-buttons {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.photo-preview {
+  padding: 0 16px;
+}
+
+.photo-container {
+  text-align: center;
+  cursor: pointer;
+}
+
+.photo-small {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--ion-color-primary);
+}
+
+.photo-large {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 2px solid var(--ion-color-primary);
+}
+
+.photo-hint {
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  margin-top: 8px;
+}
+
+.foto-indicator {
+  margin-left: 8px;
+}
+
+.registro-foto {
+  text-align: center;
+}
+
+.foto-registro {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--ion-color-light);
+}
+
+.foto-caption {
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  margin-top: 4px;
+}

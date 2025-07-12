@@ -38,14 +38,13 @@ ion-app {
   padding-right: env(safe-area-inset-right);
 }
 
-
 // Headers corregidos para Android
 ion-header {
   --background: transparent;
   --ion-toolbar-background: transparent;
   --ion-toolbar-border-color: transparent;
-  padding-top:20px;
-  
+  padding-top: 20px;
+
   ion-toolbar {
     --padding-top: env(safe-area-inset-top, 0px);
     --min-height: 56px;
@@ -82,12 +81,7 @@ ion-app, ion-content, ion-router-outlet, .ion-page {
 }
 
 /* Cabecera sin sombras para diseño limpio */
-.header-md {
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
-}
-
-.header-ios {
+.header-md, .header-ios {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
@@ -146,7 +140,7 @@ ion-button {
   --border-radius: 8px;
   font-weight: 500;
   text-transform: none;
-  
+
   &.button-solid {
     --background: var(--ion-color-primary);
     --color: white;
@@ -157,13 +151,13 @@ ion-button {
 ion-segment {
   --background: var(--ion-color-light);
   border-radius: 8px;
-  
+
   ion-segment-button {
     --color: var(--ion-color-medium);
     --color-checked: var(--ion-color-primary);
     --border-radius: 6px;
     min-height: 48px;
-    
+
     &.segment-button-checked {
       --background: white;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -176,26 +170,24 @@ ion-card {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   margin: 16px;
-  
+
   ion-card-header {
     padding-bottom: 0;
   }
-  
+
   ion-card-content {
     padding-top: 8px;
   }
 }
 
 // Lista items con mejor separación
-ion-list {
-  ion-item {
-    --border-color: var(--ion-color-light);
-    --padding-start: 16px;
-    --padding-end: 16px;
-    
-    &:last-child {
-      --border-width: 0;
-    }
+ion-list ion-item {
+  --border-color: var(--ion-color-light);
+  --padding-start: 16px;
+  --padding-end: 16px;
+
+  &:last-child {
+    --border-width: 0;
   }
 }
 
@@ -218,4 +210,33 @@ ion-modal, ion-popover, ion-alert {
 ion-toast {
   --border-radius: 8px;
   --box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            Color de fondo del menú                         */
+/* -------------------------------------------------------------------------- */
+
+ion-menu {
+  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
+}
+
+ion-menu ion-content {
+  --background: #eafaf1 !important;
+}
+
+ion-menu .menu-header,
+ion-menu .menu-content,
+ion-menu .menu-footer {
+  background-color: #eafaf1 !important;
+}
+
+/* Botones del menú con color verde oscuro */
+ion-menu ion-item,
+ion-menu ion-label {
+  color: #145a32 !important; /* Verde oscuro para contraste */
+}
+
+/* Iconos del menú en verde moderno */
+ion-menu ion-icon {
+  color: #2e7d32 !important; /* Verde Bootstrap más intenso */
 }

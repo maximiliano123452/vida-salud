@@ -1,0 +1,130 @@
+/* Fondo general para recetas saludables */
+ion-content {
+  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
+}
+
+/* Card de receta del día */
+.recipe-of-day {
+  margin: 16px;
+  border-radius: 12px;
+  background: #ffffffcc; /* Blanco translúcido */
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-of-day img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Card de acceso rápido */
+.quick-access-card {
+  margin: 16px;
+  border-radius: 12px;
+  background: #ffffffcc;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Sección de categorías */
+.categories-section h3 {
+  text-align: center;
+  margin: 16px 0;
+  color: #145a32; /* Verde oscuro */
+}
+
+/* Card de categoría */
+.category-card {
+  border-radius: 12px;
+  background: #ffffffcc;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-card img {
+  width: 100%;
+  height: 100px; /* reducido para que se vea más pequeño */
+  object-fit: contain; /* muestra toda la imagen sin cortes */
+  background-color: #f8f9fa; /* fondo gris clarito */
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  padding: 8px; /* agrega espacio interno elegante */
+}
+
+.category-title {
+  text-align: center;
+  color: #145a32; /* Verde oscuro */
+  font-size: 1.1em;
+  margin: 8px 0;
+}
+
+/* Sección de búsqueda */
+.search-section ion-card {
+  margin: 16px;
+  border-radius: 12px;
+  background: #ffffffcc;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Resultados de búsqueda */
+.search-results h4 {
+  text-align: center;
+  margin: 16px 0;
+}
+
+/* Sin resultados */
+.no-results {
+  text-align: center;
+  color: #145a32;
+}
+
+/* Header de lista de recetas */
+.recipes-header ion-item {
+  background: transparent;
+  --background: transparent;
+}
+
+/* Grid de recetas */
+.recipes-grid ion-card {
+  margin: 16px;
+  border-radius: 12px;
+  background: #ffffffcc;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.recipes-grid ion-card img {
+  width: 100%;
+  height: 120px; /* altura reducida para mejor proporción */
+  object-fit: contain; /* muestra imagen completa sin cortes */
+  background-color: #f8f9fa; /* fondo gris clarito */
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  padding: 8px; /* padding interno elegante */
+}
+
+.recipe-title {
+  text-align: center;
+  color: #145a32;
+  font-size: 1.2em;
+  margin-top: 8px;
+}
+
+.recipe-ingredients {
+  margin-top: 8px;
+}
+
+/* Loading */
+.loading-container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.loading-container p {
+  margin-top: 12px;
+  color: #145a32;
+}

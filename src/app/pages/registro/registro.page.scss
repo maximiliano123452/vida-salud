@@ -1,37 +1,47 @@
-.registro-fondo {
-  --background: #e8f5e9; // Verde clarito
+/* Fondo general para registro */
+ion-content {
+  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
 }
 
+/* Contenedor principal */
 .registro-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding: 16px;
 }
 
+/* Card del formulario */
 .registro-card {
   width: 90%;
   max-width: 400px;
   border-radius: 12px;
-  background: #ffffffcc; // Fondo blanco translúcido
+  background: #ffffffcc; /* Fondo blanco translúcido */
   backdrop-filter: blur(4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 16px;
 }
 
+/* Títulos */
 .titulo, .subtitulo {
   text-align: center;
-  color: #145a32; // Verde oscuro
+  color: #145a32; /* Verde oscuro */
+  margin: 8px 0;
 }
 
+/* Inputs */
 .input-item {
-  --highlight-color-focused: #2e86c1; // Azul al enfocar
+  --highlight-color-focused: #2e86c1; /* Azul al enfocar */
 }
 
+/* Angular Material form fields */
 mat-form-field {
   width: 100%;
 }
 
+/* Título centrado adicional */
 .center-title {
   text-align: center;
   color: #145a32;

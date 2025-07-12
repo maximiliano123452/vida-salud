@@ -1,28 +1,34 @@
+/* Fondo general para ejercicio físico */
 ion-content {
-  --background: #e8f5e9;
+  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
 }
 
+/* Contenido centrado */
 .contenido {
   text-align: center;
   padding: 20px;
 }
 
+/* Imagen principal */
 .imagen {
   width: 100%;
   max-width: 300px;
   margin: 0 auto 20px;
 }
 
+/* Título */
 h2 {
-  color: #145a32;
+  color: #145a32; /* Verde oscuro */
 }
 
+/* Párrafos */
 p {
-  color: #1e8449;
+  color: #1e8449; /* Verde intermedio */
 }
 
+/* Listas */
 ul {
   text-align: left;
-  color: #117a65;
+  color: #117a65; /* Verde profundo */
   margin-top: 20px;
 }
