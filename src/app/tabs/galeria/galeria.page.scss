@@ -1,16 +1,20 @@
-.galeria-fondo {
-  --background: #e8f5e9; // Verde claro
+/* Fondo general para galería */
+ion-content.galeria-fondo {
+  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
 }
 
+/* Título centrado */
 .center-title {
   text-align: center;
-  color: #145a32; // Verde oscuro
+  color: #145a32; /* Verde oscuro */
 }
 
+/* Grid de galería */
 .gallery-grid {
   padding: 16px;
 }
 
+/* Imagen de galería */
 .gallery-image {
   width: 100%;
   height: 150px;
@@ -20,10 +24,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Efecto hover en imagen */
 .gallery-image:hover {
   transform: scale(1.05);
 }
 
+/* Fade in animation */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);

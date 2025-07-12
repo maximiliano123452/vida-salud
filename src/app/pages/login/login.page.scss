@@ -1,7 +1,9 @@
-.login-fondo {
-  --background: #e8f5e9; // Verde clarito de fondo
+/* Aplica fondo clarito al ion-content */
+ion-content.login-fondo {
+  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
 }
 
+/* Contenedor principal de login */
 .login-container {
   display: flex;
   flex-direction: column;
@@ -10,6 +12,7 @@
   height: 100%;
 }
 
+/* Logo */
 .logo-container {
   text-align: center;
   margin-bottom: 20px;
@@ -21,23 +24,27 @@
   animation: zoomIn 3s ease-in-out infinite alternate;
 }
 
+/* Card de login */
 .login-card {
   width: 90%;
   max-width: 400px;
   border-radius: 12px;
-  background: #ffffffcc;
+  background: #ffffffcc; /* Blanco con transparencia */
   backdrop-filter: blur(4px);
 }
 
+/* Títulos */
 .titulo, .subtitulo {
   text-align: center;
-  color: #145a32; // Verde oscuro
+  color: #145a32; /* Verde oscuro */
 }
 
+/* Inputs */
 .input-item {
-  --highlight-color-focused: #2e86c1; // Azul cuando enfocado
+  --highlight-color-focused: #2e86c1; /* Azul cuando enfocado */
 }
 
+/* Link de olvidar contraseña */
 .forgot-password {
   text-align: center;
   margin-top: 10px;
@@ -45,8 +52,10 @@
   color: #2e86c1;
 }
 
+/* Animación del logo */
 @keyframes zoomIn {
   0% { transform: scale(1); }
   100% { transform: scale(1.05); }
 }
+
 

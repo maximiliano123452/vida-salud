@@ -13,7 +13,10 @@
 <ion-content [fullscreen]="true" class="recetas-fondo">
   <div class="recetas-container">
     <ion-card *ngFor="let receta of recetas" class="receta-card">
-      <img [src]="receta.imagen" alt="{{ receta.nombre }}" class="receta-img" />
+      <img
+        [src]="receta.imagen"
+        alt="{{ receta.nombre }}"
+        class="receta-img" />
 
       <ion-card-header>
         <ion-card-title class="titulo">{{ receta.nombre }}</ion-card-title>
@@ -25,4 +28,5 @@
     </ion-card>
   </div>
 </ion-content>
+
 

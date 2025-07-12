@@ -1,7 +1,9 @@
-.productos-fondo {
-  --background: #e8f5e9; // Verde claro
+/* Fondo general para productos */
+ion-content.productos-fondo {
+  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
 }
 
+/* Contenedor de productos */
 .productos-container {
   display: flex;
   flex-direction: column;
@@ -9,16 +11,18 @@
   padding: 16px;
 }
 
+/* Card de producto */
 .producto-card {
   width: 90%;
   max-width: 400px;
   margin-bottom: 16px;
   border-radius: 12px;
-  background: #ffffffcc; // Blanco translúcido
+  background: #ffffffcc; /* Blanco translúcido */
   backdrop-filter: blur(4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Imagen del producto */
 .product-image {
   width: 100%;
   height: 200px;
@@ -27,22 +31,23 @@
   border-top-right-radius: 12px;
 }
 
+/* Título */
 .titulo {
   font-size: 1.2em;
   text-align: center;
-  color: #145a32; // Verde oscuro
+  color: #145a32; /* Verde oscuro */
   margin-top: 8px;
 }
 
+/* Subtítulo */
 .subtitulo {
   font-size: 1em;
   text-align: center;
-  color: #2e86c1; // Azul moderno
+  color: #2e86c1; /* Azul moderno */
 }
 
+/* Título centrado general */
 .center-title {
   text-align: center;
   color: #145a32;
 }
-
-  

@@ -1,3 +1,8 @@
+/* Fondo general para el home */
+ion-content {
+  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
+}
+
 //  CORRECCIONES PARA ANDROID
 ion-toolbar {
   --padding-top: 30;
