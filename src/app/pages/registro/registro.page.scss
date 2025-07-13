@@ -1,72 +1,757 @@
-/* Fondo verde claro general */
-ion-content.registro-fondo {
-  --background: #e8f5e9 !important; /* Verde clarito coherente con la app */
-  background-color: #e8f5e9 !important;
+/* ============================================
+   VARIABLES Y ANIMACIONES GLOBALES
+   ============================================ */
+:root {
+  --verde-principal: #28a745;
+  --verde-oscuro: #145a32;
+  --azul-enfoque: #2e86c1;
+  --transition-normal: 0.3s ease;
+  --sombra-card: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --sombra-hover: 0 12px 40px rgba(40, 167, 69, 0.15);
 }
 
+/* ============================================
+   ANIMACIONES PARA REGISTRO
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% { 
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0% { 
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4);
+  }
+  50% {
+    transform: scale(1.01);
+    box-shadow: 0 0 0 8px rgba(40, 167, 69, 0.1);
+  }
+  100% { 
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+  }
+}
+
+@keyframes cardShine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes expandLine {
+  from { width: 0; }
+  to { width: 100px; }
+}
+
+@keyframes floatBubbles {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-15px) rotate(1deg); }
+  66% { transform: translateY(8px) rotate(-1deg); }
+}
+
+/* ============================================
+   HEADER TRANSPARENTE MEJORADO
+   ============================================ */
+ion-header {
+  ion-toolbar {
+    --background: transparent !important;
+    --color: var(--verde-oscuro) !important;
+    --border-width: 0 !important;
+    backdrop-filter: blur(10px);
+    
+    ion-title {
+      color: var(--verde-oscuro) !important;
+      font-weight: 600 !important;
+    }
+    
+    ion-back-button {
+      --color: var(--verde-oscuro) !important;
+      transition: all var(--transition-normal);
+      
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    
+    ion-menu-button {
+      --color: var(--verde-oscuro) !important;
+      transition: all var(--transition-normal);
+      
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+/* ============================================
+   FONDO MEJORADO CON EFECTOS
+   ============================================ */
+ion-content.registro-fondo {
+  --background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%) !important;
+  position: relative;
+  --overflow: auto !important;
+  
+  /* Efecto de partículas flotantes mejorado */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 15% 25%, rgba(40, 167, 69, 0.12) 0%, transparent 25%),
+      radial-gradient(circle at 85% 75%, rgba(40, 167, 69, 0.10) 0%, transparent 25%),
+      radial-gradient(circle at 45% 50%, rgba(40, 167, 69, 0.08) 0%, transparent 25%),
+      radial-gradient(circle at 70% 20%, rgba(40, 167, 69, 0.06) 0%, transparent 20%);
+    animation: floatBubbles 25s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+/* ============================================
+   CONTENEDOR PRINCIPAL RESPONSIVE
+   ============================================ */
 .registro-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Cambiado de center a flex-start */
-  padding: 20px 0; /* Espacio arriba y abajo */
-  min-height: 100%; /* Cambiado de height: 100% */
+  justify-content: flex-start;
+  padding: 20px 20px 40px 20px;
+  min-height: 100vh;
+  animation: fadeInUp 0.8s ease-out;
+  
+  @media (min-height: 700px) {
+    padding-top: 30px;
+  }
+  
+  @media (max-height: 600px) {
+    padding: 10px 15px 30px 15px;
+  }
 }
 
+/* ============================================
+   CARD DE REGISTRO PROFESIONAL
+   ============================================ */
 .registro-card {
   width: 90%;
-  max-width: 400px;
-  border-radius: 12px;
-  background: #ffffffcc; // Fondo blanco translúcido
-  backdrop-filter: blur(4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--sombra-card);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all var(--transition-normal);
+  animation: scaleIn 0.8s ease-out 0.2s both;
+  position: relative;
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--sombra-hover);
+  }
+  
+  /* Efecto de brillo elegante */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(255, 255, 255, 0.15),
+      transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.8s;
+    opacity: 0;
+    z-index: 1;
+  }
+  
+  &:hover::before {
+    animation: cardShine 0.8s ease-in-out;
+  }
+  
+  /* Asegurar contenido visible */
+  ion-card-header,
+  ion-card-content {
+    position: relative;
+    z-index: 2;
+  }
 }
 
-.titulo, .subtitulo {
-  text-align: center;
-  color: #145a32; // Verde oscuro
+/* ============================================
+   HEADER DE CARD CON GRADIENTE
+   ============================================ */
+ion-card-header {
+  background: linear-gradient(135deg, rgba(248, 249, 250, 0.9), rgba(255, 255, 255, 0.95));
+  border-bottom: 2px solid rgba(40, 167, 69, 0.1);
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+  
+  .titulo {
+    text-align: center !important;
+    color: var(--verde-oscuro) !important;
+    font-weight: 700 !important;
+    font-size: 1.7rem !important;
+    margin-bottom: 8px !important;
+    position: relative;
+    
+    /* Subrayado animado más largo */
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      width: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--verde-principal), var(--azul-enfoque));
+      transform: translateX(-50%);
+      border-radius: 2px;
+      animation: expandLine 1.2s ease-out 1s forwards;
+    }
+  }
+  
+  .subtitulo {
+    text-align: center !important;
+    color: #666 !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+    margin-bottom: 0 !important;
+    animation: fadeInUp 0.6s ease-out 0.6s both;
+  }
 }
 
+/* ============================================
+   INPUTS CON ANIMACIONES ESCALONADAS
+   ============================================ */
 .input-item {
-  --highlight-color-focused: #2e86c1; // Azul al enfocar
+  --highlight-color-focused: var(--azul-enfoque) !important;
+  margin: 14px 0 !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  transition: all var(--transition-normal) !important;
+  animation: slideInLeft 0.5s ease-out both;
+  position: relative;
+  
+  /* Animaciones escalonadas para cada campo */
+  &:nth-of-type(1) { animation-delay: 0.8s; }  /* Nombre */
+  &:nth-of-type(2) { animation-delay: 0.9s; }  /* Apellido */
+  &:nth-of-type(3) { animation-delay: 1.0s; }  /* Email */
+  &:nth-of-type(4) { animation-delay: 1.1s; }  /* Contraseña */
+  &:nth-of-type(5) { animation-delay: 1.2s; }  /* Nivel Educacional */
+  &:nth-of-type(6) { animation-delay: 1.3s; }  /* Fecha Nacimiento */
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.95) !important;
+    transform: translateX(6px);
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1);
+  }
+  
+  &.item-has-focus {
+    background: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 0 0 3px rgba(46, 134, 193, 0.25) !important;
+    transform: translateX(8px) scale(1.01);
+  }
+  
+  /* Labels mejorados */
+  ion-label {
+    color: var(--verde-oscuro) !important;
+    font-weight: 600 !important;
+    transition: all var(--transition-normal);
+    
+    h3 {
+      color: var(--verde-oscuro) !important;
+      font-weight: 600 !important;
+    }
+    
+    p {
+      color: #666 !important;
+      font-size: 0.9rem !important;
+    }
+  }
+  
+  /* Inputs mejorados */
+  ion-input, ion-select {
+    --color: var(--verde-oscuro) !important;
+    font-weight: 500 !important;
+    
+    &::part(native) {
+      color: var(--verde-oscuro) !important;
+    }
+  }
+  
+  /* Indicadores de validación */
+  &.valid::after {
+    content: '✓';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--verde-principal);
+    font-weight: bold;
+    font-size: 1.2rem;
+    animation: scaleIn 0.3s ease;
+  }
+  
+  &.invalid::after {
+    content: '✗';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 1.2rem;
+    animation: scaleIn 0.3s ease;
+  }
 }
 
+/* ============================================
+   MAT-FORM-FIELD INTEGRADO
+   ============================================ */
 mat-form-field {
-  width: 100%;
+  width: 100% !important;
+  
+  .mat-form-field-wrapper {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-radius: 8px !important;
+    transition: all var(--transition-normal) !important;
+  }
+  
+  &:hover .mat-form-field-wrapper {
+    background: rgba(255, 255, 255, 0.95) !important;
+    transform: translateX(2px);
+  }
+  
+  .mat-form-field-outline {
+    color: var(--verde-oscuro) !important;
+  }
+  
+  .mat-form-field-label {
+    color: var(--verde-oscuro) !important;
+    font-weight: 500 !important;
+  }
+  
+  input {
+    color: var(--verde-oscuro) !important;
+    font-weight: 500 !important;
+  }
 }
 
-.center-title {
-  text-align: center;
-  color: #145a32;
+/* ============================================
+   SECCIÓN DE CÁMARA PREMIUM
+   ============================================ */
+.camera-section {
+  margin-top: 24px !important;
+  padding: 20px !important;
+  background: linear-gradient(135deg, rgba(40, 167, 69, 0.05), rgba(40, 167, 69, 0.02)) !important;
+  border-radius: 16px !important;
+  border: 2px solid rgba(40, 167, 69, 0.2) !important;
+  animation: fadeInUp 0.6s ease-out 1.4s both;
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.08), rgba(40, 167, 69, 0.04)) !important;
+    border-color: rgba(40, 167, 69, 0.3) !important;
+    transform: translateY(-2px);
+  }
+  
+  ion-item {
+    background: transparent !important;
+    --background: transparent !important;
+  }
 }
 
-/* Estilos para foto de perfil */
+.camera-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 16px 0;
+  
+  ion-button {
+    --border-radius: 10px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    transition: all var(--transition-normal) !important;
+    
+    &[color="primary"] {
+      --color: var(--azul-enfoque) !important;
+      --border-color: var(--azul-enfoque) !important;
+      
+      &:hover {
+        --background: rgba(46, 134, 193, 0.1) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(46, 134, 193, 0.2);
+      }
+    }
+    
+    &[color="danger"] {
+      --color: #dc3545 !important;
+      --border-color: #dc3545 !important;
+      
+      &:hover {
+        --background: rgba(220, 53, 69, 0.1) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+      }
+    }
+  }
+}
+
+/* ============================================
+   PREVIEW DE FOTO MEJORADO
+   ============================================ */
 .photo-preview {
-  padding: 0 16px;
-  overflow: auto;
+  padding: 16px !important;
   text-align: center;
+  animation: scaleIn 0.5s ease-out;
+  
+  ion-card {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(40, 167, 69, 0.2) !important;
+    transition: all var(--transition-normal) !important;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(40, 167, 69, 0.15);
+    }
+    
+    ion-card-header {
+      background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(40, 167, 69, 0.05)) !important;
+      border-bottom: 1px solid rgba(40, 167, 69, 0.2) !important;
+      
+      ion-card-subtitle {
+        color: var(--verde-principal) !important;
+        font-weight: 600 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+      }
+    }
+  }
+}
+
+.photo-container {
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  padding: 8px;
+  border-radius: 12px;
+  
+  &:hover {
+    background: rgba(40, 167, 69, 0.05);
+    transform: scale(1.02);
+  }
 }
 
 .photo-small {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid var(--ion-color-primary);
+  width: 120px !important;
+  height: 120px !important;
+  object-fit: cover !important;
+  border-radius: 12px !important;
+  border: 3px solid var(--verde-principal) !important;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3) !important;
+  transition: all var(--transition-normal) !important;
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4) !important;
+  }
 }
 
 .photo-large {
-  width: 80%; /* Antes 100% */
-  max-width: 250px; /* Reducido de 300px */
-  height: auto;
-  object-fit: contain;
-  border-radius: 8px;
-  border: 2px solid var(--ion-color-primary);
+  width: 85% !important;
+  max-width: 280px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  border-radius: 16px !important;
+  border: 3px solid var(--verde-principal) !important;
+  box-shadow: 0 8px 30px rgba(40, 167, 69, 0.3) !important;
+  transition: all var(--transition-normal) !important;
+  
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 35px rgba(40, 167, 69, 0.4) !important;
+  }
 }
 
 .photo-hint {
-  font-size: 0.8rem;
-  color: var(--ion-color-medium);
-  margin-top: 8px;
+  font-size: 0.85rem !important;
+  color: #666 !important;
+  margin-top: 12px !important;
+  font-weight: 500 !important;
+  padding: 8px 16px !important;
+  background: rgba(40, 167, 69, 0.08) !important;
+  border-radius: 20px !important;
+  display: inline-block !important;
+  transition: all var(--transition-normal) !important;
+  
+  &:hover {
+    background: rgba(40, 167, 69, 0.12) !important;
+  }
 }
 
+/* ============================================
+   BOTONES DE ACCIÓN PREMIUM
+   ============================================ */
+ion-button {
+  --border-radius: 12px !important;
+  margin: 16px 0 8px 0 !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  min-height: 48px !important;
+  transition: all var(--transition-normal) !important;
+  animation: fadeInUp 0.6s ease-out both;
+  
+  /* Botón Guardar Datos (success) */
+  &[color="success"] {
+    --background: linear-gradient(135deg, var(--verde-principal), #34ce57) !important;
+    --color: white !important;
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4) !important;
+    animation-delay: 1.5s;
+    
+    &:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: 0 10px 30px rgba(40, 167, 69, 0.5) !important;
+      --background: linear-gradient(135deg, #34ce57, var(--verde-principal)) !important;
+    }
+    
+    &:active {
+      transform: translateY(-1px) !important;
+    }
+  }
+  
+  /* Botón Iniciar Sesión (clear) */
+  &[color="primary"][fill="clear"] {
+    --color: var(--azul-enfoque) !important;
+    animation-delay: 1.6s;
+    position: relative;
+    
+    &:hover {
+      --background: rgba(46, 134, 193, 0.08) !important;
+      transform: translateY(-1px) !important;
+      --color: var(--verde-principal) !important;
+    }
+    
+    /* Subrayado animado */
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--azul-enfoque);
+      transform: translateX(-50%);
+      transition: width var(--transition-normal);
+      border-radius: 1px;
+    }
+    
+    &:hover::after {
+      width: 80%;
+    }
+  }
+}
+
+/* Efecto pulse en botón principal */
+ion-button[color="success"] {
+  animation: fadeInUp 0.6s ease-out 1.5s both, pulseGlow 3s ease-in-out 3s infinite;
+}
+
+/* ============================================
+   RESPONSIVE COMPLETO
+   ============================================ */
+
+/* Pantallas muy pequeñas */
+@media (max-height: 600px) {
+  .registro-card {
+    border-radius: 16px;
+    margin: 0;
+  }
+  
+  .titulo {
+    font-size: 1.4rem !important;
+  }
+  
+  .subtitulo {
+    font-size: 0.9rem !important;
+  }
+  
+  .input-item {
+    margin: 10px 0 !important;
+  }
+  
+  ion-card-header {
+    padding: 12px 16px !important;
+  }
+  
+  ion-card-content {
+    padding: 16px !important;
+  }
+  
+  .camera-section {
+    padding: 15px !important;
+    margin-top: 16px !important;
+  }
+  
+  ion-button {
+    min-height: 44px !important;
+    margin: 12px 0 6px 0 !important;
+  }
+}
+
+/* Móviles en vertical */
+@media (max-width: 480px) {
+  .registro-card {
+    width: 95%;
+    max-width: none;
+  }
+  
+  .camera-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .photo-small {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  .photo-large {
+    max-width: 250px !important;
+  }
+}
+
+/* Tablets y pantallas grandes */
+@media (min-width: 768px) {
+  .registro-container {
+    padding: 40px;
+  }
+  
+  .registro-card {
+    max-width: 500px;
+  }
+  
+  .titulo {
+    font-size: 2rem !important;
+  }
+  
+  .camera-buttons {
+    justify-content: center;
+  }
+  
+  .photo-small {
+    width: 140px !important;
+    height: 140px !important;
+  }
+  
+  .photo-large {
+    max-width: 320px !important;
+  }
+}
+
+/* Pantallas extra pequeñas */
+@media (max-width: 360px) {
+  .registro-container {
+    padding: 10px;
+  }
+  
+  .input-item {
+    margin: 8px 0 !important;
+  }
+  
+  .titulo {
+    font-size: 1.3rem !important;
+  }
+}
+
+/* ============================================
+   LOADING STATE Y ESTADOS ESPECIALES
+   ============================================ */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  animation: fadeInUp 0.3s ease;
+  
+  ion-spinner {
+    --color: var(--verde-principal);
+    transform: scale(1.5);
+  }
+}
+
+/* Estados de éxito */
+.success-state {
+  background: linear-gradient(135deg, #d4edda, #c3e6cb) !important;
+  border: 2px solid var(--verde-principal) !important;
+  color: #155724 !important;
+  animation: scaleIn 0.5s ease;
+}
+
+/* Indicador de progreso del formulario */
+.form-progress {
+  width: 100%;
+  height: 4px;
+  background: #e9ecef;
+  border-radius: 2px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--verde-principal), var(--azul-enfoque));
+    transition: width 0.5s ease;
+    border-radius: 2px;
+  }
+}
