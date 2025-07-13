@@ -10,10 +10,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true">
 
-  <!--  Segment con detección de cambio -->
-  <ion-segment [(ngModel)]="seccionActiva" color="primary" (ionChange)="onSegmentChange($event)">
+  <!-- Segment con efectos -->
+  <ion-segment 
+    [(ngModel)]="seccionActiva" 
+    color="primary" 
+    (ionChange)="onSegmentChange($event)">
     <ion-segment-button value="datos">
       <ion-label>Mis Datos</ion-label>
     </ion-segment-button>
@@ -25,30 +28,37 @@
     </ion-segment-button>
   </ion-segment>
 
-  <!--  SECCIÓN: Datos de salud generales -->
-  <div *ngIf="seccionActiva === 'datos'" class="seccion">
+  <!-- SECCIÓN: Datos de salud generales -->
+  <div *ngIf="seccionActiva === 'datos'" class="seccion fade-in" data-seccion="datos">
     
     <h2>📊 Registrar Datos de Salud</h2>
     
     <!-- Formulario para nuevo dato -->
-    <ion-card>
+    <ion-card class="scale-in">
       <ion-card-header>
-        <ion-card-title>Nuevo Registro</ion-card-title>
+        <ion-card-title>✨ Nuevo Registro</ion-card-title>
+        <ion-card-subtitle>Agrega tus datos de salud de forma segura</ion-card-subtitle>
       </ion-card-header>
       
       <ion-card-content>
         
         <ion-item>
-          <ion-label position="stacked">Tipo de dato</ion-label>
-          <ion-select [(ngModel)]="nuevoDato.tipo">
-            <ion-select-option value="peso">Peso (kg)</ion-select-option>
-            <ion-select-option value="imc">IMC</ion-select-option>
-            <ion-select-option value="medicion">Medición corporal</ion-select-option>
+          <ion-label position="stacked">
+            <h3>📋 Tipo de dato</h3>
+            <p>Selecciona el tipo de medición</p>
+          </ion-label>
+          <ion-select [(ngModel)]="nuevoDato.tipo" interface="popover" placeholder="Seleccionar tipo">
+            <ion-select-option value="peso">⚖️ Peso (kg)</ion-select-option>
+            <ion-select-option value="imc">📊 IMC</ion-select-option>
+            <ion-select-option value="medicion">📏 Medición corporal</ion-select-option>
           </ion-select>
         </ion-item>
 
         <ion-item>
-          <ion-label position="stacked">Valor</ion-label>
+          <ion-label position="stacked">
+            <h3>🔢 Valor</h3>
+            <p>Introduce el valor medido</p>
+          </ion-label>
           <ion-input 
             type="number" 
             [(ngModel)]="nuevoDato.valor" 
@@ -57,20 +67,27 @@
         </ion-item>
 
         <ion-item>
-          <ion-label position="stacked">Fecha</ion-label>
+          <ion-label position="stacked">
+            <h3>📅 Fecha</h3>
+            <p>Fecha de la medición</p>
+          </ion-label>
           <ion-input type="date" [(ngModel)]="nuevoDato.fecha"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label position="stacked">Notas (opcional)</ion-label>
+          <ion-label position="stacked">
+            <h3>📝 Notas (opcional)</h3>
+            <p>Observaciones adicionales</p>
+          </ion-label>
           <ion-textarea 
             [(ngModel)]="nuevoDato.notas" 
-            placeholder="Agregar observaciones...">
+            placeholder="Agregar observaciones..."
+            rows="3">
           </ion-textarea>
         </ion-item>
 
         <!-- SECCIÓN: CÁMARA -->
-        <div class="camera-section ion-margin-top">
+        <div class="camera-section">
           <ion-item>
             <ion-label>
               <h3>📸 Adjuntar Foto (Opcional)</h3>
@@ -78,14 +95,14 @@
             </ion-label>
           </ion-item>
 
-          <!-- Botones de cámara -->
+          <!-- Botones de cámara con efectos -->
           <div class="camera-buttons">
             <ion-button 
               fill="outline" 
               size="default"
               color="primary"
               (click)="mostrarOpcionesCamara()"
-              class="ion-margin-end">
+              class="slide-in-left">
               <ion-icon name="camera" slot="start"></ion-icon>
               {{ fotoTomada ? 'Cambiar Foto' : 'Agregar Foto' }}
             </ion-button>
@@ -95,19 +112,20 @@
               fill="outline" 
               size="default"
               color="danger"
-              (click)="eliminarFoto()">
+              (click)="eliminarFoto()"
+              class="slide-in-right">
               <ion-icon name="trash" slot="start"></ion-icon>
               Eliminar
             </ion-button>
           </div>
 
-          <!-- Preview de foto tomada -->
-          <div *ngIf="fotoTomada" class="photo-preview ion-margin-top">
-            <ion-card>
+          <!-- Preview de foto -->
+          <div *ngIf="fotoTomada" class="photo-preview">
+            <ion-card class="scale-in">
               <ion-card-header>
                 <ion-card-subtitle>
                   <ion-icon name="checkmark-circle" color="success"></ion-icon>
-                  Foto adjunta
+                  Foto adjunta correctamente
                 </ion-card-subtitle>
               </ion-card-header>
               <ion-card-content>
@@ -127,34 +145,40 @@
           </div>
         </div>
 
-        <ion-button 
-          expand="block" 
-          (click)="crearDato()" 
-          color="primary"
-          class="ion-margin-top">
-          <ion-icon name="add-outline" slot="start"></ion-icon>
-          {{ fotoTomada ? 'Guardar Dato con Foto (POST)' : 'Guardar Dato (POST)' }}
-        </ion-button>
+        <div class="botones-accion">
+          <ion-button 
+            expand="block" 
+            (click)="crearDato()" 
+            color="primary"
+            class="success-animation">
+            <ion-icon name="add-outline" slot="start"></ion-icon>
+            {{ fotoTomada ? 'Guardar Dato con Foto (POST)' : 'Guardar Dato (POST)' }}
+          </ion-button>
+        </div>
 
       </ion-card-content>
     </ion-card>
 
   </div>
 
-  <!--  SECCIÓN: Presión arterial -->
-  <div *ngIf="seccionActiva === 'presion'" class="seccion">
+  <!-- SECCIÓN: Presión arterial -->
+  <div *ngIf="seccionActiva === 'presion'" class="seccion fade-in" data-seccion="presion">
     
     <h2>🩺 Registrar Presión Arterial</h2>
     
-    <ion-card>
+    <ion-card class="scale-in">
       <ion-card-header>
-        <ion-card-title>Nueva Medición</ion-card-title>
+        <ion-card-title>❤️ Nueva Medición</ion-card-title>
+        <ion-card-subtitle>Registro de presión arterial</ion-card-subtitle>
       </ion-card-header>
       
       <ion-card-content>
         
         <ion-item>
-          <ion-label position="stacked">Presión Sistólica</ion-label>
+          <ion-label position="stacked">
+            <h3>⬆️ Presión Sistólica</h3>
+            <p>Valor superior (mmHg)</p>
+          </ion-label>
           <ion-input 
             type="number" 
             [(ngModel)]="nuevaPresion.sistolica" 
@@ -163,7 +187,10 @@
         </ion-item>
 
         <ion-item>
-          <ion-label position="stacked">Presión Diastólica</ion-label>
+          <ion-label position="stacked">
+            <h3>⬇️ Presión Diastólica</h3>
+            <p>Valor inferior (mmHg)</p>
+          </ion-label>
           <ion-input 
             type="number" 
             [(ngModel)]="nuevaPresion.diastolica" 
@@ -172,20 +199,27 @@
         </ion-item>
 
         <ion-item>
-          <ion-label position="stacked">Fecha</ion-label>
+          <ion-label position="stacked">
+            <h3>📅 Fecha</h3>
+            <p>Fecha de la medición</p>
+          </ion-label>
           <ion-input type="date" [(ngModel)]="nuevaPresion.fecha"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label position="stacked">Notas (opcional)</ion-label>
+          <ion-label position="stacked">
+            <h3>📝 Notas (opcional)</h3>
+            <p>Condiciones de la medición</p>
+          </ion-label>
           <ion-textarea 
             [(ngModel)]="nuevaPresion.notas" 
-            placeholder="Condiciones de la medición...">
+            placeholder="Condiciones de la medición..."
+            rows="3">
           </ion-textarea>
         </ion-item>
 
         <!-- CÁMARA EN PRESIÓN ARTERIAL -->
-        <div class="camera-section ion-margin-top">
+        <div class="camera-section">
           <ion-item>
             <ion-label>
               <h3>📸 Foto del Tensiómetro (Opcional)</h3>
@@ -198,7 +232,8 @@
               fill="outline" 
               size="default"
               color="success"
-              (click)="mostrarOpcionesCamara()">
+              (click)="mostrarOpcionesCamara()"
+              class="slide-in-left">
               <ion-icon name="camera" slot="start"></ion-icon>
               {{ fotoTomada ? 'Cambiar Foto' : 'Agregar Foto' }}
             </ion-button>
@@ -208,15 +243,16 @@
               fill="outline" 
               size="default"
               color="danger"
-              (click)="eliminarFoto()">
+              (click)="eliminarFoto()"
+              class="slide-in-right">
               <ion-icon name="trash" slot="start"></ion-icon>
               Eliminar
             </ion-button>
           </div>
 
-          <!-- Preview también aquí -->
-          <div *ngIf="fotoTomada" class="photo-preview ion-margin-top">
-            <ion-card>
+          <!-- Preview -->
+          <div *ngIf="fotoTomada" class="photo-preview">
+            <ion-card class="scale-in">
               <ion-card-content>
                 <div class="photo-container" (click)="togglePreviewFoto()">
                   <img 
@@ -234,64 +270,72 @@
           </div>
         </div>
 
-        <ion-button 
-          expand="block" 
-          (click)="registrarPresion()" 
-          color="success"
-          class="ion-margin-top">
-          <ion-icon name="medical-outline" slot="start"></ion-icon>
-          Registrar Presión (POST)
-        </ion-button>
+        <div class="botones-accion">
+          <ion-button 
+            expand="block" 
+            (click)="registrarPresion()" 
+            color="success"
+            class="success-animation">
+            <ion-icon name="medical-outline" slot="start"></ion-icon>
+            Registrar Presión (POST)
+          </ion-button>
+        </div>
 
       </ion-card-content>
     </ion-card>
 
   </div>
 
-  <!--  SECCIÓN: Historial de datos -->
-  <div *ngIf="seccionActiva === 'historial'" class="seccion">
+  <!-- SECCIÓN: Historial de datos -->
+  <div *ngIf="seccionActiva === 'historial'" class="seccion fade-in" data-seccion="historial">
     
-    <!--  HEADER CON INFO DE DEBUG -->
+    <!-- HEADER CON INFO DE DEBUG -->
     <div class="historial-header">
       <h2>📋 Historial de Datos</h2>
       
-      <!--  CHIPS DE ESTADO -->
-      <div class="info-chips ion-margin-bottom">
-        <ion-chip color="primary">
+      <!-- CHIPS DE ESTADO -->
+      <div class="info-chips">
+        <ion-chip color="primary" class="slide-in-left">
           <ion-icon name="list-outline"></ion-icon>
           <ion-label>{{datosSalud.length}} registros</ion-label>
         </ion-chip>
         
-        <ion-chip color="{{loading ? 'warning' : 'success'}}">
-          <ion-icon name="{{loading ? 'hourglass-outline' : 'checkmark-circle-outline'}}"></ion-icon>
+        <ion-chip [color]="loading ? 'warning' : 'success'" class="fade-in">
+          <ion-icon [name]="loading ? 'hourglass-outline' : 'checkmark-circle-outline'"></ion-icon>
           <ion-label>{{loading ? 'Cargando...' : 'Listo'}}</ion-label>
         </ion-chip>
 
         <!-- Estado de cámara -->
-        <ion-chip color="tertiary">
+        <ion-chip color="tertiary" class="slide-in-right">
           <ion-icon name="camera"></ion-icon>
           <ion-label>Cámara: {{ fotoTomada ? 'Con foto' : 'Sin foto' }}</ion-label>
         </ion-chip>
       </div>
       
-      <ion-button fill="outline" (click)="cargarDatos()" [disabled]="loading">
+      <ion-button 
+        fill="outline" 
+        (click)="cargarDatos()" 
+        [disabled]="loading"
+        color="primary"
+        class="scale-in">
         <ion-icon name="refresh-outline" slot="start"></ion-icon>
         Actualizar (GET)
       </ion-button>
     </div>
 
-    <!--  LOADING MEJORADO -->
-    <div *ngIf="loading" class="loading-container ion-text-center ion-padding">
+    <!-- LOADING -->
+    <div *ngIf="loading" class="loading-container">
       <ion-spinner name="crescent" color="primary"></ion-spinner>
-      <p class="ion-margin-top">Cargando datos de la API...</p>
-      <p><small>JSONPlaceholder devuelve ~100 registros</small></p>
+      <p>Cargando datos de la API...
+        <small>JSONPlaceholder devuelve ~100 registros</small>
+      </p>
     </div>
 
-    <!--  LISTA DE DATOS -->
+    <!-- LISTA DE DATOS -->
     <div *ngIf="!loading">
       
-      <!--  MENSAJE DE ÉXITO AL CARGAR -->
-      <ion-card *ngIf="datosSalud.length > 0" color="light" class="ion-margin-bottom">
+      <!-- MENSAJE DE ÉXITO AL CARGAR -->
+      <ion-card *ngIf="datosSalud.length > 0" color="light" class="scale-in">
         <ion-card-content>
           <ion-icon name="checkmark-circle" color="success"></ion-icon>
           <strong> API conectada exitosamente!</strong>
@@ -299,14 +343,18 @@
         </ion-card-content>
       </ion-card>
       
-      <ion-card *ngFor="let dato of datosSalud; let i = index" class="dato-card">
+      <!-- CARDS DE DATOS CON ANIMACIONES ESCALONADAS -->
+      <ion-card 
+        *ngFor="let dato of datosSalud; let i = index" 
+        class="dato-card scale-in"
+        [style.animation-delay]="(i * 0.1) + 's'">
         
         <!-- Modo normal -->
         <div *ngIf="editandoId !== dato.id">
           <ion-card-header>
             <ion-card-title>
               {{ dato.title }}
-              <!--Indicador de foto -->
+              <!-- Indicador de foto con animación -->
               <ion-icon 
                 *ngIf="dato.foto" 
                 name="camera" 
@@ -328,17 +376,18 @@
             <p>{{ dato.body }}</p>
 
             <!-- Mostrar foto si existe -->
-            <div *ngIf="dato.foto" class="registro-foto ion-margin-top">
+            <div *ngIf="dato.foto" class="registro-foto">
               <img [src]="dato.foto" alt="Foto del registro" class="foto-registro" />
               <p class="foto-caption">📸 Foto adjunta al registro</p>
             </div>
             
-            <div class="botones-accion ion-margin-top">
+            <div class="botones-accion">
               <ion-button 
                 fill="outline" 
                 size="small" 
                 color="warning"
-                (click)="iniciarEdicion(dato)">
+                (click)="iniciarEdicion(dato)"
+                class="slide-in-left">
                 <ion-icon name="create-outline" slot="start"></ion-icon>
                 Editar (PUT)
               </ion-button>
@@ -347,7 +396,8 @@
                 fill="outline" 
                 size="small" 
                 color="danger"
-                (click)="eliminarDato(dato.id)">
+                (click)="eliminarDato(dato.id)"
+                class="slide-in-right">
                 <ion-icon name="trash-outline" slot="start"></ion-icon>
                 Eliminar (DELETE)
               </ion-button>
@@ -356,15 +406,19 @@
         </div>
 
         <!-- Modo edición -->
-        <div *ngIf="editandoId === dato.id">
+        <div *ngIf="editandoId === dato.id" class="fade-in">
           <ion-card-header>
             <ion-card-title>✏️ Editando: {{ dato.title }}</ion-card-title>
+            <ion-card-subtitle>Modifica los datos según necesites</ion-card-subtitle>
           </ion-card-header>
           
           <ion-card-content>
             
             <ion-item>
-              <ion-label position="stacked">Nuevo valor</ion-label>
+              <ion-label position="stacked">
+                <h3>🔢 Nuevo valor</h3>
+                <p>Actualiza el valor medido</p>
+              </ion-label>
               <ion-input 
                 type="number" 
                 [(ngModel)]="datoEditando.valor" 
@@ -373,21 +427,31 @@
             </ion-item>
 
             <ion-item>
-              <ion-label position="stacked">Fecha</ion-label>
+              <ion-label position="stacked">
+                <h3>📅 Fecha</h3>
+                <p>Actualiza la fecha si es necesario</p>
+              </ion-label>
               <ion-input type="date" [(ngModel)]="datoEditando.fecha"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label position="stacked">Notas</ion-label>
-              <ion-textarea [(ngModel)]="datoEditando.notas"></ion-textarea>
+              <ion-label position="stacked">
+                <h3>📝 Notas</h3>
+                <p>Modifica las observaciones</p>
+              </ion-label>
+              <ion-textarea 
+                [(ngModel)]="datoEditando.notas"
+                rows="3">
+              </ion-textarea>
             </ion-item>
 
-            <div class="botones-edicion ion-margin-top">
+            <div class="botones-edicion">
               <ion-button 
                 fill="solid" 
                 size="small" 
                 color="success"
-                (click)="actualizarDato()">
+                (click)="actualizarDato()"
+                class="slide-in-left">
                 <ion-icon name="checkmark-outline" slot="start"></ion-icon>
                 Guardar Cambios
               </ion-button>
@@ -396,7 +460,8 @@
                 fill="outline" 
                 size="small" 
                 color="medium"
-                (click)="cancelarEdicion()">
+                (click)="cancelarEdicion()"
+                class="slide-in-right">
                 <ion-icon name="close-outline" slot="start"></ion-icon>
                 Cancelar
               </ion-button>
@@ -407,12 +472,16 @@
 
       </ion-card>
 
-      <!--  ESTADO VACÍO MEJORADO -->
-      <div *ngIf="datosSalud.length === 0" class="empty-state ion-text-center ion-padding">
+      <!-- ESTADO VACÍO -->
+      <div *ngIf="datosSalud.length === 0" class="empty-state">
         <ion-icon name="cloud-download-outline" size="large" color="medium"></ion-icon>
         <h3>No hay datos cargados</h3>
         <p>Presiona "Actualizar (GET)" para cargar datos de la API</p>
-        <ion-button fill="outline" (click)="cargarDatos()">
+        <ion-button 
+          fill="outline" 
+          (click)="cargarDatos()"
+          color="primary"
+          class="scale-in">
           <ion-icon name="refresh-outline" slot="start"></ion-icon>
           Cargar Datos de API
         </ion-button>
@@ -423,71 +492,3 @@
   </div>
 
 </ion-content>
-
-<!-- ESTILOS CSS PARA LAS FOTOS -->
-<style>
-.camera-section {
-  border-top: 1px solid var(--ion-color-light);
-  padding-top: 16px;
-}
-
-.camera-buttons {
-  display: flex;
-  gap: 8px;
-  padding: 0 16px;
-}
-
-.photo-preview {
-  padding: 0 16px;
-}
-
-.photo-container {
-  text-align: center;
-  cursor: pointer;
-}
-
-.photo-small {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid var(--ion-color-primary);
-}
-
-.photo-large {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 8px;
-  border: 2px solid var(--ion-color-primary);
-}
-
-.photo-hint {
-  font-size: 0.8rem;
-  color: var(--ion-color-medium);
-  margin-top: 8px;
-}
-
-.foto-indicator {
-  margin-left: 8px;
-}
-
-.registro-foto {
-  text-align: center;
-}
-
-.foto-registro {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid var(--ion-color-light);
-}
-
-.foto-caption {
-  font-size: 0.8rem;
-  color: var(--ion-color-medium);
-  margin-top: 4px;
-}
-</style>

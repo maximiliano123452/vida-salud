@@ -1,75 +1,23 @@
 /* ============================================
-   HEADER TRANSPARENTE PROFESIONAL
+   VARIABLES PARA DATOS DE SALUD
    ============================================ */
-ion-header {
-  ion-toolbar {
-    --background: transparent;
-    --color: #145a32; /* Verde oscuro para el texto */
-    --border-width: 0;
-    backdrop-filter: blur(10px);
-    
-    ion-title {
-      color: #145a32;
-      font-weight: 600;
-    }
-    
-    ion-back-button {
-      --color: #145a32;
-    }
-    
-    ion-buttons ion-button {
-      --color: #145a32;
-    }
-  }
+:root {
+  --verde-principal: #28a745;
+  --verde-oscuro: #145a32;
+  --verde-claro: #34ce57;
+  --azul-salud: #2196F3;
+  --turquesa-medico: #00BCD4;
+  --transition-normal: 0.3s ease;
+  --sombra-card: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --sombra-hover: 0 12px 40px rgba(40, 167, 69, 0.15);
+  --sombra-activo: 0 6px 25px rgba(40, 167, 69, 0.3);
 }
 
-/* Fondo general para Datos de Salud */
-ion-content {
-  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
-}
-
-/* ============================================
-   SEGMENTO MEJORADO
-   ============================================ */
-ion-segment {
-  margin: 16px;
-  border-radius: 12px;
-  background: #ffffffcc;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --color: #145a32;
-  --color-checked: #ffffff;
-  --background-checked: #28a745;
-  --indicator-color: transparent;
-  
-  ion-segment-button {
-    border-radius: 8px;
-    margin: 4px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    
-    &:hover {
-      transform: translateY(-1px);
-    }
-    
-    &.segment-button-checked {
-      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
-    }
-  }
-}
-
-/* ============================================
-   SECCIONES GENERALES MEJORADAS
-   ============================================ */
-.seccion {
-  padding: 16px;
-  animation: fadeInUp 0.6s ease-out;
-}
-
+/*ANIMACIONES PARA DATOS DE SALUD*/
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -77,244 +25,583 @@ ion-segment {
   }
 }
 
-/* ============================================
-   TÍTULOS PROFESIONALES
-   ============================================ */
-h2 {
-  text-align: center;
-  color: #145a32; /* Verde oscuro */
-  margin-bottom: 20px;
-  font-weight: 600;
-  font-size: 1.4rem;
-  position: relative;
-  
-  &::after {
-    content: '';
-    width: 50px;
-    height: 3px;
-    background: linear-gradient(90deg, #28a745, #34ce57);
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-/* ============================================
-   CARDS PROFESIONALES CON EFECTOS
-   ============================================ */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% { 
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes cardShine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes floatBubbles {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(0.5deg); }
+  66% { transform: translateY(6px) rotate(-0.5deg); }
+}
+
+@keyframes medicalPulse {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.3);
+  }
+  50% { 
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
+  }
+}
+
+@keyframes spinnerRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes heartbeat {
+  0%, 50%, 100% { transform: scale(1); }
+  25%, 75% { transform: scale(1.1); }
+}
+
+/*HEADER TRANSPARENTE PARA SALUD*/
+ion-header {
+  ion-toolbar {
+    --background: transparent !important;
+    --color: white !important;
+    --border-width: 0 !important;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.8), rgba(52, 206, 87, 0.6)) !important;
+    
+    ion-title {
+      color: white !important;
+      font-weight: 700 !important;
+      font-size: 1.3rem !important;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    ion-back-button {
+      --color: white !important;
+      transition: all var(--transition-normal);
+      
+      &:hover {
+        transform: scale(1.1) translateX(-2px);
+      }
+    }
+    
+    ion-buttons ion-menu-button,
+    ion-buttons ion-button {
+      --color: white !important;
+      transition: all var(--transition-normal);
+      
+      &:hover {
+        transform: scale(1.1) rotate(5deg);
+      }
+    }
+  }
+}
+
+/*FONDO CON EFECTOS MÉDICOS*/
+ion-content {
+  --background: linear-gradient(135deg, #eafaf1 0%, #f0f9f2 50%, #e8f5e9 100%) !important;
+  position: relative;
+  
+  /* Patrón de fondo temático médico */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(40, 167, 69, 0.06) 0%, transparent 25%),
+      radial-gradient(circle at 80% 70%, rgba(52, 206, 87, 0.04) 0%, transparent 25%),
+      radial-gradient(circle at 40% 80%, rgba(33, 150, 243, 0.03) 0%, transparent 20%),
+      radial-gradient(circle at 60% 20%, rgba(0, 188, 212, 0.04) 0%, transparent 20%);
+    animation: floatBubbles 35s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+/*SEGMENT MEJORADO */
+ion-segment {
+  margin: 16px !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: var(--sombra-card) !important;
+  border: 1px solid rgba(40, 167, 69, 0.2) !important;
+  --color: #666 !important;
+  --color-checked: white !important;
+  --background-checked: linear-gradient(135deg, var(--verde-principal), var(--verde-claro)) !important;
+  --indicator-color: transparent !important;
+  animation: fadeInUp 0.6s ease-out;
+  
+  ion-segment-button {
+    border-radius: 12px !important;
+    margin: 4px !important;
+    font-weight: 600 !important;
+    transition: all var(--transition-normal) !important;
+    min-height: 50px !important;
+    
+    &:hover {
+      transform: translateY(-1px);
+    }
+    
+    &.segment-button-checked {
+      box-shadow: var(--sombra-activo) !important;
+      transform: translateY(-2px) !important;
+      animation: medicalPulse 2s ease-in-out infinite;
+    }
+    
+    ion-label {
+      font-size: 0.9rem !important;
+      font-weight: 600 !important;
+    }
+  }
+}
+
+/*SECCIONES MEJORADAS*/
+.seccion {
+  animation: fadeInUp 0.6s ease-out;
+  
+  &[data-seccion="datos"] {
+    animation-delay: 0.1s;
+  }
+  
+  &[data-seccion="presion"] {
+    animation-delay: 0.2s;
+  }
+  
+  &[data-seccion="historial"] {
+    animation-delay: 0.3s;
+  }
+}
+
+/*TÍTULOS CON EFECTOS*/
+h2 {
+  text-align: center !important;
+  margin: 24px 16px 20px 16px !important;
+  color: var(--verde-oscuro) !important;
+  font-weight: 700 !important;
+  font-size: 1.4rem !important;
+  position: relative;
+  animation: slideInLeft 0.6s ease-out;
+  
+  /* Subrayado decorativo médico */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--verde-principal), var(--verde-claro));
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+  
+  /* Iconos médicos decorativos */
+  &::before {
+    content: '🩺';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    animation: heartbeat 2s ease-in-out infinite;
+  }
+}
+
+/*CARDS MÉDICOS*/
 ion-card {
-  margin: 16px;
-  border-radius: 16px;
-  background: #ffffffcc; /* Blanco translúcido */
-  backdrop-filter: blur(6px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  overflow: hidden;
+  margin: 16px !important;
+  border-radius: 20px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: var(--sombra-card) !important;
+  border: 2px solid rgba(40, 167, 69, 0.2) !important;
+  overflow: hidden !important;
+  transition: all var(--transition-normal) !important;
+  animation: scaleIn 0.8s ease-out;
+  position: relative !important;
   
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(40, 167, 69, 0.15);
+    transform: translateY(-6px) !important;
+    box-shadow: var(--sombra-hover) !important;
+    border-color: rgba(40, 167, 69, 0.4) !important;
+  }
+  
+  /* Efecto de brillo médico */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(40, 167, 69, 0.1),
+      transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.8s;
+    opacity: 0;
+    z-index: 1;
+  }
+  
+  &:hover::before {
+    animation: cardShine 0.8s ease-in-out;
+  }
+  
+  /* Contenido por encima del efecto */
+  ion-card-header,
+  ion-card-content {
+    position: relative !important;
+    z-index: 2 !important;
   }
   
   ion-card-header {
-    background: linear-gradient(135deg, #f8f9fa, #ffffff);
-    border-bottom: 1px solid rgba(20, 90, 50, 0.1);
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.9), rgba(255, 255, 255, 0.95)) !important;
+    border-bottom: 1px solid rgba(40, 167, 69, 0.1) !important;
     
     ion-card-title {
-      color: #145a32;
-      font-weight: 600;
-      font-size: 1.2rem;
+      color: var(--verde-oscuro) !important;
+      font-weight: 700 !important;
+      font-size: 1.2rem !important;
     }
     
     ion-card-subtitle {
-      color: #2d5a3d;
-      font-weight: 500;
+      color: var(--verde-principal) !important;
+      font-weight: 600 !important;
     }
   }
   
   ion-card-content {
-    padding: 20px;
+    padding: 20px !important;
   }
 }
 
-/* ============================================
-   INPUTS Y FORMULARIOS MEJORADOS
-   ============================================ */
-ion-item {
-  --background: rgba(255, 255, 255, 0.7);
-  --border-radius: 8px;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+/*CARDS ESPECIALES POR TIPO*/
+
+/* Card para nuevos registros */
+.dato-card:first-of-type {
+  border-color: rgba(33, 150, 243, 0.3) !important;
   
   &:hover {
-    --background: rgba(255, 255, 255, 0.9);
-    transform: translateX(2px);
+    border-color: rgba(33, 150, 243, 0.5) !important;
+    box-shadow: 0 12px 40px rgba(33, 150, 243, 0.15) !important;
+  }
+}
+
+/* Card de presión arterial */
+.seccion[data-seccion="presion"] ion-card {
+  border-color: rgba(255, 112, 67, 0.3) !important;
+  
+  &:hover {
+    border-color: rgba(255, 112, 67, 0.5) !important;
+    box-shadow: 0 12px 40px rgba(255, 112, 67, 0.15) !important;
+  }
+}
+
+/*INPUTS Y FORMULARIOS*/
+ion-item {
+  --background: rgba(255, 255, 255, 0.9) !important;
+  --border-radius: 12px !important;
+  margin-bottom: 12px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(40, 167, 69, 0.1) !important;
+  transition: all var(--transition-normal) !important;
+  backdrop-filter: blur(4px) !important;
+  
+  &:hover {
+    --background: rgba(255, 255, 255, 0.95) !important;
+    transform: translateX(2px) !important;
+    border-color: rgba(40, 167, 69, 0.3) !important;
   }
   
   &.item-has-focus {
-    --background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.3);
+    --background: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2) !important;
+    border-color: rgba(40, 167, 69, 0.5) !important;
+    transform: translateX(4px) !important;
+  }
+  
+  ion-label {
+    color: var(--verde-oscuro) !important;
+    font-weight: 600 !important;
+    
+    h3 {
+      color: var(--verde-oscuro) !important;
+      font-weight: 700 !important;
+    }
+    
+    p {
+      color: var(--verde-principal) !important;
+      font-weight: 500 !important;
+    }
   }
 }
 
 ion-input, ion-select, ion-textarea {
-  font-weight: 500;
-  --color: #145a32;
+  font-weight: 500 !important;
+  --color: var(--verde-oscuro) !important;
   
   &::part(native) {
-    color: #145a32;
+    color: var(--verde-oscuro) !important;
   }
 }
 
-/* ============================================
-   BOTONES PROFESIONALES
-   ============================================ */
+/*BOTONES MÉDICOS*/
 .botones-accion, .botones-edicion {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 20px;
+  animation: slideInRight 0.6s ease-out 0.3s both;
 }
 
 ion-button {
-  --border-radius: 10px;
-  font-weight: 600;
-  text-transform: none;
-  transition: all 0.3s ease;
-  min-height: 44px;
+  --border-radius: 12px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  transition: all var(--transition-normal) !important;
+  min-height: 48px !important;
+  position: relative !important;
+  overflow: hidden !important;
   
-  &[color="primary"] {
-    --background: linear-gradient(135deg, #28a745, #34ce57);
-    --background-activated: #218838;
-    --color: white;
-    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+  /* Efecto ripple mejorado */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: all 0.5s ease;
+    pointer-events: none;
+  }
+  
+  &:active::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  
+  &[color="primary"], &:not([color]) {
+    --background: linear-gradient(135deg, var(--verde-principal), var(--verde-claro)) !important;
+    --background-activated: #218838 !important;
+    --color: white !important;
+    box-shadow: var(--sombra-activo) !important;
     
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+      transform: translateY(-3px) !important;
+      box-shadow: 0 8px 30px rgba(40, 167, 69, 0.4) !important;
     }
   }
   
-  &[color="secondary"] {
-    --background: linear-gradient(135deg, #6c757d, #868e96);
-    --color: white;
+  &[color="success"] {
+    --background: linear-gradient(135deg, #28a745, #20c997) !important;
+    --color: white !important;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3) !important;
     
     &:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px) !important;
+      box-shadow: 0 8px 30px rgba(40, 167, 69, 0.4) !important;
+    }
+  }
+  
+  &[color="warning"] {
+    --background: linear-gradient(135deg, #ffc107, #ffca2c) !important;
+    --color: #212529 !important;
+    
+    &:hover {
+      transform: translateY(-2px) !important;
     }
   }
   
   &[color="danger"] {
-    --background: linear-gradient(135deg, #dc3545, #e55d6c);
-    --color: white;
+    --background: linear-gradient(135deg, #dc3545, #e55d6c) !important;
+    --color: white !important;
     
     &:hover {
-      transform: translateY(-2px);
+      transform: translateY(-2px) !important;
     }
   }
   
   &[fill="outline"] {
-    --border-color: #28a745;
-    --color: #28a745;
+    --border-color: var(--verde-principal) !important;
+    --color: var(--verde-principal) !important;
+    border: 2px solid var(--verde-principal) !important;
     
     &:hover {
-      --background: rgba(40, 167, 69, 0.1);
-      transform: translateY(-1px);
+      --background: rgba(40, 167, 69, 0.1) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 20px rgba(40, 167, 69, 0.2) !important;
     }
   }
 }
 
-/* ============================================
-   CHIPS INFORMATIVOS MEJORADOS
-   ============================================ */
+/*CHIPS INFORMATIVOS*/
 .info-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
-  margin: 16px 0;
+  margin: 20px 0;
+  animation: fadeInUp 0.6s ease-out 0.4s both;
 }
 
 ion-chip {
-  --background: linear-gradient(135deg, #e8f5e8, #f1f9f1);
-  --color: #145a32;
-  border: 1px solid rgba(40, 167, 69, 0.2);
-  border-radius: 20px;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  --background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(52, 206, 87, 0.05)) !important;
+  --color: var(--verde-oscuro) !important;
+  border: 1px solid rgba(40, 167, 69, 0.3) !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  transition: all var(--transition-normal) !important;
+  backdrop-filter: blur(4px) !important;
   
   &:hover {
-    --background: linear-gradient(135deg, #d4edda, #e8f5e8);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+    --background: linear-gradient(135deg, rgba(40, 167, 69, 0.2), rgba(52, 206, 87, 0.1)) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.2) !important;
   }
   
   ion-icon {
-    color: #28a745;
+    color: var(--verde-principal) !important;
+  }
+  
+  &[color="primary"] {
+    --background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(3, 169, 244, 0.05)) !important;
+    --color: var(--azul-salud) !important;
+    border-color: rgba(33, 150, 243, 0.3) !important;
+    
+    ion-icon {
+      color: var(--azul-salud) !important;
+    }
+  }
+  
+  &[color="warning"] {
+    --background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 202, 44, 0.05)) !important;
+    --color: #856404 !important;
+    border-color: rgba(255, 193, 7, 0.3) !important;
+  }
+  
+  &[color="success"] {
+    --background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(32, 201, 151, 0.05)) !important;
+    --color: var(--verde-oscuro) !important;
+    border-color: rgba(40, 167, 69, 0.3) !important;
   }
 }
 
-/* ============================================
-   ESTADOS DE LOADING Y VACÍO MEJORADOS
-   ============================================ */
+/*ESTADOS DE LOADING*/
 .loading-container {
-  text-align: center;
-  margin-top: 40px;
-  padding: 40px 20px;
+  text-align: center !important;
+  margin-top: 60px !important;
+  padding: 40px 20px !important;
+  animation: fadeInUp 0.6s ease-out;
   
   ion-spinner {
-    --color: #28a745;
-    transform: scale(1.2);
+    --color: var(--verde-principal) !important;
+    transform: scale(1.5) !important;
+    animation: spinnerRotate 1s linear infinite;
   }
   
   p {
-    margin-top: 20px;
-    color: #145a32;
-    font-weight: 500;
-    font-size: 1.1rem;
+    margin-top: 20px !important;
+    color: var(--verde-oscuro) !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    
+    small {
+      color: var(--verde-principal) !important;
+      font-weight: 500 !important;
+      display: block;
+      margin-top: 8px;
+    }
   }
 }
 
 .empty-state {
-  text-align: center;
-  color: #145a32;
-  padding: 60px 20px;
+  text-align: center !important;
+  color: var(--verde-oscuro) !important;
+  padding: 60px 20px !important;
+  animation: scaleIn 0.8s ease-out;
   
   ion-icon {
-    font-size: 4rem;
-    color: #28a745;
-    opacity: 0.6;
-    margin-bottom: 20px;
+    font-size: 4rem !important;
+    color: var(--verde-principal) !important;
+    opacity: 0.6 !important;
+    margin-bottom: 20px !important;
+    animation: medicalPulse 3s ease-in-out infinite;
   }
   
   h3 {
-    color: #145a32;
-    margin-bottom: 10px;
-    font-weight: 600;
+    color: var(--verde-oscuro) !important;
+    margin-bottom: 10px !important;
+    font-weight: 700 !important;
   }
   
   p {
-    color: #2d5a3d;
-    font-weight: 500;
-    line-height: 1.5;
+    color: var(--verde-principal) !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
   }
 }
 
-/* ============================================
-   SECCIÓN DE CÁMARA Y FOTOS PROFESIONAL
-   ============================================ */
+/*SECCIÓN DE CÁMARA*/
 .camera-section {
-  border-top: 2px solid rgba(40, 167, 69, 0.2);
-  padding-top: 24px;
-  margin-top: 20px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(248, 249, 250, 0.8));
-  border-radius: 12px;
-  backdrop-filter: blur(4px);
+  border-top: 2px solid rgba(40, 167, 69, 0.2) !important;
+  padding-top: 24px !important;
+  margin-top: 20px !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.8)) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.1) !important;
+  animation: slideInLeft 0.6s ease-out 0.5s both;
 }
 
 .camera-buttons {
@@ -327,107 +614,167 @@ ion-chip {
 
 .photo-preview {
   padding: 20px 16px;
+  animation: scaleIn 0.6s ease-out;
 }
 
 .photo-container {
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border-radius: 12px;
-  padding: 8px;
+  transition: all var(--transition-normal);
+  border-radius: 16px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
   
   &:hover {
     background: rgba(40, 167, 69, 0.05);
     transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.1);
   }
 }
 
 .photo-small {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 3px solid #28a745;
-  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
-  transition: all 0.3s ease;
+  width: 140px !important;
+  height: 140px !important;
+  object-fit: cover !important;
+  border-radius: 16px !important;
+  border: 3px solid var(--verde-principal) !important;
+  box-shadow: var(--sombra-activo) !important;
+  transition: all var(--transition-normal) !important;
   
   &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    transform: scale(1.05) !important;
+    box-shadow: 0 8px 30px rgba(40, 167, 69, 0.4) !important;
   }
 }
 
 .photo-large {
-  width: 100%;
-  max-width: 350px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 12px;
-  border: 3px solid #28a745;
-  box-shadow: 0 6px 25px rgba(40, 167, 69, 0.3);
-  transition: all 0.3s ease;
+  width: 100% !important;
+  max-width: 400px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  border-radius: 16px !important;
+  border: 3px solid var(--verde-principal) !important;
+  box-shadow: 0 8px 30px rgba(40, 167, 69, 0.3) !important;
+  transition: all var(--transition-normal) !important;
   
   &:hover {
-    transform: scale(1.02);
+    transform: scale(1.02) !important;
   }
 }
 
 .photo-hint {
-  font-size: 0.85rem;
-  color: #2d5a3d;
-  margin-top: 12px;
-  font-weight: 500;
-  padding: 8px 16px;
-  background: rgba(40, 167, 69, 0.1);
-  border-radius: 20px;
-  display: inline-block;
+  font-size: 0.9rem !important;
+  color: var(--verde-principal) !important;
+  margin-top: 12px !important;
+  font-weight: 600 !important;
+  padding: 8px 16px !important;
+  background: rgba(40, 167, 69, 0.1) !important;
+  border-radius: 20px !important;
+  display: inline-block !important;
+  backdrop-filter: blur(4px) !important;
 }
 
 .foto-indicator {
-  margin-left: 8px;
-  color: #28a745;
-  font-weight: 600;
+  margin-left: 8px !important;
+  color: var(--verde-principal) !important;
+  font-weight: 600 !important;
+  animation: heartbeat 2s ease-in-out infinite;
 }
 
 .registro-foto {
-  text-align: center;
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  margin: 12px 0;
-  transition: all 0.3s ease;
+  text-align: center !important;
+  padding: 20px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 16px !important;
+  margin: 16px 0 !important;
+  transition: all var(--transition-normal) !important;
+  backdrop-filter: blur(4px) !important;
+  border: 1px solid rgba(40, 167, 69, 0.2) !important;
   
   &:hover {
-    background: rgba(255, 255, 255, 0.95);
-    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.95) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.15) !important;
   }
 }
 
 .foto-registro {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 2px solid rgba(40, 167, 69, 0.3);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  width: 200px !important;
+  height: 200px !important;
+  object-fit: cover !important;
+  border-radius: 16px !important;
+  border: 2px solid rgba(40, 167, 69, 0.3) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+  transition: all var(--transition-normal) !important;
   
   &:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.2);
+    transform: scale(1.03) !important;
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.2) !important;
   }
 }
 
 .foto-caption {
-  font-size: 0.85rem;
-  color: #2d5a3d;
-  margin-top: 8px;
-  font-weight: 500;
+  font-size: 0.9rem !important;
+  color: var(--verde-principal) !important;
+  margin-top: 12px !important;
+  font-weight: 600 !important;
 }
 
-/* ============================================
-   RESPONSIVE DESIGN MEJORADO
-   ============================================ */
+/*HISTORIAL HEADER */
+.historial-header {
+  animation: fadeInUp 0.6s ease-out;
+  text-align: center;
+  margin-bottom: 24px;
+  
+  ion-button {
+    margin-top: 16px;
+    animation: medicalPulse 3s ease-in-out infinite;
+  }
+}
+
+/*RESPONSIVE mejorado*/
+
+/* Pantallas pequeñas */
+@media (max-width: 480px) {
+  ion-segment {
+    margin: 12px 8px !important;
+    
+    ion-segment-button {
+      min-height: 45px !important;
+      
+      ion-label {
+        font-size: 0.8rem !important;
+      }
+    }
+  }
+  
+  ion-card {
+    margin: 12px 8px !important;
+  }
+  
+  .photo-small {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  
+  .foto-registro {
+    width: 160px !important;
+    height: 160px !important;
+  }
+  
+  .botones-accion, .botones-edicion {
+    flex-direction: column;
+    align-items: center;
+    
+    ion-button {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+}
+
+/* Tablets */
 @media (min-width: 768px) {
   .seccion {
     max-width: 800px;
@@ -437,30 +784,26 @@ ion-chip {
   
   ion-card {
     max-width: 600px;
-    margin: 20px auto;
-  }
-  
-  .botones-accion, .botones-edicion {
-    max-width: 400px;
-    margin: 24px auto;
+    margin: 20px auto !important;
   }
   
   .camera-section {
     max-width: 600px;
-    margin: 24px auto;
+    margin: 24px auto !important;
   }
   
   .photo-small {
-    width: 140px;
-    height: 140px;
+    width: 160px !important;
+    height: 160px !important;
   }
   
   .foto-registro {
-    width: 200px;
-    height: 200px;
+    width: 220px !important;
+    height: 220px !important;
   }
 }
 
+/* Desktop */
 @media (min-width: 1024px) {
   .seccion {
     max-width: 1000px;
@@ -468,45 +811,88 @@ ion-chip {
   }
   
   h2 {
-    font-size: 1.6rem;
+    font-size: 1.6rem !important;
+  }
+  
+  ion-card {
+    &:hover {
+      transform: translateY(-8px) !important;
+    }
+  }
+  
+  .camera-section {
+    &:hover {
+      transform: translateY(-2px) !important;
+    }
   }
 }
 
-/* ============================================
-   ANIMACIONES Y MICRO-INTERACCIONES
-   ============================================ */
-.slide-in {
-  animation: slideIn 0.5s ease-out;
+/*EFECTOS ADICIONALES Y ESTADOS ESPECIALES*/
+
+/* Skeleton loading para cards */
+.card-skeleton {
+  background: linear-gradient(90deg, #f0f9f2 25%, #e8f5e9 50%, #f0f9f2 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 20px;
+  height: 200px;
+  margin: 16px;
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
 }
 
-.pulse {
-  animation: pulse 2s infinite;
+/* Estados especiales */
+.fade-in {
+  animation: fadeInUp 0.6s ease-out;
 }
 
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
-  }
+.slide-in-left {
+  animation: slideInLeft 0.6s ease-out;
 }
 
-/* Aplicar pulse a elementos importantes */
-.botones-accion ion-button[color="primary"]:first-child {
-  animation: pulse 3s infinite;
+.slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
+
+.scale-in {
+  animation: scaleIn 0.6s ease-out;
+}
+
+/* Efectos de foco mejorados */
+.input-focused {
+  animation: medicalPulse 1s ease-in-out;
+}
+
+/* Animación de éxito */
+.success-animation {
+  animation: scaleIn 0.6s ease-out, medicalPulse 2s ease-in-out 0.6s infinite;
+}
+
+/*TEMA OSCURO (OPCIONAL)*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --verde-principal: #34ce57;
+    --verde-oscuro: #1e7e34;
+  }
+  
+  ion-content {
+    --background: linear-gradient(135deg, #1a2f1a 0%, #1e3d1e 50%, #1a2f1a 100%) !important;
+  }
+  
+  ion-card {
+    background: rgba(30, 40, 30, 0.95) !important;
+    border-color: rgba(52, 206, 87, 0.3) !important;
+    
+    ion-card-header {
+      background: linear-gradient(135deg, rgba(30, 40, 30, 0.9), rgba(20, 30, 20, 0.95)) !important;
+    }
+  }
+  
+  ion-item {
+    --background: rgba(30, 40, 30, 0.9) !important;
+    border-color: rgba(52, 206, 87, 0.2) !important;
+  }
 }
