@@ -1,239 +1,901 @@
 /* ============================================
-   HEADER TRANSPARENTE 
+   VARIABLES Y ANIMACIONES PARA RECETAS
+   ============================================ */
+:root {
+  --azul-principal: #2196F3;
+  --azul-claro: #03A9F4;
+  --turquesa: #00BCD4;
+  --verde-oscuro: #145a32;
+  --verde-recetas: #28a745;
+  --transition-normal: 0.3s ease;
+  --sombra-card: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --sombra-hover: 0 12px 40px rgba(33, 150, 243, 0.15);
+}
+
+/* ============================================
+   ANIMACIONES PREMIUM PARA RECETAS
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% { 
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes cardShine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes floatBubbles {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(0.5deg); }
+  66% { transform: translateY(6px) rotate(-0.5deg); }
+}
+
+@keyframes cookingAnimation {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% { 
+    transform: translateY(-2px) rotate(1deg);
+  }
+  50% { 
+    transform: translateY(-4px) rotate(0deg);
+  }
+  75% { 
+    transform: translateY(-2px) rotate(-1deg);
+  }
+}
+
+@keyframes spinnerRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ============================================
+   HEADER TRANSPARENTE CON TEMA RECETAS
    ============================================ */
 ion-header {
   ion-toolbar {
-    --background: transparent;
-    --color: #145a32; /* Verde oscuro para el texto */
-    --border-width: 0;
+    --background: transparent !important;
+    --color: white !important;
+    --border-width: 0 !important;
     backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.8), rgba(3, 169, 244, 0.6)) !important;
     
     ion-title {
-      color: #145a32;
-      font-weight: 600;
+      color: white !important;
+      font-weight: 700 !important;
+      font-size: 1.3rem !important;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     }
     
     ion-back-button {
-      --color: #145a32;
-    }
-    
-    ion-buttons ion-button {
-      --color: #145a32;
+      --color: white !important;
+      transition: all var(--transition-normal);
+      
+      &:hover {
+        transform: scale(1.1) translateX(-2px);
+      }
     }
   }
 }
 
-/* Fondo general para recetas saludables */
+/* ============================================
+   FONDO PREMIUM CON EFECTOS CULINARIOS
+   ============================================ */
 ion-content {
-  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
+  --background: linear-gradient(135deg, #eafaf1 0%, #e3f2fd 50%, #e0f2f1 100%) !important;
+  position: relative;
+  
+  /* Patrón de fondo temático de cocina */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(33, 150, 243, 0.06) 0%, transparent 25%),
+      radial-gradient(circle at 80% 70%, rgba(3, 169, 244, 0.04) 0%, transparent 25%),
+      radial-gradient(circle at 40% 80%, rgba(0, 188, 212, 0.03) 0%, transparent 20%),
+      radial-gradient(circle at 60% 20%, rgba(33, 150, 243, 0.04) 0%, transparent 20%);
+    animation: floatBubbles 30s ease-in-out infinite;
+    pointer-events: none;
+  }
 }
 
 /* ============================================
-   BANNER DE RECETA DEL DÍA - MÁS PEQUEÑO Y PROFESIONAL
+   SEGMENT PREMIUM
+   ============================================ */
+ion-segment {
+  margin: 16px !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: var(--sombra-card) !important;
+  border: 1px solid rgba(33, 150, 243, 0.2) !important;
+  --color: #666 !important;
+  --color-checked: white !important;
+  --background-checked: linear-gradient(135deg, var(--azul-principal), var(--azul-claro)) !important;
+  --indicator-color: transparent !important;
+  animation: fadeInUp 0.6s ease-out;
+  
+  ion-segment-button {
+    border-radius: 12px !important;
+    margin: 4px !important;
+    font-weight: 600 !important;
+    transition: all var(--transition-normal) !important;
+    min-height: 50px !important;
+    
+    &:hover {
+      transform: translateY(-1px);
+    }
+    
+    &.segment-button-checked {
+      box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3) !important;
+      transform: translateY(-2px) !important;
+    }
+    
+    ion-icon {
+      font-size: 1.2rem !important;
+      margin-bottom: 4px !important;
+    }
+    
+    ion-label {
+      font-size: 0.9rem !important;
+      font-weight: 600 !important;
+    }
+  }
+}
+
+/* ============================================
+   RECETA DEL DÍA PREMIUM
    ============================================ */
 .recipe-of-day {
-  margin: 16px;
-  border-radius: 12px;
-  background: #ffffffcc; /* Blanco translúcido */
-  backdrop-filter: blur(4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Asegura bordes redondeados perfectos */
-}
-
-.recipe-of-day img {
-  width: 100%;
-  height: 100px; /* Reducido de 140px a 100px - más pequeño y profesional */
-  object-fit: cover;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  transition: transform 0.3s ease; /* Efecto hover profesional */
-}
-
-/* Efecto hover profesional para el banner */
-.recipe-of-day:hover img {
-  transform: scale(1.05);
-}
-
-/* Card de acceso rápido */
-.quick-access-card {
-  margin: 16px;
-  border-radius: 12px;
-  background: #ffffffcc;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Sección de categorías */
-.categories-section h3 {
-  text-align: center;
-  margin: 16px 0;
-  color: #145a32; /* Verde oscuro */
-  font-weight: 600;
-}
-
-/* Card de categoría */
-.category-card {
-  border-radius: 12px;
-  background: #ffffffcc;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.category-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-}
-
-.category-card img {
-  width: 100%;
-  height: 100px; /* reducido para que se vea más pequeño */
-  object-fit: contain; /* muestra toda la imagen sin cortes */
-  background-color: #f8f9fa; /* fondo gris clarito */
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  padding: 8px; /* agrega espacio interno elegante */
-}
-
-.category-title {
-  text-align: center;
-  color: #145a32; /* Verde oscuro */
-  font-size: 1.1em;
-  font-weight: 500;
-  margin: 8px 0;
-}
-
-/* Sección de búsqueda */
-.search-section ion-card {
-  margin: 16px;
-  border-radius: 12px;
-  background: #ffffffcc;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Botón de buscar recetas - Verde */
-.search-section ion-button,
-ion-button[color="primary"] {
-  --background: #28a745; /* Verde principal */
-  --background-activated: #218838; /* Verde más oscuro al presionar */
-  --background-hover: #34ce57; /* Verde más claro al hover */
-  --color: white;
-  --border-radius: 8px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  text-transform: none; /* Mantiene el texto sin mayúsculas forzadas */
-}
-
-/* Efectos hover para el botón */
-.search-section ion-button:hover,
-ion-button[color="primary"]:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
-}
-
-/* Resultados de búsqueda */
-.search-results h4 {
-  text-align: center;
-  margin: 16px 0;
-  color: #145a32;
-  font-weight: 600;
-}
-
-/* Sin resultados */
-.no-results {
-  text-align: center;
-  color: #145a32;
-  font-weight: 500;
-}
-
-/* Header de lista de recetas */
-.recipes-header ion-item {
-  background: transparent;
-  --background: transparent;
-}
-
-/* Grid de recetas */
-.recipes-grid ion-card {
-  margin: 16px;
-  border-radius: 12px;
-  background: #ffffffcc;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.recipes-grid ion-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-}
-
-.recipes-grid ion-card img {
-  width: 100%;
-  height: 120px; /* altura reducida para mejor proporción */
-  object-fit: contain; /* muestra imagen completa sin cortes */
-  background-color: #f8f9fa; /* fondo gris clarito */
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  padding: 8px; /* padding interno elegante */
-  transition: transform 0.3s ease;
-}
-
-.recipes-grid ion-card:hover img {
-  transform: scale(1.03);
-}
-
-.recipe-title {
-  text-align: center;
-  color: #145a32;
-  font-size: 1.2em;
-  font-weight: 600;
-  margin-top: 8px;
-}
-
-.recipe-ingredients {
-  margin-top: 8px;
-  color: #2d5a3d;
-}
-
-/* Loading */
-.loading-container {
-  text-align: center;
-  margin-top: 40px;
-}
-
-.loading-container p {
-  margin-top: 12px;
-  color: #145a32;
-  font-weight: 500;
+  margin: 20px 16px !important;
+  border-radius: 20px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: var(--sombra-card) !important;
+  border: 2px solid rgba(33, 150, 243, 0.2) !important;
+  overflow: hidden !important;
+  transition: all var(--transition-normal) !important;
+  animation: scaleIn 0.8s ease-out 0.3s both;
+  position: relative !important;
+  
+  &:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: var(--sombra-hover) !important;
+    border-color: rgba(33, 150, 243, 0.4) !important;
+  }
+  
+  /* Efecto de brillo culinario */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(33, 150, 243, 0.1),
+      transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.8s;
+    opacity: 0;
+    z-index: 1;
+  }
+  
+  &:hover::before {
+    animation: cardShine 0.8s ease-in-out;
+  }
+  
+  /* Contenido por encima del efecto */
+  ion-card-header,
+  ion-card-content {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+  
+  img {
+    width: 100% !important;
+    height: 120px !important;
+    object-fit: cover !important;
+    transition: all var(--transition-normal) !important;
+    filter: brightness(1.1) contrast(1.05) !important;
+  }
+  
+  &:hover img {
+    transform: scale(1.05) !important;
+    filter: brightness(1.2) contrast(1.1) !important;
+  }
+  
+  ion-card-header {
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.9), rgba(255, 255, 255, 0.95)) !important;
+    
+    ion-card-subtitle {
+      color: var(--azul-principal) !important;
+      font-weight: 600 !important;
+      font-size: 0.9rem !important;
+    }
+    
+    ion-card-title {
+      color: var(--verde-oscuro) !important;
+      font-weight: 700 !important;
+      font-size: 1.2rem !important;
+    }
+  }
+  
+  ion-card-content {
+    p {
+      color: #666 !important;
+      font-weight: 500 !important;
+      margin-bottom: 12px !important;
+    }
+    
+    ion-button {
+      --background: linear-gradient(135deg, var(--azul-principal), var(--azul-claro)) !important;
+      --color: white !important;
+      --border-radius: 10px !important;
+      font-weight: 600 !important;
+      text-transform: none !important;
+      
+      &:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(33, 150, 243, 0.3) !important;
+      }
+    }
+  }
 }
 
 /* ============================================
-   MEJORAS PROFESIONALES ADICIONALES
+   CARD DE ACCESO RÁPIDO
+   ============================================ */
+.quick-access-card {
+  margin: 20px 16px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(139, 195, 74, 0.05)) !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: var(--sombra-card) !important;
+  border: 2px solid rgba(76, 175, 80, 0.2) !important;
+  transition: all var(--transition-normal) !important;
+  animation: slideInLeft 0.6s ease-out 0.5s both;
+  
+  &:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.2) !important;
+    border-color: rgba(76, 175, 80, 0.4) !important;
+  }
+  
+  ion-card-header {
+    ion-card-title {
+      color: var(--verde-oscuro) !important;
+      font-weight: 700 !important;
+      font-size: 1.3rem !important;
+    }
+  }
+  
+  ion-card-content {
+    ion-button {
+      --background: linear-gradient(135deg, var(--verde-recetas), #34ce57) !important;
+      --color: white !important;
+      --border-radius: 12px !important;
+      font-weight: 700 !important;
+      text-transform: none !important;
+      min-height: 48px !important;
+      
+      &:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4) !important;
+      }
+    }
+  }
+}
+
+/* ============================================
+   SECCIONES PRINCIPALES
+   ============================================ */
+.categories-section {
+  animation: fadeInUp 0.6s ease-out 0.7s both;
+  
+  h3 {
+    text-align: center !important;
+    margin: 24px 16px 20px 16px !important;
+    color: var(--verde-oscuro) !important;
+    font-weight: 700 !important;
+    font-size: 1.4rem !important;
+    position: relative;
+    
+    /* Subrayado decorativo */
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--azul-principal), var(--turquesa));
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+  }
+}
+
+/* ============================================
+   CARDS DE CATEGORÍA PREMIUM
+   ============================================ */
+.category-card {
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.1) !important;
+  border: 1px solid rgba(33, 150, 243, 0.1) !important;
+  transition: all var(--transition-normal) !important;
+  margin: 8px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  
+  &:hover {
+    transform: translateY(-6px) scale(1.02) !important;
+    box-shadow: 0 8px 25px rgba(33, 150, 243, 0.2) !important;
+    border-color: rgba(33, 150, 243, 0.3) !important;
+  }
+  
+  /* Efecto de overlay azul sutil */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.05), transparent);
+    opacity: 0;
+    transition: all var(--transition-normal);
+    z-index: 1;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
+  
+  img {
+    width: 100% !important;
+    height: 100px !important;
+    object-fit: cover !important;
+    background-color: #f8f9fa !important;
+    border-radius: 16px 16px 0 0 !important;
+    padding: 8px !important;
+    transition: all var(--transition-normal) !important;
+    animation: cookingAnimation 6s ease-in-out infinite;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+  
+  &:hover img {
+    transform: scale(1.05) !important;
+    animation-play-state: paused;
+  }
+  
+  ion-card-header {
+    position: relative !important;
+    z-index: 2 !important;
+    
+    .category-title {
+      text-align: center !important;
+      color: var(--verde-oscuro) !important;
+      font-size: 1rem !important;
+      font-weight: 600 !important;
+      margin: 12px 0 !important;
+    }
+  }
+}
+
+/* ============================================
+   SECCIÓN DE BÚSQUEDA PREMIUM
+   ============================================ */
+.search-section {
+  animation: slideInRight 0.6s ease-out 0.4s both;
+  
+  ion-card {
+    margin: 20px 16px !important;
+    border-radius: 20px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    box-shadow: var(--sombra-card) !important;
+    border: 1px solid rgba(33, 150, 243, 0.2) !important;
+    
+    ion-card-header {
+      background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(3, 169, 244, 0.05)) !important;
+      
+      ion-card-title {
+        color: var(--verde-oscuro) !important;
+        font-weight: 700 !important;
+        font-size: 1.3rem !important;
+      }
+      
+      ion-card-subtitle {
+        color: #666 !important;
+        font-weight: 500 !important;
+      }
+    }
+    
+    ion-card-content {
+      ion-searchbar {
+        --background: rgba(248, 249, 250, 0.8) !important;
+        --border-radius: 12px !important;
+        --box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1) !important;
+        margin-bottom: 16px !important;
+        
+        &.searchbar-has-focus {
+          --background: rgba(255, 255, 255, 0.95) !important;
+          --box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2) !important;
+        }
+      }
+      
+      ion-button {
+        --background: linear-gradient(135deg, var(--azul-principal), var(--azul-claro)) !important;
+        --color: white !important;
+        --border-radius: 12px !important;
+        font-weight: 700 !important;
+        text-transform: none !important;
+        min-height: 48px !important;
+        
+        &:hover {
+          transform: translateY(-2px) !important;
+          box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4) !important;
+        }
+        
+        &[disabled] {
+          --background: #e0e0e0 !important;
+          --color: #9e9e9e !important;
+        }
+      }
+    }
+  }
+}
+
+/* ============================================
+   RESULTADOS DE BÚSQUEDA
+   ============================================ */
+.search-results {
+  animation: fadeInUp 0.6s ease-out;
+  
+  h4 {
+    text-align: center !important;
+    margin: 20px 16px !important;
+    color: var(--azul-principal) !important;
+    font-weight: 700 !important;
+    font-size: 1.2rem !important;
+  }
+  
+  ion-card {
+    margin: 16px !important;
+    border-radius: 16px !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.1) !important;
+    transition: all var(--transition-normal) !important;
+    
+    &:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: 0 8px 25px rgba(33, 150, 243, 0.2) !important;
+    }
+    
+    ion-item {
+      --background: transparent !important;
+      
+      ion-thumbnail {
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        
+        img {
+          object-fit: cover !important;
+          filter: brightness(1.1) !important;
+        }
+      }
+      
+      ion-label {
+        h3 {
+          color: var(--verde-oscuro) !important;
+          font-weight: 600 !important;
+          font-size: 1.1rem !important;
+        }
+        
+        p {
+          color: #666 !important;
+          font-weight: 500 !important;
+          
+          &.recipe-preview {
+            font-size: 0.85rem !important;
+            margin-top: 4px !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+             line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+          }
+        }
+      }
+      
+      ion-icon[slot="end"] {
+        color: var(--azul-principal) !important;
+      }
+    }
+  }
+}
+
+/* ============================================
+   SIN RESULTADOS
+   ============================================ */
+.no-results {
+  text-align: center !important;
+  padding: 40px 20px !important;
+  color: var(--verde-oscuro) !important;
+  
+  ion-icon {
+    color: #ccc !important;
+    margin-bottom: 16px !important;
+  }
+  
+  h3 {
+    color: var(--verde-oscuro) !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+  }
+  
+  p {
+    color: #666 !important;
+    font-weight: 500 !important;
+  }
+}
+
+/* ============================================
+   HEADER DE LISTA DE RECETAS
+   ============================================ */
+.recipes-header {
+  animation: slideInLeft 0.6s ease-out;
+  
+  ion-item {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(8px) !important;
+    margin: 16px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.1) !important;
+    
+    ion-icon {
+      color: var(--azul-principal) !important;
+      cursor: pointer !important;
+      transition: all var(--transition-normal) !important;
+      
+      &:hover {
+        transform: scale(1.2) !important;
+      }
+    }
+    
+    ion-label {
+      h2 {
+        color: var(--verde-oscuro) !important;
+        font-weight: 700 !important;
+      }
+      
+      p {
+        color: var(--azul-principal) !important;
+        font-weight: 500 !important;
+      }
+    }
+  }
+}
+
+/* ============================================
+   GRID DE RECETAS PREMIUM
+   ============================================ */
+.recipes-grid {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+  
+  ion-card {
+    margin: 16px !important;
+    border-radius: 16px !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.1) !important;
+    border: 1px solid rgba(33, 150, 243, 0.1) !important;
+    transition: all var(--transition-normal) !important;
+    overflow: hidden !important;
+    
+    &:hover {
+      transform: translateY(-6px) !important;
+      box-shadow: 0 8px 25px rgba(33, 150, 243, 0.2) !important;
+      border-color: rgba(33, 150, 243, 0.3) !important;
+    }
+    
+    img {
+      width: 100% !important;
+      height: 140px !important;
+      object-fit: cover !important;
+      background-color: #f8f9fa !important;
+      border-radius: 16px 16px 0 0 !important;
+      padding: 8px !important;
+      transition: all var(--transition-normal) !important;
+      filter: brightness(1.1) !important;
+    }
+    
+    &:hover img {
+      transform: scale(1.03) !important;
+      filter: brightness(1.2) !important;
+    }
+    
+    ion-card-header {
+      .recipe-title {
+        text-align: center !important;
+        color: var(--verde-oscuro) !important;
+        font-size: 1.1rem !important;
+        font-weight: 700 !important;
+        margin: 12px 0 8px 0 !important;
+      }
+      
+      ion-card-subtitle {
+        text-align: center !important;
+        color: var(--azul-principal) !important;
+        font-weight: 500 !important;
+      }
+    }
+    
+    ion-card-content {
+      .recipe-ingredients {
+        margin-top: 12px !important;
+        
+        p {
+          color: var(--verde-oscuro) !important;
+          font-weight: 600 !important;
+          font-size: 0.9rem !important;
+          margin-bottom: 8px !important;
+        }
+        
+        ion-chip {
+          --background: rgba(33, 150, 243, 0.1) !important;
+          --color: var(--azul-principal) !important;
+          border: 1px solid rgba(33, 150, 243, 0.2) !important;
+          font-weight: 500 !important;
+          font-size: 0.8rem !important;
+          margin: 2px 4px 2px 0 !important;
+          
+          &:hover {
+            --background: rgba(33, 150, 243, 0.2) !important;
+            transform: translateY(-1px) !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ============================================
+   LOADING PREMIUM
+   ============================================ */
+.loading-container {
+  text-align: center !important;
+  margin-top: 60px !important;
+  padding: 40px 20px !important;
+  animation: fadeInUp 0.6s ease-out;
+  
+  ion-spinner {
+    --color: var(--azul-principal) !important;
+    transform: scale(1.5) !important;
+    animation: spinnerRotate 1s linear infinite;
+  }
+  
+  p {
+    margin-top: 20px !important;
+    color: var(--verde-oscuro) !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+  }
+}
+
+/* ============================================
+   RESPONSIVE PREMIUM
    ============================================ */
 
-/* Animaciones suaves para las cards */
-ion-card {
-  will-change: transform;
+/* Pantallas pequeñas */
+@media (max-width: 480px) {
+  ion-segment {
+    margin: 12px 8px !important;
+    
+    ion-segment-button {
+      min-height: 45px !important;
+      
+      ion-icon {
+        font-size: 1rem !important;
+      }
+      
+      ion-label {
+        font-size: 0.8rem !important;
+      }
+    }
+  }
+  
+  .recipe-of-day,
+  .quick-access-card,
+  .search-section ion-card {
+    margin: 16px 12px !important;
+  }
+  
+  .category-card {
+    margin: 6px !important;
+    
+    img {
+      height: 80px !important;
+    }
+    
+    .category-title {
+      font-size: 0.9rem !important;
+    }
+  }
+  
+  .recipes-grid ion-card {
+    margin: 12px !important;
+    
+    img {
+      height: 120px !important;
+    }
+    
+    .recipe-title {
+      font-size: 1rem !important;
+    }
+  }
 }
 
-/* Mejora en la tipografía */
-h1, h2, h3, h4, h5, h6 {
-  color: #145a32;
-}
-
-/* Responsive para tablets */
+/* Tablets */
 @media (min-width: 768px) {
   .recipe-of-day,
   .quick-access-card,
   .search-section ion-card {
     max-width: 600px;
-    margin: 16px auto;
+    margin: 20px auto !important;
   }
   
-  .categories-section,
-  .recipes-grid {
+  .categories-section {
     max-width: 800px;
     margin: 0 auto;
+    
+    ion-grid {
+      ion-col {
+        padding: 8px !important;
+      }
+    }
   }
+  
+  .recipes-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+    
+    ion-card {
+      margin: 0 !important;
+    }
+  }
+  
+  .search-results {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .categories-section {
+    max-width: 1000px;
+  }
+  
+  .recipes-grid {
+    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  
+  .category-card {
+    &:hover {
+      transform: translateY(-8px) scale(1.03) !important;
+    }
+  }
+  
+  .recipes-grid ion-card {
+    &:hover {
+      transform: translateY(-8px) !important;
+    }
+  }
+}
+
+/* ============================================
+   ESTADOS ESPECIALES
+   ============================================ */
+
+/* Estado de carga para categorías */
+.category-skeleton {
+  background: linear-gradient(90deg, #e3f2fd 25%, #bbdefb 50%, #e3f2fd 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 16px;
+  height: 150px;
+  margin: 8px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+/* Efectos adicionales */
+.fade-in {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
+
+.scale-in {
+  animation: scaleIn 0.6s ease-out;
 }

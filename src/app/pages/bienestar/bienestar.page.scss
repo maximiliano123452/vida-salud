@@ -1,6 +1,4 @@
-/* ============================================
-   VARIABLES Y ANIMACIONES PARA BIENESTAR
-   ============================================ */
+/* VARIABLES Y ANIMACIONES PARA BIENESTAR */
 :root {
   --morado-principal: #9C27B0;
   --rosa-suave: #E91E63;
@@ -14,9 +12,7 @@
   --sombra-hover: 0 12px 40px rgba(156, 39, 176, 0.15);
 }
 
-/* ============================================
-   ANIMACIONES PREMIUM PARA BIENESTAR
-   ============================================ */
+/*ANIMACIONES PARA MEJORAR EXPERIENCIA USUARIO*/
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -131,9 +127,7 @@
   }
 }
 
-/* ============================================
-   HEADER TRANSPARENTE CON TEMA BIENESTAR
-   ============================================ */
+/*HEADER TRANSPARENTE CON TEMA BIENESTAR*/
 ion-header {
   ion-toolbar {
     --background: transparent !important;
@@ -160,9 +154,7 @@ ion-header {
   }
 }
 
-/* ============================================
-   FONDO PREMIUM CON EFECTOS ZEN
-   ============================================ */
+/*FONDO CON EFECTOS ZEN*/
 ion-content {
   --background: linear-gradient(135deg, #eafaf1 0%, #f3e5f5 50%, #fce4ec 100%) !important;
   position: relative;
@@ -185,9 +177,7 @@ ion-content {
   }
 }
 
-/* ============================================
-   CONTENIDO PRINCIPAL MEJORADO
-   ============================================ */
+/*CONTENIDO PRINCIPAL MEJORADO*/
 .contenido {
   text-align: center !important;
   padding: 30px 20px 40px 20px !important;
@@ -196,9 +186,7 @@ ion-content {
   z-index: 2;
 }
 
-/* ============================================
-   IMAGEN PRINCIPAL CON EFECTOS ZEN
-   ============================================ */
+/*IMAGEN PRINCIPAL CON EFECTOS ZEN*/
 .imagen {
   width: 100% !important;
   max-width: 280px !important;
@@ -242,9 +230,7 @@ ion-content {
   }
 }
 
-/* ============================================
-   TÍTULO PRINCIPAL CON TEMA BIENESTAR
-   ============================================ */
+/*TÍTULO PRINCIPAL CON TEMA BIENESTAR*/
 h2 {
   color: var(--verde-oscuro) !important;
   margin-bottom: 20px !important;
@@ -277,9 +263,7 @@ h2 {
   to { width: 150px; }
 }
 
-/* ============================================
-   PÁRRAFO EN CARD PREMIUM ZEN
-   ============================================ */
+/*PÁRRAFO EN CARD ZEN*/
 p {
   color: #555 !important;
   font-size: 1.1rem !important;
@@ -323,9 +307,7 @@ p {
   }
 }
 
-/* ============================================
-   LISTA PREMIUM CON TEMA MINDFULNESS
-   ============================================ */
+/*LISTA CON TEMA MINDFULNESS*/
 ul {
   text-align: left !important;
   color: var(--verde-profundo) !important;
@@ -417,9 +399,7 @@ ul {
   }
 }
 
-/* ============================================
-   SECCIÓN DE BENEFICIOS DEL BIENESTAR EMOCIONAL
-   ============================================ */
+/*SECCIÓN DE BENEFICIOS DEL BIENESTAR EMOCIONAL*/
 .beneficios-card {
   background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(233, 30, 99, 0.05));
   border-radius: 20px;
@@ -534,9 +514,7 @@ ul {
   }
 }
 
-/* ============================================
-   RESPONSIVE PREMIUM PARA BIENESTAR
-   ============================================ */
+/*RESPONSIVE*/
 
 /* Pantallas pequeñas */
 @media (max-width: 480px) {
@@ -676,9 +654,7 @@ ul {
   }
 }
 
-/* ============================================
-   ESTADOS ESPECIALES ZEN
-   ============================================ */
+/*ESTADOS ESPECIALES ZEN*/
 
 /* Estado de carga con tema zen */
 .loading-skeleton {
