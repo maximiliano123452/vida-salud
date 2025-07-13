@@ -1,35 +1,614 @@
-/* Fondo general para alimentación */
+/*VARIABLES Y ANIMACIONES GLOBALES*/
+:root {
+  --verde-principal: #28a745;
+  --verde-oscuro: #145a32;
+  --verde-intermedio: #1e8449;
+  --verde-profundo: #117a65;
+  --verde-claro: #34ce57;
+  --transition-normal: 0.3s ease;
+  --sombra-card: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --sombra-hover: 0 12px 40px rgba(40, 167, 69, 0.15);
+}
+
+/*ANIMACIONES PARA MEJORAR EXPERIENCIA*/
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% { 
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes floatImage {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% { 
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes cardShine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes checkmarkPop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseGreen {
+  0% { 
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(40, 167, 69, 0);
+  }
+  100% { 
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+  }
+}
+
+@keyframes floatBubbles {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-15px) rotate(1deg); }
+  66% { transform: translateY(8px) rotate(-1deg); }
+}
+
+/*HEADER TRANSPARENTE MEJORADO*/
+ion-header {
+  ion-toolbar {
+    --background: transparent !important;
+    --color: white !important;
+    --border-width: 0 !important;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.8), rgba(52, 206, 87, 0.6)) !important;
+    
+    ion-title {
+      color: white !important;
+      font-weight: 700 !important;
+      font-size: 1.3rem !important;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    ion-back-button {
+      --color: white !important;
+      transition: all var(--transition-normal);
+      
+      &:hover {
+        transform: scale(1.1) translateX(-2px);
+      }
+    }
+  }
+}
+
+/*FONDO CON EFECTOS*/
 ion-content {
-  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
+  --background: linear-gradient(135deg, #eafaf1 0%, #f0f9f2 50%, #e8f5e9 100%) !important;
+  position: relative;
+  
+  /* Patrón de fondo temático de alimentación */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(76, 175, 80, 0.08) 0%, transparent 25%),
+      radial-gradient(circle at 80% 70%, rgba(139, 195, 74, 0.06) 0%, transparent 25%),
+      radial-gradient(circle at 40% 80%, rgba(205, 220, 57, 0.04) 0%, transparent 20%),
+      radial-gradient(circle at 60% 20%, rgba(40, 167, 69, 0.05) 0%, transparent 20%);
+    animation: floatBubbles 25s ease-in-out infinite;
+    pointer-events: none;
+  }
 }
 
-/* Contenido centrado */
+/*CONTENIDO PRINCIPAL MEJORADO*/
 .contenido {
-  text-align: center;
-  padding: 20px;
+  text-align: center !important;
+  padding: 30px 20px 40px 20px !important;
+  animation: fadeInUp 0.8s ease-out;
+  position: relative;
+  z-index: 2;
 }
 
-/* Imagen principal */
+/*IMAGEN PRINCIPAL CON EFECTOS*/
 .imagen {
-  width: 100%;
-  max-width: 300px;
-  margin: 0 auto 20px;
+  width: 100% !important;
+  max-width: 280px !important;
+  margin: 0 auto 30px auto !important;
+  border-radius: 20px !important;
+  box-shadow: 0 12px 35px rgba(40, 167, 69, 0.3) !important;
+  transition: all var(--transition-normal) !important;
+  animation: floatImage 6s ease-in-out infinite, scaleIn 1s ease-out 0.3s both;
+  filter: brightness(1.1) contrast(1.05) saturate(1.2) !important;
+  border: 4px solid rgba(255, 255, 255, 0.8) !important;
+  position: relative !important;
+  
+  &:hover {
+    transform: scale(1.05) rotate(-2deg) !important;
+    box-shadow: 0 20px 50px rgba(40, 167, 69, 0.4) !important;
+    filter: brightness(1.2) contrast(1.1) saturate(1.3) !important;
+  }
+  
+  /* Efecto de brillo que cruza la imagen */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    border-radius: 16px;
+    opacity: 0;
+    transition: all 0.6s;
+  }
+  
+  &:hover::after {
+    animation: cardShine 0.8s ease-in-out;
+  }
 }
 
-/* Título */
+/*TÍTULO PRINCIPAL MEJORADO*/
 h2 {
-  color: #145a32; /* Verde oscuro */
-  margin-bottom: 10px;
+  color: var(--verde-oscuro) !important;
+  margin-bottom: 20px !important;
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  animation: fadeInUp 0.6s ease-out 0.5s both;
+  position: relative;
+  background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-principal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Subrayado decorativo animado */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--verde-principal), var(--verde-claro));
+    transform: translateX(-50%);
+    border-radius: 2px;
+    animation: expandLine 1.2s ease-out 1.5s forwards;
+  }
 }
 
-/* Párrafos */
+@keyframes expandLine {
+  from { width: 0; }
+  to { width: 120px; }
+}
+
+/*PÁRRAFO EN CARD (NUEVO)*/
 p {
-  color: #1e8449; /* Verde intermedio */
+  color: #555 !important;
+  font-size: 1.1rem !important;
+  line-height: 1.6 !important;
+  font-weight: 500 !important;
+  margin: 30px auto !important;
+  max-width: 600px !important;
+  padding: 24px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--sombra-card) !important;
+  border: 1px solid rgba(40, 167, 69, 0.2) !important;
+  animation: slideInLeft 0.6s ease-out 0.7s both;
+  position: relative !important;
+  overflow: hidden !important;
+  
+  /* Efecto de brillo sutil */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(40, 167, 69, 0.1),
+      transparent
+    );
+    transform: rotate(45deg);
+    animation: cardShine 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  &:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: var(--sombra-hover) !important;
+    border-color: rgba(40, 167, 69, 0.4) !important;
+  }
 }
 
-/* Listas */
+/*LISTA CON ANIMACIONES*/
 ul {
-  text-align: left;
-  color: #117a65; /* Verde profundo */
-  margin-top: 20px;
+  text-align: left !important;
+  color: var(--verde-profundo) !important;
+  margin: 40px auto 0 auto !important;
+  max-width: 500px !important;
+  padding: 0 !important;
+  list-style: none !important;
+  animation: slideInRight 0.6s ease-out 0.9s both;
+  
+  li {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(8px) !important;
+    margin: 16px 0 !important;
+    padding: 20px 24px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2) !important;
+    border-left: 5px solid var(--verde-principal) !important;
+    transition: all var(--transition-normal) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    animation: fadeInUp 0.5s ease-out both;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    color: var(--verde-oscuro) !important;
+    
+    /* Animaciones escalonadas */
+    &:nth-child(1) { 
+      animation-delay: 1.0s;
+      border-left-color: #4CAF50;
+    }
+    &:nth-child(2) { 
+      animation-delay: 1.1s;
+      border-left-color: #2196F3;
+    }
+    &:nth-child(3) { 
+      animation-delay: 1.2s;
+      border-left-color: #FF9800;
+    }
+    
+    /* Checkmark animado */
+    &::before {
+      content: '';
+      position: absolute;
+      left: -2px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 5px;
+      background: inherit;
+      border-radius: 50%;
+      animation: checkmarkPop 0.5s ease-out both;
+      animation-delay: inherit;
+    }
+    
+    /* Icono checkmark real */
+    &::after {
+      content: '✓';
+      position: absolute;
+      left: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      background: var(--verde-principal);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+      animation: checkmarkPop 0.6s ease-out both;
+      animation-delay: inherit;
+    }
+    
+    /* Ajustar colores del checkmark por item */
+    &:nth-child(1)::after { background: #4CAF50; }
+    &:nth-child(2)::after { background: #2196F3; }
+    &:nth-child(3)::after { background: #FF9800; }
+    
+    &:hover {
+      transform: translateX(8px) translateY(-2px) !important;
+      box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3) !important;
+      border-left-width: 8px !important;
+    }
+    
+    /* Efecto de brillo al hover */
+    &:hover::before {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      animation: cardShine 0.6s ease-in-out;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      transform: none;
+      border-radius: 0;
+    }
+  }
+}
+
+/*SECCIONES ADICIONALES (OPCIONALES)*/
+
+/* Card de beneficios nutricionales */
+.beneficios-card {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(139, 195, 74, 0.05));
+  border-radius: 20px;
+  padding: 30px;
+  margin: 40px auto;
+  max-width: 600px;
+  border: 2px solid rgba(76, 175, 80, 0.2);
+  animation: scaleIn 0.8s ease-out 1.3s both;
+  
+  h3 {
+    color: var(--verde-oscuro);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .beneficio-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    transition: all var(--transition-normal);
+    
+    &:hover {
+      transform: translateX(5px);
+      background: rgba(255, 255, 255, 0.95);
+    }
+    
+    .icono {
+      width: 40px;
+      height: 40px;
+      background: var(--verde-principal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      color: white;
+      font-weight: bold;
+    }
+    
+    .texto {
+      flex: 1;
+      color: var(--verde-oscuro);
+      font-weight: 500;
+    }
+  }
+}
+
+/* Cards de categorías de alimentos */
+.categorias-alimentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 800px;
+  animation: fadeInUp 0.8s ease-out 1.4s both;
+  
+  .categoria-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    transition: all var(--transition-normal);
+    border: 2px solid transparent;
+    
+    &:hover {
+      transform: translateY(-5px);
+      border-color: var(--verde-principal);
+      box-shadow: 0 8px 25px rgba(40, 167, 69, 0.2);
+    }
+    
+    .categoria-icono {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      display: block;
+      animation: floatImage 4s ease-in-out infinite;
+    }
+    
+    .categoria-nombre {
+      color: var(--verde-oscuro);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+  }
+}
+
+/*RESPONSIVE MEJORADO*/
+
+/* Pantallas pequeñas */
+@media (max-width: 480px) {
+  .contenido {
+    padding: 20px 15px 30px 15px !important;
+  }
+  
+  .imagen {
+    max-width: 240px !important;
+  }
+  
+  h2 {
+    font-size: 1.6rem !important;
+    
+    &::after {
+      width: 80px;
+    }
+  }
+  
+  p {
+    font-size: 1rem !important;
+    padding: 20px !important;
+  }
+  
+  ul li {
+    padding: 16px 20px !important;
+    font-size: 0.9rem !important;
+    
+    &::after {
+      width: 25px;
+      height: 25px;
+      font-size: 12px;
+    }
+  }
+  
+  .categorias-alimentos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+  .contenido {
+    padding: 50px 40px !important;
+  }
+  
+  .imagen {
+    max-width: 320px !important;
+  }
+  
+  h2 {
+    font-size: 2.4rem !important;
+    
+    &::after {
+      width: 150px;
+    }
+  }
+  
+  p {
+    font-size: 1.2rem !important;
+    padding: 30px !important;
+  }
+  
+  ul li {
+    padding: 24px 28px !important;
+    font-size: 1.1rem !important;
+    
+    &:hover {
+      transform: translateX(12px) translateY(-3px) !important;
+    }
+  }
+  
+  .categorias-alimentos {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .contenido {
+    padding: 60px 60px !important;
+  }
+  
+  h2 {
+    font-size: 2.6rem !important;
+  }
+  
+  .imagen {
+    max-width: 350px !important;
+    
+    &:hover {
+      transform: scale(1.08) rotate(-3deg) !important;
+    }
+  }
+  
+  ul li {
+    &:hover {
+      transform: translateX(15px) translateY(-4px) !important;
+    }
+  }
+}
+
+/*ESTADOS ESPECIALES*/
+
+/* Estado de carga */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 16px;
+  height: 200px;
+  margin: 20px auto;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+/* Efecto pulse para elementos importantes */
+.pulse-effect {
+  animation: pulseGreen 2s infinite;
 }

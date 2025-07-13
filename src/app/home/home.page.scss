@@ -1,170 +1,22 @@
-/* Fondo general para el home */
-ion-content {
-  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
+/*VARIABLES Y ANIMACIONES GLOBALES*/
+:root {
+  --verde-principal: #28a745;
+  --verde-oscuro: #145a32;
+  --verde-claro: #34ce57;
+  --azul-enfoque: #2e86c1;
+  --naranja-ejercicio: #ff8c00;
+  --morado-bienestar: #8e44ad;
+  --rosa-recetas: #e91e63;
+  --transition-normal: 0.3s ease;
+  --sombra-card: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --sombra-hover: 0 12px 40px rgba(40, 167, 69, 0.15);
 }
 
-//  CORRECCIONES PARA ANDROID
-ion-toolbar {
-  --padding-top: 30;
-  --min-height: 56px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-}
-
-ion-menu-button {
-  --padding-top: 30;
-  --padding-bottom: 0;
-  margin: 0;
-}
-
-ion-title {
-  --padding-start: 0;
-  --padding-end: 0;
-}
-
-// Info del usuario
-.user-info {
-  text-align: center;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--ion-color-light);
-  margin-bottom: 20px;
-
-  .user-avatar {
-    width: 90px;        // Aumentado de 60px a 90px
-    height: 90px;       // Aumentado de 60px a 90px
-    border-radius: 50%;
-    margin-bottom: 15px; // Aumentado el margen inferior de 10px a 15px
-    object-fit: cover;   // Agregado para mejor ajuste de la imagen
-    border: 3px solid var(--ion-color-light); // Agregado borde sutil
-  }
-
-  h2 {
-    color: var(--ion-color-primary);
-    margin: 10px 0 5px 0;
-    font-size: 1.2rem;
-  }
-
-  span {
-    color: var(--ion-color-medium);
-    font-size: 0.9rem;
-  }
-}
-
-// ESTILOS PARA LAS CARDS DE NAVEGACIÓN (del mis-datos original)
-.seccion-info {
-  text-align: center;
-  margin-bottom: 20px;
-  padding: 16px;
-  
-  h2 {
-    color: var(--ion-color-primary);
-    margin-bottom: 5px;
-    font-size: 1.5rem;
-  }
-}
-
-// Cards de navegación
-ion-card[button] {
-  margin: 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  img {
-    width: 100%;
-    height: 200px; // Aumentado de 160px a 200px
-    object-fit: contain;
-    background-color: #f8f9fa;
-    padding: 12px; // Aumentado de 8px a 12px para mejor proporción
-  }
-  
-  ion-card-header {
-    padding-bottom: 6px; // Reducido de 8px a 6px
-    padding-top: 12px; // Reducido padding superior
-    
-    ion-card-title {
-      font-size: 1.1rem; // Reducido de 1.2rem a 1.1rem
-      color: var(--ion-color-primary);
-      font-weight: bold;
-      margin-bottom: 4px;
-    }
-  }
-  
-  ion-card-content {
-    color: var(--ion-color-dark);
-    line-height: 1.4; // Reducido de 1.5 a 1.4
-    font-size: 0.85rem; // Reducido de 0.95rem a 0.85rem
-    padding-top: 8px; // Reducido padding superior
-  }
-}
-
-//  Estilos para consejo del día
-.tip-card {
-  margin: 16px;
-  
-  ion-card-title {
-    font-size: 1.1rem;
-    color: var(--ion-color-primary);
-  }
-  
-  ion-card-content {
-    p {
-      margin-bottom: 12px;
-      line-height: 1.5;
-      font-style: italic;
-      color: var(--ion-color-dark);
-    }
-    
-    ion-chip {
-      margin-top: 8px;
-      --background: var(--ion-color-success-tint);
-      --color: var(--ion-color-success-shade);
-      
-      ion-icon {
-        margin-right: 4px;
-      }
-    }
-  }
-}
-
-// Estilos para segments (comentados pero disponibles)
-.custom-segment {
-  margin: 20px 0;
-  --color: var(--ion-color-medium);
-  --color-checked: var(--ion-color-primary);
-  --border-radius: 8px;
-  
-  ion-segment-button {
-    --padding-top: 18px;
-    --padding-bottom: 8px;
-    min-height: 48px;
-    
-    ion-icon {
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
-    
-    ion-label {
-      font-size: 0.85rem;
-    }
-  }
-}
-
-.segment-content {
-  margin-top: 20px;
-  animation: fadeIn 0.3s ease-in-out;
-  min-height: 300px; 
-}
-
-@keyframes fadeIn {
+/*ANIMACIONES (NUEVAS)*/
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -172,126 +24,693 @@ ion-card[button] {
   }
 }
 
-// Estilos para los componentes (disponibles para reactivar)
-.form-card {
-  margin-bottom: 20px;
-  
-  ion-card {
-    margin: 16px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-.experiencia-header, 
-.certificacion-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  padding: 0 16px;
-  
-  h4 {
-    margin: 0;
-    color: var(--ion-color-primary);
-    font-size: 1.1rem;
+@keyframes scaleIn {
+  0% { 
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
-.trabajando-actual {
-  color: var(--ion-color-success);
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-
-.vencimiento-info {
-  margin-top: 10px;
-  padding: 8px;
-  border-radius: 6px;
-  
-  &.proximo-vencer {
-    background-color: var(--ion-color-warning-tint);
-    color: var(--ion-color-warning-shade);
+@keyframes floatAvatar {
+  0%, 100% { 
+    transform: translateY(0px);
   }
-  
-  &.vencido {
-    background-color: var(--ion-color-danger-tint);
-    color: var(--ion-color-danger-shade);
+  50% { 
+    transform: translateY(-6px);
   }
 }
 
-.estado-certificado {
-  margin-top: 8px;
-  font-size: 0.85rem;
-  
-  .vigente {
-    color: var(--ion-color-success);
+@keyframes cardShine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    opacity: 0;
   }
-  
-  .proximo-vencer {
-    color: var(--ion-color-warning);
+  50% {
+    opacity: 1;
   }
-  
-  .vencido {
-    color: var(--ion-color-danger);
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+    opacity: 0;
   }
 }
 
-.empty-state {
+@keyframes pulseGlow {
+  0% { 
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(40, 167, 69, 0);
+  }
+  100% { 
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+  }
+}
+
+@keyframes floatBubbles {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(1deg); }
+  66% { transform: translateY(6px) rotate(-1deg); }
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-3px) scale(1.05); }
+}
+
+/*HEADER TRANSPARENTE MEJORADO*/
+ion-header {
+  ion-toolbar {
+    --background: transparent !important;
+    --color: var(--verde-oscuro) !important;
+    --border-width: 0 !important;
+    backdrop-filter: blur(10px);
+    
+    .titulo-header {
+      color: var(--verde-oscuro) !important;
+      font-weight: 700 !important;
+      font-size: 1.3rem !important;
+      text-align: center !important;
+    }
+    
+    ion-menu-button {
+      --color: var(--verde-oscuro) !important;
+      transition: all var(--transition-normal);
+      
+      &:hover {
+        transform: scale(1.1) rotate(5deg);
+      }
+    }
+  }
+}
+
+/*FONDO CON EFECTOS*/
+ion-content {
+  --background: linear-gradient(135deg, #eafaf1 0%, #f0f9f2 50%, #e8f5e9 100%) !important;
+  position: relative;
+  
+  /* Patrón de fondo sutil */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(40, 167, 69, 0.08) 0%, transparent 30%),
+      radial-gradient(circle at 80% 70%, rgba(40, 167, 69, 0.06) 0%, transparent 30%),
+      radial-gradient(circle at 40% 80%, rgba(40, 167, 69, 0.04) 0%, transparent 25%),
+      radial-gradient(circle at 60% 20%, rgba(40, 167, 69, 0.05) 0%, transparent 25%);
+    animation: floatBubbles 30s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+/*SECCIÓN DE USUARIO MEJORADA*/
+.user-info {
   text-align: center;
-  padding: 40px 20px;
-  color: var(--ion-color-medium);
+  padding: 30px 20px;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.8));
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 30px 30px;
+  border-bottom: 3px solid rgba(40, 167, 69, 0.2);
+  animation: fadeInUp 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
   
-  .empty-icon {
-    font-size: 64px;
-    margin-bottom: 16px;
-    opacity: 0.5;
-    color: var(--ion-color-light);
+  /* Efecto de brillo sutil */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transform: rotate(45deg);
+    animation: cardShine 8s ease-in-out infinite;
+    pointer-events: none;
   }
   
-  p {
-    font-size: 1rem;
-    margin: 0;
+  /* Contenido por encima del efecto */
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .user-avatar {
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50% !important;
+    margin-bottom: 20px !important;
+    object-fit: cover !important;
+    border: 4px solid var(--verde-principal) !important;
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3) !important;
+    transition: all var(--transition-normal) !important;
+    animation: floatAvatar 4s ease-in-out infinite;
+    
+    &:hover {
+      transform: scale(1.1) rotate(-5deg) !important;
+      box-shadow: 0 12px 35px rgba(40, 167, 69, 0.4) !important;
+    }
+  }
+
+  h2 {
+    color: var(--verde-oscuro) !important;
+    margin: 15px 0 8px 0 !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    
+    strong {
+      background: linear-gradient(135deg, var(--verde-principal), var(--verde-claro));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  span {
+    color: #666 !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    padding: 8px 20px !important;
+    background: rgba(40, 167, 69, 0.1) !important;
+    border-radius: 20px !important;
+    display: inline-block !important;
+    margin-top: 8px !important;
   }
 }
 
-// Botones y controles
-ion-button {
-  --border-radius: 8px;
-  margin: 8px 0;
+/*SECCIÓN INFO MEJORADA*/
+.seccion-info {
+  text-align: center !important;
+  margin-bottom: 30px !important;
+  padding: 0 20px !important;
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+  
+  h2 {
+    color: var(--verde-oscuro) !important;
+    margin-bottom: 10px !important;
+    font-size: 1.8rem !important;
+    font-weight: 700 !important;
+    position: relative !important;
+    
+    /* Subrayado decorativo */
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--verde-principal), var(--verde-claro));
+      transform: translateX(-50%);
+      border-radius: 2px;
+      animation: scaleIn 1s ease-out 1s both;
+    }
+  }
 }
 
-ion-item {
-  --padding-start: 16px;
-  --padding-end: 16px;
-  --min-height: 48px;
-}
-
-ion-input, ion-select, ion-datetime {
-  --padding-top: 12px;
-  --padding-bottom: 12px;
-}
-
-// Responsive para tablets
-@media (min-width: 768px) {
-  .segment-content {
-    max-width: 600px;
-    margin: 20px auto;
+/*CARDS MEJORADOS*/
+ion-card[button] {
+  margin: 20px 16px !important;
+  border-radius: 20px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: var(--sombra-card) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  transition: all var(--transition-normal) !important;
+  animation: slideInLeft 0.6s ease-out both;
+  position: relative !important;
+  overflow: hidden !important;
+  
+  /* Animaciones escalonadas */
+  &:nth-of-type(1) { animation-delay: 0.5s; }  /* Alimentación */
+  &:nth-of-type(2) { animation-delay: 0.6s; }  /* Ejercicio */
+  &:nth-of-type(3) { animation-delay: 0.7s; }  /* Bienestar */
+  &:nth-of-type(4) { animation-delay: 0.8s; }  /* Recetas */
+  
+  &:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: var(--sombra-hover) !important;
   }
   
+  /* FOTOS CON EFECTOS */
+  img {
+    width: 100% !important;
+    height: 200px !important;
+    object-fit: cover !important; /* Cambié de contain a cover para mejor apariencia */
+    border-radius: 20px 20px 0 0 !important;
+    transition: all var(--transition-normal) !important;
+    position: relative !important;
+    z-index: 1 !important;
+    
+    /* Filtros para hacer las fotos más atractivas */
+    filter: brightness(1.1) contrast(1.05) saturate(1.2) !important;
+    
+    &:hover {
+      transform: scale(1.05) !important;
+      filter: brightness(1.2) contrast(1.1) saturate(1.3) !important;
+    }
+  }
+  
+  /* Overlay de gradiente sobre las fotos para darles personalidad */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    z-index: 2;
+    border-radius: 20px 20px 0 0;
+    transition: all var(--transition-normal);
+    pointer-events: none;
+  }
+  
+  /* Gradientes específicos por card como overlay */
+  &[routerLink="/alimentacion"]::before {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.3), rgba(139, 195, 74, 0.2), rgba(205, 220, 57, 0.1));
+  }
+  
+  &[routerLink="/ejercicio"]::before {
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.3), rgba(255, 193, 7, 0.2), rgba(255, 235, 59, 0.1));
+  }
+  
+  &[routerLink="/bienestar"]::before {
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.3), rgba(233, 30, 99, 0.2), rgba(240, 98, 146, 0.1));
+  }
+  
+  &[routerLink="/recetas"]::before {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.3), rgba(3, 169, 244, 0.2), rgba(0, 188, 212, 0.1));
+  }
+  
+  /* Iconos flotantes sobre las fotos */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    z-index: 3;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all var(--transition-normal);
+    animation: iconFloat 3s ease-in-out infinite;
+  }
+  
+  &:hover::after {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Iconos específicos por card */
+  &[routerLink="/alimentacion"]::after {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234CAF50"><path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2M21 9V7L15 1H5C3.89 1 3 1.89 3 3V21C3 22.11 3.89 23 5 23H19C20.11 23 21 22.11 21 21V9M12 18C8.69 18 6 15.31 6 12S8.69 6 12 6 18 8.69 18 12 15.31 18 12 18M12 8C9.79 8 8 9.79 8 12S9.79 16 12 16 16 14.21 16 12 14.21 8 12 8Z"/></svg>');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &[routerLink="/ejercicio"]::after {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FF9800"><path d="M20.57,14.86L22,13.43L20.57,12L17,15.57L8.43,7L12,3.43L10.57,2L9.14,3.43L7.71,2L5.57,4.14L4.14,2.71L2.71,4.14L4.14,5.57L2,7.71L3.43,9.14L4.86,7.71L13.43,16.29L9.86,19.86L11.29,21.29L12.71,19.86L14.14,21.29L16.29,19.14L17.71,20.57L19.14,19.14L17.71,17.71L19.86,15.57L18.43,14.14L20.57,14.86Z"/></svg>');
+    background-size: 28px 28px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &[routerLink="/bienestar"]::after {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%239C27B0"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg>');
+    background-size: 28px 28px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &[routerLink="/recetas"]::after {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232196F3"><path d="M8.1,13.34L3.91,9.16C2.35,7.59 2.35,5.06 3.91,3.5L10.93,10.5L8.1,13.34M14.88,11.53C16.28,12.92 16.28,15.16 14.88,16.56C13.49,17.95 11.25,17.95 9.85,16.56L7.07,13.78L8.5,12.36L9.85,13.71C10.54,14.39 11.64,14.39 12.33,13.71C13,13 13,11.92 12.33,11.24L11,9.9L12.38,8.53L14.88,11.03V11.53Z"/></svg>');
+    background-size: 28px 28px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  /* Efecto de brillo elegante que cruza toda la card */
+  &:hover::before {
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    animation: cardShine 0.6s ease-in-out;
+  }
+  
+  /* Contenido por encima */
+  ion-card-header,
+  ion-card-content {
+    position: relative !important;
+    z-index: 4 !important;
+  }
+  
+  ion-card-header {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(8px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
+    
+    ion-card-title {
+      font-size: 1.3rem !important;
+      color: var(--verde-oscuro) !important;
+      font-weight: 700 !important;
+      margin-bottom: 8px !important;
+      text-align: center !important;
+    }
+  }
+  
+  ion-card-content {
+    color: #555 !important;
+    line-height: 1.5 !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    text-align: center !important;
+    padding: 16px !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+  }
+}
+
+/*ICONOS FLOTANTES EN LAS CARDS (NUEVO)*/
+/* Agregar iconos grandes centrados en cada gradiente */
+ion-card[button][routerLink="/alimentacion"]::before {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A, #CDDC39);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" opacity="0.9"><path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2M21 9V7L15 1H5C3.89 1 3 1.89 3 3V21C3 22.11 3.89 23 5 23H19C20.11 23 21 22.11 21 21V9M12 18C8.69 18 6 15.31 6 12S8.69 6 12 6 18 8.69 18 12 15.31 18 12 18M12 8C9.79 8 8 9.79 8 12S9.79 16 12 16 16 14.21 16 12 14.21 8 12 8Z"/></svg>');
+  background-size: 80px 80px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+ion-card[button][routerLink="/ejercicio"]::before {
+  background: linear-gradient(135deg, #FF9800, #FFC107, #FFEB3B);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" opacity="0.9"><path d="M20.57,14.86L22,13.43L20.57,12L17,15.57L8.43,7L12,3.43L10.57,2L9.14,3.43L7.71,2L5.57,4.14L4.14,2.71L2.71,4.14L4.14,5.57L2,7.71L3.43,9.14L4.86,7.71L13.43,16.29L9.86,19.86L11.29,21.29L12.71,19.86L14.14,21.29L16.29,19.14L17.71,20.57L19.14,19.14L17.71,17.71L19.86,15.57L18.43,14.14L20.57,14.86Z"/></svg>');
+  background-size: 70px 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+ion-card[button][routerLink="/bienestar"]::before {
+  background: linear-gradient(135deg, #9C27B0, #E91E63, #F06292);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" opacity="0.9"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg>');
+  background-size: 70px 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+ion-card[button][routerLink="/recetas"]::before {
+  background: linear-gradient(135deg, #2196F3, #03A9F4, #00BCD4);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" opacity="0.9"><path d="M8.1,13.34L3.91,9.16C2.35,7.59 2.35,5.06 3.91,3.5L10.93,10.5L8.1,13.34M14.88,11.53C16.28,12.92 16.28,15.16 14.88,16.56C13.49,17.95 11.25,17.95 9.85,16.56L7.07,13.78L8.5,12.36L9.85,13.71C10.54,14.39 11.64,14.39 12.33,13.71C13,13 13,11.92 12.33,11.24L11,9.9L12.38,8.53L14.88,11.03V11.53Z"/></svg>');
+  background-size: 70px 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/*CARD CONSEJO DEL DÍA*/
+.tip-card {
+  margin: 20px 16px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 250, 0.9)) !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: var(--sombra-card) !important;
+  border: 2px solid rgba(40, 167, 69, 0.2) !important;
+  transition: all var(--transition-normal) !important;
+  animation: scaleIn 0.8s ease-out 0.9s both;
+  position: relative !important;
+  overflow: hidden !important;
+  
+  &:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: var(--sombra-hover) !important;
+    border-color: rgba(40, 167, 69, 0.4) !important;
+  }
+  
+  /* Efecto de brillo */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(40, 167, 69, 0.1),
+      transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.8s;
+    opacity: 0;
+  }
+  
+  &:hover::before {
+    animation: cardShine 0.8s ease-in-out;
+  }
+  
+  ion-card-header {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(40, 167, 69, 0.05)) !important;
+    border-bottom: 2px solid rgba(40, 167, 69, 0.2) !important;
+    position: relative !important;
+    z-index: 2 !important;
+    
+    ion-card-title {
+      font-size: 1.3rem !important;
+      color: var(--verde-oscuro) !important;
+      font-weight: 700 !important;
+      text-align: center !important;
+    }
+  }
+  
+  ion-card-content {
+    position: relative !important;
+    z-index: 2 !important;
+    
+    p {
+      margin-bottom: 16px !important;
+      line-height: 1.6 !important;
+      font-style: italic !important;
+      color: #555 !important;
+      font-size: 1rem !important;
+      font-weight: 500 !important;
+      text-align: center !important;
+    }
+    
+    ion-chip {
+      margin: 16px auto 0 auto !important;
+      --background: linear-gradient(135deg, var(--verde-principal), var(--verde-claro)) !important;
+      --color: white !important;
+      border-radius: 25px !important;
+      padding: 8px 16px !important;
+      font-weight: 600 !important;
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3) !important;
+      transition: all var(--transition-normal) !important;
+      display: flex !important;
+      width: fit-content !important;
+      
+      &:hover {
+        transform: translateY(-2px) scale(1.05) !important;
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4) !important;
+      }
+      
+      ion-icon {
+        margin-right: 6px !important;
+        animation: iconFloat 2s ease-in-out infinite !important;
+      }
+      
+      ion-label {
+        color: white !important;
+        font-weight: 600 !important;
+      }
+    }
+  }
+}
+
+/*RESPONSIVE DE ALTO VUELO*/
+
+/* Pantallas pequeñas */
+@media (max-width: 480px) {
   .user-info {
-    max-width: 400px;
-    margin: 0 auto 20px auto;
+    padding: 20px 15px;
+    
+    .user-avatar {
+      width: 80px !important;
+      height: 80px !important;
+    }
+    
+    h2 {
+      font-size: 1.2rem !important;
+    }
+  }
+  
+  .seccion-info h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  ion-card[button] {
+    margin: 16px 12px !important;
+    min-height: 160px !important;
+    
+    &::before {
+      height: 100px;
+    }
+    
+    ion-card-title {
+      font-size: 1.1rem !important;
+    }
+    
+    ion-card-content {
+      font-size: 0.9rem !important;
+      padding: 12px !important;
+    }
+  }
+  
+  .tip-card {
+    margin: 16px 12px !important;
+    
+    ion-card-title {
+      font-size: 1.1rem !important;
+    }
+    
+    p {
+      font-size: 0.9rem !important;
+    }
+  }
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+  .user-info {
+    max-width: 500px;
+    margin: 0 auto 40px auto;
+    border-radius: 0 0 40px 40px;
+    
+    .user-avatar {
+      width: 120px !important;
+      height: 120px !important;
+    }
+    
+    h2 {
+      font-size: 1.6rem !important;
+    }
+  }
+  
+  .seccion-info {
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    
+    h2 {
+      font-size: 2rem !important;
+      
+      &::after {
+        width: 100px;
+      }
+    }
   }
   
   .tip-card,
   ion-card[button] {
     max-width: 600px;
-    margin: 16px auto;
+    margin: 24px auto !important;
+  }
+  
+  ion-card[button] {
+    min-height: 200px !important;
+    
+    &::before {
+      height: 140px;
+    }
+    
+    ion-card-title {
+      font-size: 1.4rem !important;
+    }
+    
+    ion-card-content {
+      font-size: 1rem !important;
+    }
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .user-info {
+    max-width: 600px;
   }
   
   .seccion-info {
-    max-width: 600px;
-    margin: 0 auto 20px auto;
+    max-width: 800px;
   }
+  
+  ion-card[button] {
+    max-width: 700px;
+    
+    &:hover {
+      transform: translateY(-12px) scale(1.03) !important;
+    }
+  }
+  
+  .tip-card {
+    max-width: 700px;
+    
+    &:hover {
+      transform: translateY(-8px) !important;
+    }
+  }
+}
+
+/*ESTADOS ADICIONALES*/
+
+/* Estado de carga */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 20px;
+  height: 180px;
+  margin: 20px 16px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+/* Efecto pulse para elementos importantes */
+.pulse-effect {
+  animation: pulseGlow 2s infinite;
 }

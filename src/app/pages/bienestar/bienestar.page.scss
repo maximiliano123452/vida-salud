@@ -1,34 +1,706 @@
-/* Fondo general para bienestar emocional */
+/* ============================================
+   VARIABLES Y ANIMACIONES PARA BIENESTAR
+   ============================================ */
+:root {
+  --morado-principal: #9C27B0;
+  --rosa-suave: #E91E63;
+  --lavanda-claro: #CE93D8;
+  --rosa-claro: #F8BBD9;
+  --verde-oscuro: #145a32;
+  --verde-intermedio: #1e8449;
+  --verde-profundo: #117a65;
+  --transition-normal: 0.3s ease;
+  --sombra-card: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --sombra-hover: 0 12px 40px rgba(156, 39, 176, 0.15);
+}
+
+/* ============================================
+   ANIMACIONES PREMIUM PARA BIENESTAR
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% { 
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes meditationFloat {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+  }
+  33% { 
+    transform: translateY(-4px) scale(1.01);
+  }
+  66% { 
+    transform: translateY(-2px) scale(1.005);
+  }
+}
+
+@keyframes cardShine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes checkmarkPop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulsePurple {
+  0% { 
+    box-shadow: 0 0 0 0 rgba(156, 39, 176, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(156, 39, 176, 0);
+  }
+  100% { 
+    box-shadow: 0 0 0 0 rgba(156, 39, 176, 0);
+  }
+}
+
+@keyframes floatBubblesZen {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(0.5deg); }
+  66% { transform: translateY(5px) rotate(-0.5deg); }
+}
+
+@keyframes breathingAnimation {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+@keyframes zenGlow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(156, 39, 176, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(233, 30, 99, 0.4);
+  }
+}
+
+/* ============================================
+   HEADER TRANSPARENTE CON TEMA BIENESTAR
+   ============================================ */
+ion-header {
+  ion-toolbar {
+    --background: transparent !important;
+    --color: white !important;
+    --border-width: 0 !important;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.8), rgba(233, 30, 99, 0.6)) !important;
+    
+    ion-title {
+      color: white !important;
+      font-weight: 700 !important;
+      font-size: 1.3rem !important;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    ion-back-button {
+      --color: white !important;
+      transition: all var(--transition-normal);
+      
+      &:hover {
+        transform: scale(1.1) translateX(-2px);
+      }
+    }
+  }
+}
+
+/* ============================================
+   FONDO PREMIUM CON EFECTOS ZEN
+   ============================================ */
 ion-content {
-  --background: #eafaf1 !important; /* Verde MUY clarito y suave */
+  --background: linear-gradient(135deg, #eafaf1 0%, #f3e5f5 50%, #fce4ec 100%) !important;
+  position: relative;
+  
+  /* Patrón de fondo zen y relajante */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(156, 39, 176, 0.06) 0%, transparent 30%),
+      radial-gradient(circle at 80% 70%, rgba(233, 30, 99, 0.04) 0%, transparent 30%),
+      radial-gradient(circle at 40% 80%, rgba(206, 147, 216, 0.03) 0%, transparent 25%),
+      radial-gradient(circle at 60% 20%, rgba(248, 187, 208, 0.03) 0%, transparent 25%);
+    animation: floatBubblesZen 35s ease-in-out infinite;
+    pointer-events: none;
+  }
 }
 
-/* Contenido centrado */
+/* ============================================
+   CONTENIDO PRINCIPAL MEJORADO
+   ============================================ */
 .contenido {
-  text-align: center;
-  padding: 20px;
+  text-align: center !important;
+  padding: 30px 20px 40px 20px !important;
+  animation: fadeInUp 0.8s ease-out;
+  position: relative;
+  z-index: 2;
 }
 
-/* Imagen principal */
+/* ============================================
+   IMAGEN PRINCIPAL CON EFECTOS ZEN
+   ============================================ */
 .imagen {
-  width: 100%;
-  max-width: 300px;
-  margin: 0 auto 20px;
+  width: 100% !important;
+  max-width: 280px !important;
+  margin: 0 auto 30px auto !important;
+  border-radius: 50% !important; /* Circular para efecto zen */
+  box-shadow: 0 15px 40px rgba(156, 39, 176, 0.3) !important;
+  transition: all var(--transition-normal) !important;
+  animation: meditationFloat 8s ease-in-out infinite, scaleIn 1s ease-out 0.3s both;
+  filter: brightness(1.1) contrast(1.05) saturate(1.2) !important;
+  border: 4px solid rgba(206, 147, 216, 0.8) !important;
+  position: relative !important;
+  
+  &:hover {
+    transform: scale(1.03) !important;
+    box-shadow: 0 20px 50px rgba(156, 39, 176, 0.4) !important;
+    filter: brightness(1.15) contrast(1.1) saturate(1.3) !important;
+    animation: zenGlow 2s ease-in-out infinite;
+  }
+  
+  /* Efecto de aura zen que rodea la imagen */
+  &::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(206, 147, 216, 0.3),
+      transparent
+    );
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.8s;
+  }
+  
+  &:hover::after {
+    animation: breathingAnimation 2s ease-in-out infinite;
+  }
 }
 
-/* Título */
+/* ============================================
+   TÍTULO PRINCIPAL CON TEMA BIENESTAR
+   ============================================ */
 h2 {
-  color: #145a32; /* Verde oscuro */
+  color: var(--verde-oscuro) !important;
+  margin-bottom: 20px !important;
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  animation: fadeInUp 0.6s ease-out 0.5s both;
+  position: relative;
+  background: linear-gradient(135deg, var(--verde-oscuro), var(--morado-principal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Subrayado decorativo animado en morado/rosa */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--morado-principal), var(--rosa-suave));
+    transform: translateX(-50%);
+    border-radius: 2px;
+    animation: expandLine 1.2s ease-out 1.5s forwards;
+  }
 }
 
-/* Párrafos */
+@keyframes expandLine {
+  from { width: 0; }
+  to { width: 150px; }
+}
+
+/* ============================================
+   PÁRRAFO EN CARD PREMIUM ZEN
+   ============================================ */
 p {
-  color: #1e8449; /* Verde intermedio */
+  color: #555 !important;
+  font-size: 1.1rem !important;
+  line-height: 1.6 !important;
+  font-weight: 500 !important;
+  margin: 30px auto !important;
+  max-width: 600px !important;
+  padding: 24px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--sombra-card) !important;
+  border: 1px solid rgba(156, 39, 176, 0.2) !important;
+  animation: slideInLeft 0.6s ease-out 0.7s both;
+  position: relative !important;
+  overflow: hidden !important;
+  
+  /* Efecto de calma sutil */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(156, 39, 176, 0.08),
+      transparent
+    );
+    transform: rotate(45deg);
+    animation: cardShine 12s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  &:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: var(--sombra-hover) !important;
+    border-color: rgba(156, 39, 176, 0.4) !important;
+  }
 }
 
-/* Listas */
+/* ============================================
+   LISTA PREMIUM CON TEMA MINDFULNESS
+   ============================================ */
 ul {
-  text-align: left;
-  color: #117a65; /* Verde profundo */
-  margin-top: 20px;
+  text-align: left !important;
+  color: var(--verde-profundo) !important;
+  margin: 40px auto 0 auto !important;
+  max-width: 500px !important;
+  padding: 0 !important;
+  list-style: none !important;
+  animation: slideInRight 0.6s ease-out 0.9s both;
+  
+  li {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(8px) !important;
+    margin: 16px 0 !important;
+    padding: 20px 24px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 15px rgba(156, 39, 176, 0.2) !important;
+    border-left: 5px solid var(--morado-principal) !important;
+    transition: all var(--transition-normal) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    animation: fadeInUp 0.5s ease-out both;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    color: var(--verde-oscuro) !important;
+    
+    /* Animaciones escalonadas con colores zen */
+    &:nth-child(1) { 
+      animation-delay: 1.0s;
+      border-left-color: #9C27B0; /* Morado - meditación */
+    }
+    &:nth-child(2) { 
+      animation-delay: 1.1s;
+      border-left-color: #E91E63; /* Rosa - gratitud */
+    }
+    &:nth-child(3) { 
+      animation-delay: 1.2s;
+      border-left-color: #673AB7; /* Violeta - apoyo social */
+    }
+    
+    /* Checkmark animado con colores zen */
+    &::after {
+      content: '✓';
+      position: absolute;
+      left: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      background: var(--morado-principal);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
+      animation: checkmarkPop 0.6s ease-out both;
+      animation-delay: inherit;
+    }
+    
+    /* Ajustar colores del checkmark por práctica */
+    &:nth-child(1)::after { background: #9C27B0; } /* Meditación */
+    &:nth-child(2)::after { background: #E91E63; } /* Gratitud */
+    &:nth-child(3)::after { background: #673AB7; } /* Apoyo social */
+    
+    &:hover {
+      transform: translateX(8px) translateY(-2px) !important;
+      box-shadow: 0 8px 25px rgba(156, 39, 176, 0.3) !important;
+      border-left-width: 8px !important;
+    }
+    
+    /* Efecto de serenidad al hover */
+    &:hover::before {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(206, 147, 216, 0.3),
+        transparent
+      );
+      animation: cardShine 0.8s ease-in-out;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      transform: none;
+      border-radius: 0;
+    }
+  }
+}
+
+/* ============================================
+   SECCIÓN DE BENEFICIOS DEL BIENESTAR EMOCIONAL
+   ============================================ */
+.beneficios-card {
+  background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(233, 30, 99, 0.05));
+  border-radius: 20px;
+  padding: 30px;
+  margin: 40px auto;
+  max-width: 600px;
+  border: 2px solid rgba(156, 39, 176, 0.2);
+  animation: scaleIn 0.8s ease-out 1.3s both;
+  position: relative;
+  overflow: hidden;
+  
+  /* Efecto de aura zen */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(156, 39, 176, 0.05),
+      transparent
+    );
+    transform: rotate(45deg);
+    animation: cardShine 15s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(156, 39, 176, 0.2);
+    border-color: rgba(156, 39, 176, 0.4);
+  }
+  
+  h3 {
+    color: var(--verde-oscuro);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, var(--verde-oscuro), var(--morado-principal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .beneficio-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 14px;
+    transition: all var(--transition-normal);
+    position: relative;
+    z-index: 2;
+    animation: slideInLeft 0.5s ease-out both;
+    
+    /* Animaciones escalonadas */
+    &:nth-child(2) { animation-delay: 1.4s; }
+    &:nth-child(3) { animation-delay: 1.5s; }
+    &:nth-child(4) { animation-delay: 1.6s; }
+    &:nth-child(5) { animation-delay: 1.7s; }
+    &:nth-child(6) { animation-delay: 1.8s; }
+    
+    &:hover {
+      transform: translateX(8px) translateY(-2px);
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 6px 20px rgba(156, 39, 176, 0.15);
+    }
+    
+    .icono {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, var(--morado-principal), var(--rosa-suave));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 18px;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+      transition: all var(--transition-normal);
+      animation: breathingAnimation 4s ease-in-out infinite;
+      
+      &:hover {
+        transform: scale(1.1);
+        animation-play-state: paused;
+      }
+    }
+    
+    /* Colores específicos por beneficio emocional */
+    &:nth-child(2) .icono { background: linear-gradient(135deg, #E91E63, #F06292); } /* Estrés */
+    &:nth-child(3) .icono { background: linear-gradient(135deg, #673AB7, #9C27B0); } /* Autoestima */
+    &:nth-child(4) .icono { background: linear-gradient(135deg, #3F51B5, #5C6BC0); } /* Concentración */
+    &:nth-child(5) .icono { background: linear-gradient(135deg, #009688, #26A69A); } /* Emociones */
+    &:nth-child(6) .icono { background: linear-gradient(135deg, #FF5722, #FF7043); } /* Resiliencia */
+    
+    .texto {
+      flex: 1;
+      color: var(--verde-oscuro);
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+  }
+}
+
+/* ============================================
+   RESPONSIVE PREMIUM PARA BIENESTAR
+   ============================================ */
+
+/* Pantallas pequeñas */
+@media (max-width: 480px) {
+  .contenido {
+    padding: 20px 15px 30px 15px !important;
+  }
+  
+  .imagen {
+    max-width: 240px !important;
+  }
+  
+  h2 {
+    font-size: 1.6rem !important;
+    
+    &::after {
+      width: 120px;
+    }
+  }
+  
+  p {
+    font-size: 1rem !important;
+    padding: 20px !important;
+  }
+  
+  ul li {
+    padding: 16px 20px !important;
+    font-size: 0.9rem !important;
+    
+    &::after {
+      width: 25px;
+      height: 25px;
+      font-size: 12px;
+    }
+  }
+  
+  .beneficios-card {
+    padding: 20px;
+    
+    .beneficio-item {
+      padding: 14px;
+      
+      .icono {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        margin-right: 14px;
+      }
+      
+      .texto {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+  .contenido {
+    padding: 50px 40px !important;
+  }
+  
+  .imagen {
+    max-width: 320px !important;
+  }
+  
+  h2 {
+    font-size: 2.4rem !important;
+    
+    &::after {
+      width: 180px;
+    }
+  }
+  
+  p {
+    font-size: 1.2rem !important;
+    padding: 30px !important;
+  }
+  
+  ul li {
+    padding: 24px 28px !important;
+    font-size: 1.1rem !important;
+    
+    &:hover {
+      transform: translateX(12px) translateY(-3px) !important;
+    }
+  }
+  
+  .beneficios-card {
+    padding: 40px;
+    
+    .beneficio-item {
+      padding: 22px;
+      
+      .icono {
+        width: 50px;
+        height: 50px;
+        margin-right: 22px;
+      }
+      
+      .texto {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .contenido {
+    padding: 60px 60px !important;
+  }
+  
+  h2 {
+    font-size: 2.6rem !important;
+  }
+  
+  .imagen {
+    max-width: 350px !important;
+    
+    &:hover {
+      transform: scale(1.05) !important;
+    }
+  }
+  
+  ul li {
+    &:hover {
+      transform: translateX(15px) translateY(-4px) !important;
+    }
+  }
+  
+  .beneficios-card {
+    .beneficio-item {
+      &:hover {
+        transform: translateX(12px) translateY(-3px);
+      }
+    }
+  }
+}
+
+/* ============================================
+   ESTADOS ESPECIALES ZEN
+   ============================================ */
+
+/* Estado de carga con tema zen */
+.loading-skeleton {
+  background: linear-gradient(90deg, #fce4ec 25%, #f8bbd9 50%, #fce4ec 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 16px;
+  height: 200px;
+  margin: 20px auto;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+/* Efecto pulse para elementos importantes */
+.pulse-effect {
+  animation: pulsePurple 3s infinite;
+}
+
+/* Clase para elementos que respiran (zen) */
+.breathing-element {
+  animation: breathingAnimation 6s ease-in-out infinite;
 }
