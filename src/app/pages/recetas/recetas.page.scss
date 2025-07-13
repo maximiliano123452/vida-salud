@@ -1,23 +1,57 @@
+/* ============================================
+   HEADER TRANSPARENTE 
+   ============================================ */
+ion-header {
+  ion-toolbar {
+    --background: transparent;
+    --color: #145a32; /* Verde oscuro para el texto */
+    --border-width: 0;
+    backdrop-filter: blur(10px);
+    
+    ion-title {
+      color: #145a32;
+      font-weight: 600;
+    }
+    
+    ion-back-button {
+      --color: #145a32;
+    }
+    
+    ion-buttons ion-button {
+      --color: #145a32;
+    }
+  }
+}
+
 /* Fondo general para recetas saludables */
 ion-content {
   --background: #eafaf1 !important; /* Verde MUY clarito y suave */
 }
 
-/* Card de receta del día */
+/* ============================================
+   BANNER DE RECETA DEL DÍA - MÁS PEQUEÑO Y PROFESIONAL
+   ============================================ */
 .recipe-of-day {
   margin: 16px;
   border-radius: 12px;
   background: #ffffffcc; /* Blanco translúcido */
   backdrop-filter: blur(4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Asegura bordes redondeados perfectos */
 }
 
 .recipe-of-day img {
   width: 100%;
-  height: 140px;
+  height: 100px; /* Reducido de 140px a 100px - más pequeño y profesional */
   object-fit: cover;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  transition: transform 0.3s ease; /* Efecto hover profesional */
+}
+
+/* Efecto hover profesional para el banner */
+.recipe-of-day:hover img {
+  transform: scale(1.05);
 }
 
 /* Card de acceso rápido */
@@ -34,6 +68,7 @@ ion-content {
   text-align: center;
   margin: 16px 0;
   color: #145a32; /* Verde oscuro */
+  font-weight: 600;
 }
 
 /* Card de categoría */
@@ -42,6 +77,12 @@ ion-content {
   background: #ffffffcc;
   backdrop-filter: blur(4px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .category-card img {
@@ -58,6 +99,7 @@ ion-content {
   text-align: center;
   color: #145a32; /* Verde oscuro */
   font-size: 1.1em;
+  font-weight: 500;
   margin: 8px 0;
 }
 
@@ -70,16 +112,39 @@ ion-content {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Botón de buscar recetas - Verde */
+.search-section ion-button,
+ion-button[color="primary"] {
+  --background: #28a745; /* Verde principal */
+  --background-activated: #218838; /* Verde más oscuro al presionar */
+  --background-hover: #34ce57; /* Verde más claro al hover */
+  --color: white;
+  --border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: none; /* Mantiene el texto sin mayúsculas forzadas */
+}
+
+/* Efectos hover para el botón */
+.search-section ion-button:hover,
+ion-button[color="primary"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
 /* Resultados de búsqueda */
 .search-results h4 {
   text-align: center;
   margin: 16px 0;
+  color: #145a32;
+  font-weight: 600;
 }
 
 /* Sin resultados */
 .no-results {
   text-align: center;
   color: #145a32;
+  font-weight: 500;
 }
 
 /* Header de lista de recetas */
@@ -95,6 +160,12 @@ ion-content {
   background: #ffffffcc;
   backdrop-filter: blur(4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipes-grid ion-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .recipes-grid ion-card img {
@@ -105,17 +176,24 @@ ion-content {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   padding: 8px; /* padding interno elegante */
+  transition: transform 0.3s ease;
+}
+
+.recipes-grid ion-card:hover img {
+  transform: scale(1.03);
 }
 
 .recipe-title {
   text-align: center;
   color: #145a32;
   font-size: 1.2em;
+  font-weight: 600;
   margin-top: 8px;
 }
 
 .recipe-ingredients {
   margin-top: 8px;
+  color: #2d5a3d;
 }
 
 /* Loading */
@@ -127,4 +205,35 @@ ion-content {
 .loading-container p {
   margin-top: 12px;
   color: #145a32;
+  font-weight: 500;
+}
+
+/* ============================================
+   MEJORAS PROFESIONALES ADICIONALES
+   ============================================ */
+
+/* Animaciones suaves para las cards */
+ion-card {
+  will-change: transform;
+}
+
+/* Mejora en la tipografía */
+h1, h2, h3, h4, h5, h6 {
+  color: #145a32;
+}
+
+/* Responsive para tablets */
+@media (min-width: 768px) {
+  .recipe-of-day,
+  .quick-access-card,
+  .search-section ion-card {
+    max-width: 600px;
+    margin: 16px auto;
+  }
+  
+  .categories-section,
+  .recipes-grid {
+    max-width: 800px;
+    margin: 0 auto;
+  }
 }

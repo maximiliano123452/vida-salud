@@ -1,134 +1,512 @@
+/* ============================================
+   HEADER TRANSPARENTE PROFESIONAL
+   ============================================ */
+ion-header {
+  ion-toolbar {
+    --background: transparent;
+    --color: #145a32; /* Verde oscuro para el texto */
+    --border-width: 0;
+    backdrop-filter: blur(10px);
+    
+    ion-title {
+      color: #145a32;
+      font-weight: 600;
+    }
+    
+    ion-back-button {
+      --color: #145a32;
+    }
+    
+    ion-buttons ion-button {
+      --color: #145a32;
+    }
+  }
+}
+
 /* Fondo general para Datos de Salud */
 ion-content {
   --background: #eafaf1 !important; /* Verde MUY clarito y suave */
 }
 
-/* Segmento */
+/* ============================================
+   SEGMENTO MEJORADO
+   ============================================ */
 ion-segment {
-  margin: 16px 0;
+  margin: 16px;
+  border-radius: 12px;
+  background: #ffffffcc;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --color: #145a32;
+  --color-checked: #ffffff;
+  --background-checked: #28a745;
+  --indicator-color: transparent;
+  
+  ion-segment-button {
+    border-radius: 8px;
+    margin: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-1px);
+    }
+    
+    &.segment-button-checked {
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    }
+  }
 }
 
-/* Secciones generales */
+/* ============================================
+   SECCIONES GENERALES MEJORADAS
+   ============================================ */
 .seccion {
   padding: 16px;
+  animation: fadeInUp 0.6s ease-out;
 }
 
-/* Títulos */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   TÍTULOS PROFESIONALES
+   ============================================ */
 h2 {
   text-align: center;
   color: #145a32; /* Verde oscuro */
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 1.4rem;
+  position: relative;
+  
+  &::after {
+    content: '';
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #28a745, #34ce57);
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
 }
 
-/* Cards */
+/* ============================================
+   CARDS PROFESIONALES CON EFECTOS
+   ============================================ */
 ion-card {
-  margin-bottom: 16px;
-  border-radius: 12px;
+  margin: 16px;
+  border-radius: 16px;
   background: #ffffffcc; /* Blanco translúcido */
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(40, 167, 69, 0.15);
+  }
+  
+  ion-card-header {
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    border-bottom: 1px solid rgba(20, 90, 50, 0.1);
+    
+    ion-card-title {
+      color: #145a32;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    
+    ion-card-subtitle {
+      color: #2d5a3d;
+      font-weight: 500;
+    }
+  }
+  
+  ion-card-content {
+    padding: 20px;
+  }
 }
 
-/* Inputs y selects */
+/* ============================================
+   INPUTS Y FORMULARIOS MEJORADOS
+   ============================================ */
 ion-item {
-  --background: transparent;
+  --background: rgba(255, 255, 255, 0.7);
+  --border-radius: 8px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    --background: rgba(255, 255, 255, 0.9);
+    transform: translateX(2px);
+  }
+  
+  &.item-has-focus {
+    --background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.3);
+  }
 }
 
-/* Botones de acción */
-.botones-accion,
-.botones-edicion {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+ion-input, ion-select, ion-textarea {
+  font-weight: 500;
+  --color: #145a32;
+  
+  &::part(native) {
+    color: #145a32;
+  }
 }
 
-/* Chips de info */
-.info-chips {
+/* ============================================
+   BOTONES PROFESIONALES
+   ============================================ */
+.botones-accion, .botones-edicion {
   display: flex;
+  gap: 12px;
   flex-wrap: wrap;
-  gap: 8px;
   justify-content: center;
-}
-
-/* Loading */
-.loading-container {
-  text-align: center;
   margin-top: 20px;
 }
 
-.loading-container p {
-  margin-top: 12px;
-  color: #145a32;
+ion-button {
+  --border-radius: 10px;
+  font-weight: 600;
+  text-transform: none;
+  transition: all 0.3s ease;
+  min-height: 44px;
+  
+  &[color="primary"] {
+    --background: linear-gradient(135deg, #28a745, #34ce57);
+    --background-activated: #218838;
+    --color: white;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    }
+  }
+  
+  &[color="secondary"] {
+    --background: linear-gradient(135deg, #6c757d, #868e96);
+    --color: white;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+  
+  &[color="danger"] {
+    --background: linear-gradient(135deg, #dc3545, #e55d6c);
+    --color: white;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+  
+  &[fill="outline"] {
+    --border-color: #28a745;
+    --color: #28a745;
+    
+    &:hover {
+      --background: rgba(40, 167, 69, 0.1);
+      transform: translateY(-1px);
+    }
+  }
 }
 
-/* Estado vacío */
+/* ============================================
+   CHIPS INFORMATIVOS MEJORADOS
+   ============================================ */
+.info-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+ion-chip {
+  --background: linear-gradient(135deg, #e8f5e8, #f1f9f1);
+  --color: #145a32;
+  border: 1px solid rgba(40, 167, 69, 0.2);
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    --background: linear-gradient(135deg, #d4edda, #e8f5e8);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+  }
+  
+  ion-icon {
+    color: #28a745;
+  }
+}
+
+/* ============================================
+   ESTADOS DE LOADING Y VACÍO MEJORADOS
+   ============================================ */
+.loading-container {
+  text-align: center;
+  margin-top: 40px;
+  padding: 40px 20px;
+  
+  ion-spinner {
+    --color: #28a745;
+    transform: scale(1.2);
+  }
+  
+  p {
+    margin-top: 20px;
+    color: #145a32;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+}
+
 .empty-state {
   text-align: center;
   color: #145a32;
+  padding: 60px 20px;
+  
+  ion-icon {
+    font-size: 4rem;
+    color: #28a745;
+    opacity: 0.6;
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    color: #145a32;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  p {
+    color: #2d5a3d;
+    font-weight: 500;
+    line-height: 1.5;
+  }
 }
 
-/* Cámara y fotos */
+/* ============================================
+   SECCIÓN DE CÁMARA Y FOTOS PROFESIONAL
+   ============================================ */
 .camera-section {
-  border-top: 1px solid var(--ion-color-light);
-  padding-top: 16px;
+  border-top: 2px solid rgba(40, 167, 69, 0.2);
+  padding-top: 24px;
+  margin-top: 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(248, 249, 250, 0.8));
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
 }
 
 .camera-buttons {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   padding: 0 16px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .photo-preview {
-  padding: 0 16px;
+  padding: 20px 16px;
 }
 
 .photo-container {
   text-align: center;
   cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  padding: 8px;
+  
+  &:hover {
+    background: rgba(40, 167, 69, 0.05);
+    transform: scale(1.02);
+  }
 }
 
 .photo-small {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid var(--ion-color-primary);
+  border-radius: 12px;
+  border: 3px solid #28a745;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+  }
 }
 
 .photo-large {
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   height: auto;
   object-fit: contain;
-  border-radius: 8px;
-  border: 2px solid var(--ion-color-primary);
+  border-radius: 12px;
+  border: 3px solid #28a745;
+  box-shadow: 0 6px 25px rgba(40, 167, 69, 0.3);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.02);
+  }
 }
 
 .photo-hint {
-  font-size: 0.8rem;
-  color: var(--ion-color-medium);
-  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #2d5a3d;
+  margin-top: 12px;
+  font-weight: 500;
+  padding: 8px 16px;
+  background: rgba(40, 167, 69, 0.1);
+  border-radius: 20px;
+  display: inline-block;
 }
 
 .foto-indicator {
   margin-left: 8px;
+  color: #28a745;
+  font-weight: 600;
 }
 
 .registro-foto {
   text-align: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  margin: 12px 0;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-2px);
+  }
 }
 
 .foto-registro {
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid var(--ion-color-light);
+  border-radius: 12px;
+  border: 2px solid rgba(40, 167, 69, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.2);
+  }
 }
 
 .foto-caption {
-  font-size: 0.8rem;
-  color: var(--ion-color-medium);
-  margin-top: 4px;
+  font-size: 0.85rem;
+  color: #2d5a3d;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN MEJORADO
+   ============================================ */
+@media (min-width: 768px) {
+  .seccion {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+  
+  ion-card {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  .botones-accion, .botones-edicion {
+    max-width: 400px;
+    margin: 24px auto;
+  }
+  
+  .camera-section {
+    max-width: 600px;
+    margin: 24px auto;
+  }
+  
+  .photo-small {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .foto-registro {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .seccion {
+    max-width: 1000px;
+    padding: 32px;
+  }
+  
+  h2 {
+    font-size: 1.6rem;
+  }
+}
+
+/* ============================================
+   ANIMACIONES Y MICRO-INTERACCIONES
+   ============================================ */
+.slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+  }
+}
+
+/* Aplicar pulse a elementos importantes */
+.botones-accion ion-button[color="primary"]:first-child {
+  animation: pulse 3s infinite;
 }
