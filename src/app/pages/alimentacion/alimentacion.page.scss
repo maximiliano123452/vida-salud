@@ -167,7 +167,7 @@ ion-content {
   z-index: 2;
 }
 
-/*IMAGEN PRINCIPAL CON EFECTOS - MANTENIDA COMO ESTABA*/
+/*IMAGEN PRINCIPAL CON EFECTOS*/
 .imagen {
   width: 100% !important;
   max-width: 280px !important;
@@ -287,7 +287,7 @@ p {
   }
 }
 
-/*LISTA CON ANIMACIONES - CORREGIDA PARA CHECKMARKS VISIBLES*/
+/*LISTA CON ANIMACIONES*/
 ul {
   text-align: left !important;
   color: var(--verde-profundo) !important;
@@ -301,13 +301,13 @@ ul {
     background: rgba(255, 255, 255, 0.9) !important;
     backdrop-filter: blur(8px) !important;
     margin: 16px 0 !important;
-    padding: 20px 24px 20px 55px !important; /* CORREGIDO: Padding izquierdo aumentado para espacio del checkmark */
+    padding: 20px 24px 20px 55px !important; 
     border-radius: 16px !important;
     box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2) !important;
     border-left: 5px solid var(--verde-principal) !important;
     transition: all var(--transition-normal) !important;
     position: relative !important;
-    overflow: visible !important; /* CORREGIDO: Para que se vea el checkmark completo */
+    overflow: visible !important; 
     animation: fadeInUp 0.5s ease-out both;
     font-size: 1rem !important;
     font-weight: 500 !important;
@@ -342,13 +342,13 @@ ul {
       animation-delay: inherit;
     }
     
-    /* Icono checkmark REPOSICIONADO para que se vea completo */
+    /* Icono checkmark REPOSICIONADO*/
     &::after {
       content: '✓';
       position: absolute;
-      left: 12px !important; /* CORREGIDO: De -12px a 12px para que esté dentro del contenedor */
-      top: 50% !important; /* CORREGIDO: Perfectamente centrado verticalmente */
-      transform: translateY(-50%) !important; /* CORREGIDO: Centrado exacto */
+      left: 12px !important; 
+      top: 50% !important; 
+      transform: translateY(-50%) !important; 
       width: 30px;
       height: 30px;
       background: var(--verde-principal);
@@ -362,7 +362,7 @@ ul {
       box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
       animation: checkmarkPop 0.6s ease-out both;
       animation-delay: inherit;
-      z-index: 5 !important; /* AGREGADO: Z-index para que esté encima */
+      z-index: 5 !important; 
     }
     
     /* Ajustar colores del checkmark por item */
@@ -378,7 +378,7 @@ ul {
     
     /* Efecto de brillo al hover */
     &:hover::before {
-      content: ''; /* AGREGADO: Content para que funcione */
+      content: ''; 
       position: absolute;
       background: linear-gradient(
         90deg,
@@ -392,8 +392,8 @@ ul {
       left: 0;
       top: 0;
       transform: none;
-      border-radius: 16px; /* CORREGIDO: Para mantener el border-radius del contenedor */
-      pointer-events: none; /* AGREGADO: Para que no interfiera con clics */
+      border-radius: 16px; 
+      pointer-events: none; 
     }
   }
 }
@@ -491,7 +491,7 @@ ul {
   }
 }
 
-/*RESPONSIVE MEJORADO - AJUSTADO PARA LAS CORRECCIONES*/
+/*RESPONSIVE MEJORADO*/
 
 /* Pantallas pequeñas */
 @media (max-width: 480px) {
@@ -517,14 +517,14 @@ ul {
   }
   
   ul li {
-    padding: 16px 20px 16px 50px !important; /* CORREGIDO: Espacio para checkmark en móvil */
+    padding: 16px 20px 16px 50px !important; 
     font-size: 0.9rem !important;
     
     &::after {
       width: 25px;
       height: 25px;
       font-size: 12px;
-      left: 10px !important; /* CORREGIDO: Posición en móvil */
+      left: 10px !important; 
     }
   }
   
@@ -558,11 +558,11 @@ ul {
   }
   
   ul li {
-    padding: 24px 28px 24px 60px !important; /* CORREGIDO: Más espacio para checkmark */
+    padding: 24px 28px 24px 60px !important; 
     font-size: 1.1rem !important;
     
     &::after {
-      left: 15px !important; /* CORREGIDO: Mejor posición en tablet */
+      left: 15px !important; 
     }
     
     &:hover {
@@ -594,10 +594,10 @@ ul {
   }
   
   ul li {
-    padding: 20px 24px 20px 55px !important; /* CORREGIDO: Espacio óptimo para checkmark */
+    padding: 20px 24px 20px 55px !important; 
     
     &::after {
-      left: 12px !important; /* CORREGIDO: Posición perfecta en desktop */
+      left: 12px !important; 
     }
     
     &:hover {
