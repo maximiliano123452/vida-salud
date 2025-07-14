@@ -300,7 +300,7 @@ p {
   }
 }
 
-/*LISTA CON TEMA EJERCICIO*/
+/*LISTA CON TEMA EJERCICIO - CHECKMARKS CORREGIDOS*/
 ul {
   text-align: left !important;
   color: var(--verde-profundo) !important;
@@ -314,13 +314,13 @@ ul {
     background: rgba(255, 255, 255, 0.9) !important;
     backdrop-filter: blur(8px) !important;
     margin: 16px 0 !important;
-    padding: 20px 24px !important;
+    padding: 20px 24px 20px 55px !important; /* CORREGIDO: Padding izquierdo aumentado para espacio del checkmark */
     border-radius: 16px !important;
     box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2) !important;
     border-left: 5px solid var(--naranja-principal) !important;
     transition: all var(--transition-normal) !important;
     position: relative !important;
-    overflow: hidden !important;
+    overflow: visible !important; /* CORREGIDO: Para que se vea el checkmark completo */
     animation: fadeInUp 0.5s ease-out both;
     font-size: 1rem !important;
     font-weight: 500 !important;
@@ -340,11 +340,11 @@ ul {
       border-left-color: #2196F3; /* Azul - ejercicios en casa */
     }
     
-    /* Checkmark animado con colores temáticos */
+    /* Checkmark animado CENTRADO Y VISIBLE */
     &::after {
       content: '✓';
       position: absolute;
-      left: -12px;
+      left: 12px !important; /* CORREGIDO: Dentro del contenedor */
       top: 50%;
       transform: translateY(-50%);
       width: 30px;
@@ -360,6 +360,7 @@ ul {
       box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
       animation: checkmarkPop 0.6s ease-out both;
       animation-delay: inherit;
+      z-index: 10 !important; /* AGREGADO: Z-index para que esté encima */
     }
     
     /* Ajustar colores del checkmark por actividad */
@@ -375,6 +376,8 @@ ul {
     
     /* Efecto de energía al hover */
     &:hover::before {
+      content: '';
+      position: absolute;
       background: linear-gradient(
         90deg,
         transparent,
@@ -387,7 +390,8 @@ ul {
       left: 0;
       top: 0;
       transform: none;
-      border-radius: 0;
+      border-radius: 16px;
+      pointer-events: none;
     }
   }
 }
@@ -507,7 +511,7 @@ ul {
   }
 }
 
-/*RESPONSIVE MEJORADO*/
+/*RESPONSIVE MEJORADO - AJUSTADO PARA LAS CORRECCIONES*/
 
 /* Pantallas pequeñas */
 @media (max-width: 480px) {
@@ -533,13 +537,14 @@ ul {
   }
   
   ul li {
-    padding: 16px 20px !important;
+    padding: 16px 20px 16px 50px !important; /* CORREGIDO: Espacio para checkmark en móvil */
     font-size: 0.9rem !important;
     
     &::after {
       width: 25px;
       height: 25px;
       font-size: 12px;
+      left: 10px !important; /* CORREGIDO: Posición en móvil */
     }
   }
   
@@ -587,8 +592,12 @@ ul {
   }
   
   ul li {
-    padding: 24px 28px !important;
+    padding: 24px 28px 24px 60px !important; /* CORREGIDO: Más espacio para checkmark */
     font-size: 1.1rem !important;
+    
+    &::after {
+      left: 15px !important; /* CORREGIDO: Mejor posición en tablet */
+    }
     
     &:hover {
       transform: translateX(12px) translateY(-3px) !important;
@@ -633,6 +642,12 @@ ul {
   }
   
   ul li {
+    padding: 20px 24px 20px 55px !important; /* CORREGIDO: Espacio óptimo para checkmark */
+    
+    &::after {
+      left: 12px !important; /* CORREGIDO: Posición perfecta en desktop */
+    }
+    
     &:hover {
       transform: translateX(15px) translateY(-4px) !important;
     }
